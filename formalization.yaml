@@ -14,13 +14,11 @@ sources:
     relationship: formalizes
     note: >-
       Original project Lean theory and proofs contributed by Atlas, using
-      separately authored mathlib APIs as declared dependencies. Worker A's
-      native-module and stored-client migration, followed by Atlas's
-      module-documentation placement repair, is later assembly rather than
-      the origin of the mathematical proof expression. Atlas supplied the
-      standalone guide, additional named README clients, metadata and generated
-      API documentation. The original mathematical sources and dependency
-      pins are preserved.
+      separately authored mathlib APIs as declared dependencies. A distinct AI
+      agent migrated the native modules, build and stored clients without
+      originating the mathematical proofs. Atlas subsequently repaired module
+      documentation placement and authored the guide, named README examples,
+      metadata and API assembly; Folio contributed the headline summaries.
 automation:
   methods:
     - method: agent
@@ -28,10 +26,9 @@ automation:
         Formal Frontier AI agents used Lean and mathlib with pinned revisions,
         public imports, downstream examples and independent project reviews.
   notes: >-
-    Atlas authored the original project theory and this documentation;
-    later agents assembled native interfaces and private test clients.
-    No model or cost measurements are claimed. The README reports a measured
-    cached-dependency source-build baseline and its limitations.
+    AI agents developed and assembled the project using Lean and mathlib.
+    No model or cost measurements are claimed; the README gives a scoped
+    cached-dependency build baseline, not an aggregate memory requirement.
 status:
   scope: >-
     Quotient and scalar-extension presentations and total fraction rings allow
@@ -70,11 +67,9 @@ status:
 review:
   status: agent-reviewed mathematical development
   notes: >-
-    Mathematical development and the earlier native-module/client assembly
-    received independent project review and owner acceptance. These historical
-    reviews do not certify later artifacts. Exact assembly review, findings,
-    acceptance and publication are recorded separately for each commit and
-    tree. Schema validity is not release acceptance, source coverage or
+    Mathematical development and earlier native-module/client assembly received
+    independent project review and owner acceptance. Historical review and schema
+    validity alone do not certify a later artifact, source coverage or
     redistribution clearance.
 acknowledgements: >-
   Uses mathlib's quadratic-algebra, polynomial, localization, number-field and

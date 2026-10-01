@@ -57,12 +57,10 @@ library-specific, not a generic Lean parser, proof checker or release certificat
 
 ## Provenance
 
-Atlas adapted this renderer and its tests from the original Formal Frontier
-toric-ideals assembly `ab0c7d294a864deb3a6109aab30ebb77ebf5d2cb`, itself adapted
-from minimal-primes `bed9ea5b7d022529b6b9ee1888c81c3f02683aa6` and
-integral-closure `bbc5da98d729c8737c7cef0df2f80c6323584b2e`, ultimately from
-Anchor's ideal-completion recipe `f0c8c34386109116e4912fb425a8ad15d9dc42a4`.
-Earlier reviews do not approve this adaptation. Collective credit and Apache-2.0
-terms are preserved. The generated mathematical text comes from this library's
-own signatures and original docstrings. Lean, mathlib and doc-gen4 remain
-separately credited dependencies/tools; their code and prose are not bundled.
+Atlas adapted this renderer and its tests through the Formal Frontier Toric
+Ideals, Minimal Primes and Integral Closure assemblies from Anchor's original
+Ideal Completion recipe. This is documentation-tool lineage, not authorship of
+this library's mathematical proofs. Collective credit and Apache-2.0 terms are
+preserved. Generated mathematical text comes from this library's signatures
+and original docstrings. Lean, mathlib and doc-gen4 remain separately credited
+dependencies/tools; their code and prose are not bundled.

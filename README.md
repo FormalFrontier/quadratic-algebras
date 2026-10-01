@@ -7,10 +7,11 @@ Reusable Lean theory of quadratic algebras, conjugation, integral closure, and
 squarefree radicands.
 
 Licensed under the Apache License, Version 2.0 (see [LICENSE](LICENSE)).
-**Authors: Formal Frontier Agents.** Atlas wrote the original project theory;
-later agents assembled the native modules and stored downstream clients. Project
-code and documentation were developed with AI agents using Lean and mathlib.
-The collective author credit does not assert copyright ownership.
+**Authors: Formal Frontier Agents.** Atlas wrote the original mathematical theory;
+a separate AI agent migrated the native modules, build and downstream clients.
+Atlas later developed the documentation and examples, and Folio contributed the
+headline guide. This project used AI agents, Lean and mathlib. Collective author
+credit does not assert copyright ownership.
 
 <a id="mathematical-scope"></a>
 
@@ -177,15 +178,16 @@ lake build
 To treat warnings as errors during a check, use `lake --wfail build` or
 `lake --wfail build QuadraticAlgebrasTest` after fetching the pinned cache.
 
-An initial baseline on a 23-GiB Linux runtime, using the matching dependency
-cache and absent project build outputs, took 92.65 seconds summed across twenty
-sequential warning-fatal named module invocations. The maximum measured child
-peak RSS for one invocation was 1,838,488 KiB; this is not a measurement of the
-whole runtime's aggregate memory. `LAKE_JOBS=1` and `LEAN_NUM_THREADS=1` were
-recorded for those commands. Cache preparation, native documentation generation,
-and the separate proof audit are outside that build timing. These are measured
-baseline results for the pinned sources, not performance guarantees or an
-unmeasured improvement claim.
+A baseline on a 23-GiB Linux runtime, after fetching the matching dependency
+cache and with project outputs initially absent, totaled 92.65 seconds across
+twenty **sequential, warning-fatal named-module invocations**. The largest
+measured peak RSS of a child process was 1,838,488 KiB, not the runtime's
+aggregate memory. `LAKE_JOBS=1` and `LEAN_NUM_THREADS=1` were recorded for those
+commands; `LEAN_NUM_THREADS` controls each Lean runtime's workers, while the
+recorded `LAKE_JOBS` does not establish default-build concurrency. The total
+excludes cache preparation, native documentation generation and the separate
+proof audit. It is not a cold-build timing, a portable RAM minimum, a measured
+default-build concurrency limit or an improvement claim.
 
 ## Using the library
 
@@ -290,31 +292,23 @@ module comments and relative source links to exact source and tool inputs.
 It does not distribute a JavaScript site or external dependency documentation.
 
 Build-checked examples, generated API records and a schema-valid metadata file
-serve different purposes from semantic review and proof-integrity checks. In
-particular a public documentation inventory is not an audit of private/generated
-proof bodies. Exact assembly verification, findings and release acceptance are
-recorded separately for each commit and tree; they are not inferred from a build.
+serve different purposes from semantic review and proof-integrity checks. A
+public documentation inventory does not audit private or generated proof bodies.
 
 ## Attribution and scope
 
-Atlas contributed the original project theory modules recorded in the Git
-history and authored earlier motivating exposition and source-local Lean work;
-Worker A's native-module/client/build migration is a separate contribution:
-Task `hive-request-ae290273102e3ecd8e05955b922ec36ed8bf47fc`, UID
-`4a67ebee-4947-4eca-8b1d-02e01f5189d9`. Atlas's subsequent module-doc placement
-repair did not change mathematical code. Atlas added the standalone API guide,
-named README examples, metadata and generated-documentation assembly, preserving
-all original proofs, declarations, imports and dependency pins. The documentation
-adapter retains credit to Anchor's original recipe and intermediate project reuse
-in [its provenance notes](docs/README.md).
-The source-local work is not part of this library, and mathlib's independently
-authored APIs remain separately imported. A detailed original-contributor and
-third-party rights inventory is retained with the ordinary-main contribution
-issue for independent review.
+Atlas's original theory and source-local motivation are distinct from a later
+AI agent's native-module/client/build migration; the migration did not originate
+the proofs. Atlas subsequently repaired module-documentation placement and added
+the standalone guide, named README examples, metadata and API documentation.
+Folio contributed the headline summaries and navigation links. The adapter's
+[provenance notes](docs/README.md) credit Anchor's original renderer recipe and
+the intermediate adaptations. Source-local work is not bundled here; mathlib's
+independently authored APIs remain separate dependencies.
 
-Root `formalization.yaml` describes the mathematical scope, original project
-contributions, AI involvement and historical review. No general classification
-of quadratic forms or number fields, or complete formalization of a source, is
-claimed. Schema validity, earlier reviews and collective author credit do not
-by themselves certify any particular assembled release or establish copyright
-ownership. Detailed source correspondence remains outside this reusable library.
+[`formalization.yaml`](formalization.yaml) describes scope, AI involvement and
+historical review. This library claims neither a general classification of
+quadratic forms or number fields nor complete formalization of a source.
+Historical review and schema validity alone do not certify later artifacts;
+source-specific correspondence and detailed rights evidence are maintained
+separately. Collective credit does not establish copyright ownership.
