@@ -11,9 +11,12 @@ dependency website, source PDF or external mathematical prose is distributed.
 [`api-manifest.json`](api-manifest.json) identifies the exact analyzed revision,
 all twenty Lean inputs and three configuration/pin inputs, twenty native records,
 the public inventory and output hash. The final artifact's review binds these
-inputs and generated files to its own commit and tree. Changing source or pins
-requires new native analysis and affected checks; documentation-only assembly
-does not change the mathematical inputs.
+inputs and generated files to its own commit and tree. Source or pin changes
+require assessing affected build, API and documentation bindings, correcting
+affected documentation or the manifest as needed, and renewing required affected
+checks; unaffected evidence stays reusable. Native API regeneration is an optional
+way to update affected documentation, not an automatic release prerequisite.
+Documentation-only assembly does not change the mathematical inputs.
 
 When the analyzed development commit exists locally, every input must match its
 Git object. In an isolated parentless release where that object is absent, fresh
