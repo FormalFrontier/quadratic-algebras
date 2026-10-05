@@ -18,6 +18,12 @@ invertible.  The proof transports an integral element of the total fraction
 ring to the coordinate model over `FractionRing A`.  Its trace and norm
 descend to `A`; the trace recovers the constant coordinate, and squarefree
 denominator descent recovers the linear coordinate.
+
+## References
+
+* Ravi Vakil, *The Rising Sea: Foundations of Algebraic Geometry* (October 21,
+  2025 draft), Exercise 5.4.H, supplies the trace, norm and squarefree
+  denominator proof route used for this direction of the criterion.
 -/
 
 public section
@@ -35,7 +41,8 @@ variable {A : Type u} [CommRing A] [IsDomain A]
   {f : A}
 
 /-- A domain quadratic algebra with squarefree radicand over a UFD is
-integrally closed when `2` is invertible. -/
+integrally closed when `2` is invertible. The trace/norm and reduced-denominator
+argument follows Vakil, *The Rising Sea*, Exercise 5.4.H. -/
 theorem isIntegrallyClosed_of_squarefree (hf : Squarefree f)
     [IsDomain (QuadraticAlgebra A f 0)] :
     IsIntegrallyClosed (QuadraticAlgebra A f 0) := by

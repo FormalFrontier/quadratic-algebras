@@ -14,6 +14,14 @@ This file descends the trace and norm of an integral element of a quadratic
 algebra over a fraction field.  The defining quadratic algebra need not be a
 domain: conjugation preserves integrality, so the trace and norm are integral
 over the base ring, and integral closedness places them back in that ring.
+
+## References
+
+* Ravi Vakil, *The Rising Sea: Foundations of Algebraic Geometry* (October 21,
+  2025 draft), Exercise 5.4.H, supplies the trace-and-norm descent proof route;
+  the statements here do not require a domain quadratic algebra.
+* Mathlib's [integral-closure API](https://github.com/leanprover-community/mathlib4/blob/e37d88a26f3791ed5a93daa1f949af1021b8d103/Mathlib/RingTheory/IntegralClosure/IntegrallyClosed.lean)
+  identifies integral elements of a fraction field with base-ring elements.
 -/
 
 public section
@@ -58,7 +66,8 @@ variable [CommRing R] [IsIntegrallyClosed R] [CommRing K] [Algebra R K]
   {a b : K}
 
 /-- The trace of an integral quadratic element over an integrally closed base
-ring belongs to that base ring. -/
+ring belongs to that base ring. This trace-descent step follows Vakil,
+*The Rising Sea*, Exercise 5.4.H, without requiring a domain quadratic algebra. -/
 theorem isInteger_trace_of_isIntegral {x : QuadraticAlgebra K a b}
     (hx : IsIntegral R x) : IsLocalization.IsInteger R (trace x) := by
   have hmap : IsIntegral R (algebraMap K (QuadraticAlgebra K a b) (trace x)) := by
@@ -70,7 +79,8 @@ theorem isInteger_trace_of_isIntegral {x : QuadraticAlgebra K a b}
   exact IsIntegrallyClosed.isIntegral_iff.mp htrace
 
 /-- The norm of an integral quadratic element over an integrally closed base
-ring belongs to that base ring. -/
+ring belongs to that base ring. This norm-descent step follows Vakil,
+*The Rising Sea*, Exercise 5.4.H, without requiring a domain quadratic algebra. -/
 theorem isInteger_norm_of_isIntegral {x : QuadraticAlgebra K a b}
     (hx : IsIntegral R x) : IsLocalization.IsInteger R (norm x) := by
   have hmap : IsIntegral R (algebraMap K (QuadraticAlgebra K a b) (norm x)) := by

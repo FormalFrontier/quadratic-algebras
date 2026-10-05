@@ -21,6 +21,14 @@ The results hold for arbitrary commutative rings, including rings with zero
 divisors and the zero ring.  No domain or irreducibility hypothesis is needed
 until a downstream application asks for one of the fraction rings to be a
 field.
+
+## References
+
+* Ravi Vakil, *The Rising Sea: Foundations of Algebraic Geometry* (October 21,
+  2025 draft), Exercise 5.4.H, motivates the passage to fractions in the
+  integral-closure argument; the equivalence here also covers zero divisors.
+* Mathlib's [localization base change](https://github.com/leanprover-community/mathlib4/blob/e37d88a26f3791ed5a93daa1f949af1021b8d103/Mathlib/RingTheory/Localization/BaseChange.lean)
+  supplies the scalar-extension localization API.
 -/
 
 public section
@@ -72,7 +80,7 @@ noncomputable def baseChangeEquiv
               rw [Algebra.TensorProduct.tmul_mul_tmul, mul_one, one_mul]
         _ = (algebraMap R S) a • 1 +
               (algebraMap R S) b • (1 ⊗ₜ[R] omega) := by
-              simp
+              simp only [algebraMap_smul]
               change
                 (algebraMap R S) a ⊗ₜ[R] 1 +
                     (algebraMap R S) b ⊗ₜ[R] omega =

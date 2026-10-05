@@ -1,30 +1,71 @@
-# Generated API reference
+# API reference and source binding
 
 [`API.md`](API.md) documents all 92 public native declarations in thirteen
 mathematical leaves, the aggregate module and six private test/example modules.
-It retains the native displayed signatures, docstrings and module explanations.
-Source links point into this checkout. No intermediate HTML, JavaScript, fonts,
+It retains the 92 signature blocks from the
+[published native output](https://github.com/FormalFrontier/quadratic-algebras/blob/e5ac018d29892d2a8612f4ca8d4babaabb9c4d15/docs/API.md).
+Module explanations, declaration docstrings and source links are maintained
+against this checkout's comments and source locations; those edits are not
+new native doc-gen output. No intermediate HTML, JavaScript, fonts,
 dependency website, source PDF or external mathematical prose is distributed.
 
 ## Reproduction and binding
 
-[`api-manifest.json`](api-manifest.json) identifies the exact analyzed revision,
-all twenty Lean inputs and three configuration/pin inputs, twenty native records,
-the public inventory and output hash. The final artifact's review binds these
-inputs and generated files to its own commit and tree. Source or pin changes
-require assessing affected build, API and documentation bindings, correcting
-affected documentation or the manifest as needed, and renewing required affected
-checks; unaffected evidence stays reusable. Native API regeneration is an optional
-way to update affected documentation, not an automatic release prerequisite.
-Documentation-only assembly does not change the mathematical inputs.
+[`api-manifest.json`](api-manifest.json) records native analysis of source revision
+`49e5e90c17970c0486876560eae2146ddd64e7ef`: twenty Lean inputs, three
+configuration/pin inputs, twenty native records, the public inventory and the
+output hash. It does not record native analysis of changed inputs in a later
+checkout. Source or pin changes require assessing affected build and documentation
+bindings; native regeneration is optional when the displayed API is unaffected.
+
+### Current-input comparison
+
+These SHA-256 hashes are of file bytes, not Git blob IDs. All 23 historical
+inputs match the manifest and the
+[published revision](https://github.com/FormalFrontier/quadratic-algebras/tree/e5ac018d29892d2a8612f4ca8d4babaabb9c4d15).
+The current checkout differs in the following fourteen inputs: thirteen Lean
+leaves have added references/docstrings, while the `Dedekind.lean`,
+`FractionRing.lean` and `lakefile.toml` changes also contain earlier proof or
+configuration edits. The other nine inputs still match their historical hashes.
+
+| Changed input | SHA-256 in this checkout |
+| --- | --- |
+| `QuadraticAlgebras/AdjoinRoot.lean` | `f0445c4e640bfbf8823ff6d71c0986cee938b9140099a60f723c71fe52434604` |
+| `QuadraticAlgebras/FractionRing.lean` | `c8ef88d0cdc6c802bfca0bcae709fe488e3e7b50ae209166982f9ac4f8945713` |
+| `QuadraticAlgebras/Squarefree.lean` | `569469fc2825a6f7cb35499a086ab2368d81249d8d2132a1ee62b46081e05143` |
+| `QuadraticAlgebras/Integral.lean` | `d53ed89a1ba42516ee36d8088d9b04ff1f8150f4a70fb55fc156bc90bf2d4736` |
+| `QuadraticAlgebras/IntegralClosure.lean` | `7a276743318aa7dc7e8f920977047223e1513c92e8e22229797653cafdba8eba` |
+| `QuadraticAlgebras/RepeatedSquare.lean` | `cf7ce20e182a0cba873701e560d4ca1835e69c5f29c029992832c34fef54a1e6` |
+| `QuadraticAlgebras/IntegralClosureCriterion.lean` | `86dd18f2e4fbf1f621c17c3358fb87efa9f665f01de496576c45baec6851745d` |
+| `QuadraticAlgebras/IntegralClosureInt.lean` | `52e080bed758db92f52d93b6ec208c4133484d5eff1273b0abfa6de47b5d6caa` |
+| `QuadraticAlgebras/Dedekind.lean` | `6ba53d8a21e7517ad0744131b5f80aa52a5a6fca1abbf0b856b12888a960deee` |
+| `QuadraticAlgebras/Diagonal.lean` | `dcf493e625162c3940b0522458fa206d1c35e94f9beed2167ce3095cdaf2202b` |
+| `QuadraticAlgebras/SqrtNegFive.lean` | `ccee48b010656eb2284d2b8a6f7c099a2261a31fac672cf8bb556d9e9d9ca1b5` |
+| `QuadraticAlgebras/NumberField.lean` | `7cf55e4eb4a08a09847f7ad7f9948c720bbdfb13eecc50bbc30b7e61e9343d70` |
+| `QuadraticAlgebras/ClassNumberNegFive.lean` | `f2f9a45f3e6b626f06bd969a1fb59e75018bbb1e3783c639da1bf22a1fa1cea3` |
+| `lakefile.toml` | `7d9992c5c15988dbd643ea2f58dcd2d97e1ce50a3e6fa772f1a8812f884d5f1a` |
+
+The unchanged historical manifest's SHA-256 is
+`72b9a964e729fd2c81ac73b5491c14f58f3ab9a0ea966ac750ac776025a98137`;
+its API output digest `66316af0a97e3a12bb7a1598ab7fbf6b9a47db1e2806426a289133db22c246d5`
+belongs to the published native output, **not** the current edited
+[`API.md`](API.md), whose SHA-256 is
+`951dda3ea5f423af63a05cefa04c488ef6385f0f6d5d30b4dd00a2f436c2a779`.
+All 92 native signature blocks and names/kinds remain unchanged; current module
+explanations and declaration prose match the source comments, and all 92
+relative anchors point to the current declaration docstrings. These are
+static source/file comparisons, not new native analysis or proof checks.
 
 When the analyzed development commit exists locally, every input must match its
-Git object. In an isolated parentless release where that object is absent, fresh
-generation must instead reproduce the release's committed manifest byte-for-byte,
-and every input must match the release commit. A present wrong object, changed
-input, altered native record or uncommitted manifest is refused. This is a data
-binding check, not authentication of the native run or proof correctness; the
-development commit need not be obtainable from the public release history.
+Git object. If that commit is missing from local history, generation must instead
+produce a manifest byte-for-byte equal to the one committed at `HEAD`, and every
+source input must equal `HEAD`. Missing history triggers this fallback, regardless
+of whether `HEAD` has parents. It cannot bind the changed comparison inputs to
+the unchanged historical manifest; native `--check` is not claimed to pass for
+those inputs. A present but wrong Git object cannot activate the fallback;
+in that fallback an uncommitted manifest is refused. In `--check` mode, changed
+native records also differ from the committed output. Neither branch
+authenticates a native run or proves mathematical correctness.
 
 Build native doc-gen4 at `97d4ecdfc8e09e7f511724c25e303d448de6a3db` using its
 committed five-dependency manifest and Lean `v4.34.0-rc2` in a separate checkout:
@@ -32,7 +73,8 @@ committed five-dependency manifest and Lean `v4.34.0-rc2` in a separate checkout
 Fetch this library's matching mathlib cache, then build all twenty modules using
 the root README. Start with fresh analysis/render directories. Run `single` for
 **each** module listed in `scripts/generate_api.py`, changing the module and source
-path together. Use the full analyzed revision from the manifest, not a branch.
+path together. Use the full analyzed revision matching those inputs and records
+(the manifest's revision for historical reproduction), not a branch.
 
 ```sh
 mkdir /tmp/quadratic-analysis /tmp/quadratic-render
@@ -44,17 +86,25 @@ python3 -B scripts/generate_api.py --native-data /tmp/quadratic-render/doc-data 
 python3 -B scripts/test_generate_api.py
 ```
 
+These are optional reproduction commands for exactly matching historical
+sources and native records, or deliberately newly analyzed inputs with their
+own regenerated outputs. `FULL_SOURCE_COMMIT` must be that analysis's full
+revision; the commands do not describe a completed native check for the
+current inputs. The data-only tests use a synthetic missing-history
+fixture, not release verification.
+
 The adapter accepts exactly the inspected names, native kinds, origins and source
 ranges. Native metadata groups abbreviations with definitions; the displayed
 inventory is 61 theorems, 19 noncomputable definitions, four other definitions,
 three abbreviations and five instances. All header text tokens are retained,
 normalizing whitespace only. Native pretty-printing may omit literal type
 annotations; names, docstrings and linked sources supply their context. These
-are display signatures, not standalone modules or proofs. Module documentation
-is copied from the exact single, non-nested module comment in each source.
+are display signatures, not standalone modules or proofs. Module explanations
+and declaration prose in the current API are maintained from the exact source
+comments, separately from the historical native signature blocks.
 
 Data-only tests exercise missing/duplicate/unexpected declarations, altered kinds,
-lost modifiers, malformed markup, ranges, source drift and parentless manifest
+lost modifiers, malformed markup, ranges, source drift and missing-history manifest
 binding. They do not certify a native execution. The adapter is intentionally
 library-specific, not a generic Lean parser, proof checker or release certificate.
 

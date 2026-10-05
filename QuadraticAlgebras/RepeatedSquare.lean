@@ -20,6 +20,14 @@ radicand is not squarefree.
 The domain hypothesis on the quadratic algebra rules out the zero radicand.
 This boundary is essential: an unconditional nonsquarefree-to-prime-square
 statement is false for zero in a field with no prime elements.
+
+## References
+
+* Ravi Vakil, *The Rising Sea: Foundations of Algebraic Geometry* (October 21,
+  2025 draft), Exercise 5.4.H, supplies the repeated-square obstruction;
+  the domain hypothesis and nonzero case are explicit here.
+* Mathlib's [integral-closure API](https://github.com/leanprover-community/mathlib4/blob/e37d88a26f3791ed5a93daa1f949af1021b8d103/Mathlib/RingTheory/IntegralClosure/IntegrallyClosed.lean)
+  provides the fraction-ring characterization of integral closedness.
 -/
 
 public section
@@ -149,7 +157,8 @@ theorem not_isIntegrallyClosed_of_sq_dvd
     (FractionRing (QuadraticAlgebra A f 0))).mp hclosed hx)
 
 /-- A domain quadratic algebra over a UFD is not integrally closed when its
-radicand is not squarefree. -/
+radicand is not squarefree. The integral `omega / p` obstruction follows Vakil,
+*The Rising Sea*, Exercise 5.4.H; the domain assumption excludes the zero case. -/
 theorem not_isIntegrallyClosed_of_not_squarefree
     [UniqueFactorizationMonoid A]
     [IsDomain (QuadraticAlgebra A f 0)] (hf : ¬ Squarefree f) :

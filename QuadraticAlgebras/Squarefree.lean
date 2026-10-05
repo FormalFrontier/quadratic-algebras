@@ -16,6 +16,14 @@ lies in the base ring, then the reduced denominator of `x` must be a unit.
 
 The result is stated for an arbitrary chosen fraction field.  It is not tied
 to a quadratic-algebra presentation.
+
+## References
+
+* Ravi Vakil, *The Rising Sea: Foundations of Algebraic Geometry* (October 21,
+  2025 draft), Exercise 5.4.H, supplies the reduced-denominator proof route;
+  this lemma applies to an arbitrary chosen fraction field.
+* Mathlib's [numerator and denominator API](https://github.com/leanprover-community/mathlib4/blob/e37d88a26f3791ed5a93daa1f949af1021b8d103/Mathlib/RingTheory/Localization/NumDen.lean)
+  provides reduced fractions over a UFD.
 -/
 
 public section
@@ -30,7 +38,9 @@ variable {A K : Type*} [CommRing A] [IsDomain A]
 
 /-- If the square of a fraction times a squarefree base-ring element belongs
 to the image of the base ring, then the fraction itself belongs to that image.
-Here `IsLocalization.IsInteger` means base-ring membership, not `IsIntegral`. -/
+Here `IsLocalization.IsInteger` means base-ring membership, not `IsIntegral`.
+The reduced-denominator argument follows Vakil, *The Rising Sea*, Exercise
+5.4.H, in this more general fraction-field setting. -/
 theorem isInteger_of_sq_mul_squarefree
     {f : A} (hf : Squarefree f) {x : K}
     (hx : IsLocalization.IsInteger A (x ^ 2 * algebraMap A K f)) :

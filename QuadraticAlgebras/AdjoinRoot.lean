@@ -13,6 +13,15 @@ public import Mathlib.RingTheory.AdjoinRoot
 This file identifies mathlib's coordinate model `QuadraticAlgebra R a b`, in
 which `omega ^ 2 = a + b * omega`, with the corresponding `AdjoinRoot` of
 `X ^ 2 - b * X - a`.
+
+## References
+
+* Mathlib's [quadratic algebra](https://github.com/leanprover-community/mathlib4/blob/e37d88a26f3791ed5a93daa1f949af1021b8d103/Mathlib/Algebra/QuadraticAlgebra/Basic.lean)
+  and [adjoined roots](https://github.com/leanprover-community/mathlib4/blob/e37d88a26f3791ed5a93daa1f949af1021b8d103/Mathlib/RingTheory/AdjoinRoot.lean)
+  provide the two presentations identified here.
+* Ravi Vakil, *The Rising Sea: Foundations of Algebraic Geometry* (October 21,
+  2025 draft), Exercise 5.4.H, motivates the quadratic integral-closure setting;
+  the equivalence here works over arbitrary commutative rings.
 -/
 
 public section

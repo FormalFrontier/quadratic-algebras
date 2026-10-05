@@ -15,6 +15,12 @@ closed when `f` is squarefree and congruent to `2` or `3` modulo `4`. The proof
 descends twice each coordinate from the total fraction ring using the trace,
 norm, and squarefree denominator descent. The congruence condition then forces
 both descended integer coordinates to be even.
+
+## References
+
+* Ravi Vakil, *The Rising Sea: Foundations of Algebraic Geometry* (October 21,
+  2025 draft), Exercise 5.4.I(a), motivates this integer congruence case;
+  Exercise 5.4.H supplies the trace/norm and denominator proof route.
 -/
 
 public section
@@ -127,7 +133,9 @@ private theorem isIntegrallyClosed_int_of_squarefree_of_emod_four_of_isDomain
   · exact him
 
 /-- A quadratic algebra over the integers with squarefree radicand is
-integrally closed when the radicand is congruent to `2` or `3` modulo `4`. -/
+integrally closed when the radicand is congruent to `2` or `3` modulo `4`.
+Vakil, *The Rising Sea*, Exercise 5.4.I(a), motivates this case; the proof
+uses the trace/norm and denominator route of Exercise 5.4.H. -/
 theorem isIntegrallyClosed_int_of_squarefree_of_emod_four
     {f : ℤ} (hf : Squarefree f) (hmod : f % 4 = 2 ∨ f % 4 = 3) :
     IsIntegrallyClosed (QuadraticAlgebra ℤ f 0) :=

@@ -18,6 +18,13 @@ signature, and Minkowski-bound computations for `ℤ[√-5]`.
 
 The separate `QuadraticAlgebras.ClassNumberNegFive` module builds on these
 results to classify the ideals of norm at most two and compute the class number.
+
+## References
+
+* Mathlib's [number-field class-number formalization](https://github.com/leanprover-community/mathlib4/blob/e37d88a26f3791ed5a93daa1f949af1021b8d103/Mathlib/NumberTheory/NumberField/ClassNumber.lean)
+  by Anne Baanen, Riccardo Brasca and Xavier Roblot supplies
+  `NumberField.exists_ideal_in_class_of_norm_le`. The discriminant, bound
+  computation and norm-two specialization are assembled in this library.
 -/
 
 public section
@@ -221,7 +228,9 @@ theorem classGroup_minkowskiBound_sqrtNegFiveField_lt_three :
   nlinarith [Real.pi_gt_three]
 
 /-- Every ideal class of `ℚ(√-5)` has an integral representative of absolute
-norm at most two. -/
+norm at most two. This applies Mathlib's prior formalization
+`NumberField.exists_ideal_in_class_of_norm_le` (Anne Baanen, Riccardo Brasca
+and Xavier Roblot) to the discriminant and Minkowski bound computed here. -/
 theorem exists_ideal_in_class_of_absNorm_le_two
     (C : ClassGroup (NumberField.RingOfIntegers SqrtNegFiveField)) :
     ∃ I,

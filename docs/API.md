@@ -1,16 +1,19 @@
-# Generated API reference
+# API reference
 
 Complete public API of quadratic-algebras: 92 declarations in thirteen mathematical leaves.
 Import `QuadraticAlgebras` for all leaves. Six test modules contain private checked
 clients and README examples, not additional public API.
 
-Signatures below are native doc-gen4 display signatures with all displayed implicit
-arguments retained, not declarations with proof bodies. Short names use the source
-namespace and imports; native printing can suppress type annotations on literals.
-Consult the linked source for explicit types; universe parameters are arbitrary. Module documentation
-is extracted verbatim from the exact source. All source links are relative to this
-checkout. See [generation and provenance](README.md), [exact input manifest](api-manifest.json)
-and the [mathematical overview](../README.md).
+The 92 Lean signature blocks are inherited unchanged from the
+[published native API](https://github.com/FormalFrontier/quadratic-algebras/blob/e5ac018d29892d2a8612f4ca8d4babaabb9c4d15/docs/API.md),
+with all displayed implicit arguments retained; they are not proof bodies.
+Native printing can suppress type annotations on literals. Consult the linked
+source for explicit types; universe parameters are arbitrary. Module explanations,
+declaration docstrings and relative source links are maintained against the
+current source comments, not newly generated native records. The
+[historical input manifest](api-manifest.json) and [binding guide](README.md)
+distinguish that native analysis from these edits. See the
+[mathematical overview](../README.md).
 
 ## Module `QuadraticAlgebras.AdjoinRoot`
 
@@ -19,6 +22,15 @@ and the [mathematical overview](../README.md).
 > This file identifies mathlib's coordinate model `QuadraticAlgebra R a b`, in
 > which `omega ^ 2 = a + b * omega`, with the corresponding `AdjoinRoot` of
 > `X ^ 2 - b * X - a`.
+>
+> ## References
+>
+> * Mathlib's [quadratic algebra](https://github.com/leanprover-community/mathlib4/blob/e37d88a26f3791ed5a93daa1f949af1021b8d103/Mathlib/Algebra/QuadraticAlgebra/Basic.lean)
+>   and [adjoined roots](https://github.com/leanprover-community/mathlib4/blob/e37d88a26f3791ed5a93daa1f949af1021b8d103/Mathlib/RingTheory/AdjoinRoot.lean)
+>   provide the two presentations identified here.
+> * Ravi Vakil, *The Rising Sea: Foundations of Algebraic Geometry* (October 21,
+>   2025 draft), Exercise 5.4.H, motivates the quadratic integral-closure setting;
+>   the equivalence here works over arbitrary commutative rings.
 
 [Module source](../QuadraticAlgebras/AdjoinRoot.lean)
 
@@ -30,7 +42,7 @@ noncomputable def QuadraticAlgebra.definingPolynomial {R : Type u} [CommRing R] 
 
 The monic polynomial defining `QuadraticAlgebra R a b`.
 
-[Source](../QuadraticAlgebras/AdjoinRoot.lean#L32) (line 32).
+[Source](../QuadraticAlgebras/AdjoinRoot.lean#L41) (line 41).
 
 ### QuadraticAlgebra.definingPolynomial_monic
 
@@ -40,7 +52,7 @@ theorem QuadraticAlgebra.definingPolynomial_monic {R : Type u} [CommRing R] (a b
 
 The defining quadratic is monic over every commutative ring.
 
-[Source](../QuadraticAlgebras/AdjoinRoot.lean#L37) (line 37).
+[Source](../QuadraticAlgebras/AdjoinRoot.lean#L46) (line 46).
 
 ### QuadraticAlgebra.fromAdjoinRoot
 
@@ -51,7 +63,7 @@ noncomputable def QuadraticAlgebra.fromAdjoinRoot {R : Type u} [CommRing R] (a b
 The canonical map from the polynomial-quotient model to the coordinate
 model of a quadratic algebra.
 
-[Source](../QuadraticAlgebras/AdjoinRoot.lean#L42) (line 42).
+[Source](../QuadraticAlgebras/AdjoinRoot.lean#L51) (line 51).
 
 ### QuadraticAlgebra.fromAdjoinRoot_root
 
@@ -61,7 +73,7 @@ theorem QuadraticAlgebra.fromAdjoinRoot_root {R : Type u} [CommRing R] (a b : R)
 
 The quotient-to-coordinate map sends the adjoined root to `omega`.
 
-[Source](../QuadraticAlgebras/AdjoinRoot.lean#L52) (line 52).
+[Source](../QuadraticAlgebras/AdjoinRoot.lean#L61) (line 61).
 
 ### QuadraticAlgebra.toAdjoinRoot
 
@@ -72,7 +84,7 @@ noncomputable def QuadraticAlgebra.toAdjoinRoot {R : Type u} [CommRing R] (a b :
 The canonical map from the coordinate model of a quadratic algebra to its
 polynomial-quotient model.
 
-[Source](../QuadraticAlgebras/AdjoinRoot.lean#L58) (line 58).
+[Source](../QuadraticAlgebras/AdjoinRoot.lean#L67) (line 67).
 
 ### QuadraticAlgebra.toAdjoinRoot_omega
 
@@ -82,7 +94,9 @@ theorem QuadraticAlgebra.toAdjoinRoot_omega {R : Type u} [CommRing R] (a b : R) 
 
 The coordinate-to-quotient map sends `omega` to the adjoined root.
 
-[Source](../QuadraticAlgebras/AdjoinRoot.lean#L79) (line 79).
+[Source](../QuadraticAlgebras/AdjoinRoot.lean#L88) (line 88).
+
+<a id="qa-equiv-adjoin-root" name="qa-equiv-adjoin-root"></a>
 
 ### QuadraticAlgebra.equivAdjoinRoot
 
@@ -93,7 +107,7 @@ noncomputable def QuadraticAlgebra.equivAdjoinRoot {R : Type u} [CommRing R] (a 
 The canonical algebra equivalence between the coordinate and
 polynomial-quotient models of a quadratic algebra.
 
-[Source](../QuadraticAlgebras/AdjoinRoot.lean#L85) (line 85).
+[Source](../QuadraticAlgebras/AdjoinRoot.lean#L94) (line 94).
 
 ### QuadraticAlgebra.equivAdjoinRoot_apply_omega
 
@@ -103,7 +117,7 @@ theorem QuadraticAlgebra.equivAdjoinRoot_apply_omega {R : Type u} [CommRing R] (
 
 The canonical equivalence identifies `omega` with the quotient's root.
 
-[Source](../QuadraticAlgebras/AdjoinRoot.lean#L98) (line 98).
+[Source](../QuadraticAlgebras/AdjoinRoot.lean#L107) (line 107).
 
 ### QuadraticAlgebra.equivAdjoinRoot_symm_apply_root
 
@@ -113,7 +127,7 @@ theorem QuadraticAlgebra.equivAdjoinRoot_symm_apply_root {R : Type u} [CommRing 
 
 The inverse canonical equivalence identifies the quotient's root with `omega`.
 
-[Source](../QuadraticAlgebras/AdjoinRoot.lean#L104) (line 104).
+[Source](../QuadraticAlgebras/AdjoinRoot.lean#L113) (line 113).
 
 ## Module `QuadraticAlgebras.FractionRing`
 
@@ -128,6 +142,14 @@ The inverse canonical equivalence identifies the quotient's root with `omega`.
 > divisors and the zero ring.  No domain or irreducibility hypothesis is needed
 > until a downstream application asks for one of the fraction rings to be a
 > field.
+>
+> ## References
+>
+> * Ravi Vakil, *The Rising Sea: Foundations of Algebraic Geometry* (October 21,
+>   2025 draft), Exercise 5.4.H, motivates the passage to fractions in the
+>   integral-closure argument; the equivalence here also covers zero divisors.
+> * Mathlib's [localization base change](https://github.com/leanprover-community/mathlib4/blob/e37d88a26f3791ed5a93daa1f949af1021b8d103/Mathlib/RingTheory/Localization/BaseChange.lean)
+>   supplies the scalar-extension localization API.
 
 [Module source](../QuadraticAlgebras/FractionRing.lean)
 
@@ -140,7 +162,7 @@ noncomputable def QuadraticAlgebra.baseChangeEquiv {R : Type u} [CommRing R] (S 
 Scalar extension commutes with the coordinate model of a quadratic
 algebra.
 
-[Source](../QuadraticAlgebras/FractionRing.lean#L41) (line 41).
+[Source](../QuadraticAlgebras/FractionRing.lean#L49) (line 49).
 
 ### QuadraticAlgebra.baseChangeEquiv_tmul
 
@@ -151,7 +173,7 @@ theorem QuadraticAlgebra.baseChangeEquiv_tmul {R : Type u} [CommRing R] (S : Typ
 On a pure tensor, base change maps both coordinates into `S` and then
 multiplies by the left scalar. No domain assumption is needed.
 
-[Source](../QuadraticAlgebras/FractionRing.lean#L91) (line 91).
+[Source](../QuadraticAlgebras/FractionRing.lean#L99) (line 99).
 
 ### QuadraticAlgebra.baseChangeEquiv_omega
 
@@ -161,7 +183,7 @@ theorem QuadraticAlgebra.baseChangeEquiv_omega {R : Type u} [CommRing R] (S : Ty
 
 Base change sends `1 ⊗ omega` to the distinguished quadratic generator.
 
-[Source](../QuadraticAlgebras/FractionRing.lean#L108) (line 108).
+[Source](../QuadraticAlgebras/FractionRing.lean#L116) (line 116).
 
 ### QuadraticAlgebra.baseChangeEquiv_tmul_one
 
@@ -171,7 +193,7 @@ theorem QuadraticAlgebra.baseChangeEquiv_tmul_one {R : Type u} [CommRing R] (S :
 
 Base change sends `s ⊗ 1` to the scalar `s` in the target quadratic algebra.
 
-[Source](../QuadraticAlgebras/FractionRing.lean#L117) (line 117).
+[Source](../QuadraticAlgebras/FractionRing.lean#L125) (line 125).
 
 ### QuadraticAlgebra.isLocalization_tensor_fractionRing
 
@@ -182,7 +204,7 @@ theorem QuadraticAlgebra.isLocalization_tensor_fractionRing {R : Type u} [CommRi
 Extending scalars from `R` to its total fraction ring already inverts every
 regular element of a quadratic algebra.
 
-[Source](../QuadraticAlgebras/FractionRing.lean#L125) (line 125).
+[Source](../QuadraticAlgebras/FractionRing.lean#L133) (line 133).
 
 ### QuadraticAlgebra.fractionRingEquivTensor
 
@@ -193,7 +215,7 @@ noncomputable def QuadraticAlgebra.fractionRingEquivTensor {R : Type u} [CommRin
 The total fraction ring of a quadratic algebra is its scalar localization
 at the regular elements of the base ring.
 
-[Source](../QuadraticAlgebras/FractionRing.lean#L143) (line 143).
+[Source](../QuadraticAlgebras/FractionRing.lean#L151) (line 151).
 
 ### QuadraticAlgebra.fractionRingEquivTensor_algebraMap
 
@@ -204,7 +226,7 @@ theorem QuadraticAlgebra.fractionRingEquivTensor_algebraMap {R : Type u} [CommRi
 The total-fraction-ring equivalence agrees with the canonical algebra map
 on elements of the original quadratic algebra.
 
-[Source](../QuadraticAlgebras/FractionRing.lean#L154) (line 154).
+[Source](../QuadraticAlgebras/FractionRing.lean#L162) (line 162).
 
 ### QuadraticAlgebra.fractionRingEquivBaseChange
 
@@ -215,7 +237,7 @@ noncomputable def QuadraticAlgebra.fractionRingEquivBaseChange {R : Type u} [Com
 Coordinate form of the total fraction ring of a quadratic algebra after
 extending the two defining coefficients to `FractionRing R`.
 
-[Source](../QuadraticAlgebras/FractionRing.lean#L166) (line 166).
+[Source](../QuadraticAlgebras/FractionRing.lean#L174) (line 174).
 
 ### QuadraticAlgebra.fractionRingEquivBaseChange_algebraMap
 
@@ -226,7 +248,7 @@ theorem QuadraticAlgebra.fractionRingEquivBaseChange_algebraMap {R : Type u} [Co
 An original quadratic element maps to the pair of its coordinates in
 `FractionRing R` under the total-fraction-ring/base-change equivalence.
 
-[Source](../QuadraticAlgebras/FractionRing.lean#L177) (line 177).
+[Source](../QuadraticAlgebras/FractionRing.lean#L185) (line 185).
 
 ### QuadraticAlgebra.fractionRingEquivBaseChange_omega
 
@@ -236,7 +258,7 @@ theorem QuadraticAlgebra.fractionRingEquivBaseChange_omega {R : Type u} [CommRin
 
 The base-change presentation of the total fraction ring preserves `omega`.
 
-[Source](../QuadraticAlgebras/FractionRing.lean#L198) (line 198).
+[Source](../QuadraticAlgebras/FractionRing.lean#L206) (line 206).
 
 ### QuadraticAlgebra.fractionRingEquivAdjoinRoot
 
@@ -247,7 +269,7 @@ noncomputable def QuadraticAlgebra.fractionRingEquivAdjoinRoot {R : Type u} [Com
 Polynomial-quotient form of the total fraction ring of a quadratic
 algebra.
 
-[Source](../QuadraticAlgebras/FractionRing.lean#L208) (line 208).
+[Source](../QuadraticAlgebras/FractionRing.lean#L216) (line 216).
 
 ### QuadraticAlgebra.fractionRingEquivAdjoinRoot_omega
 
@@ -258,7 +280,7 @@ theorem QuadraticAlgebra.fractionRingEquivAdjoinRoot_omega {R : Type u} [CommRin
 The quotient presentation of the total fraction ring sends the embedded
 `omega` to the root of the quadratic with fraction-ring coefficients.
 
-[Source](../QuadraticAlgebras/FractionRing.lean#L220) (line 220).
+[Source](../QuadraticAlgebras/FractionRing.lean#L228) (line 228).
 
 ## Module `QuadraticAlgebras.Squarefree`
 
@@ -270,6 +292,14 @@ The quotient presentation of the total fraction ring sends the embedded
 >
 > The result is stated for an arbitrary chosen fraction field.  It is not tied
 > to a quadratic-algebra presentation.
+>
+> ## References
+>
+> * Ravi Vakil, *The Rising Sea: Foundations of Algebraic Geometry* (October 21,
+>   2025 draft), Exercise 5.4.H, supplies the reduced-denominator proof route;
+>   this lemma applies to an arbitrary chosen fraction field.
+> * Mathlib's [numerator and denominator API](https://github.com/leanprover-community/mathlib4/blob/e37d88a26f3791ed5a93daa1f949af1021b8d103/Mathlib/RingTheory/Localization/NumDen.lean)
+>   provides reduced fractions over a UFD.
 
 [Module source](../QuadraticAlgebras/Squarefree.lean)
 
@@ -282,8 +312,10 @@ theorem IsFractionRing.isInteger_of_sq_mul_squarefree {A : Type u_1} {K : Type u
 If the square of a fraction times a squarefree base-ring element belongs
 to the image of the base ring, then the fraction itself belongs to that image.
 Here `IsLocalization.IsInteger` means base-ring membership, not `IsIntegral`.
+The reduced-denominator argument follows Vakil, *The Rising Sea*, Exercise
+5.4.H, in this more general fraction-field setting.
 
-[Source](../QuadraticAlgebras/Squarefree.lean#L31) (line 31).
+[Source](../QuadraticAlgebras/Squarefree.lean#L39) (line 39).
 
 ## Module `QuadraticAlgebras.Integral`
 
@@ -293,6 +325,14 @@ Here `IsLocalization.IsInteger` means base-ring membership, not `IsIntegral`.
 > algebra over a fraction field.  The defining quadratic algebra need not be a
 > domain: conjugation preserves integrality, so the trace and norm are integral
 > over the base ring, and integral closedness places them back in that ring.
+>
+> ## References
+>
+> * Ravi Vakil, *The Rising Sea: Foundations of Algebraic Geometry* (October 21,
+>   2025 draft), Exercise 5.4.H, supplies the trace-and-norm descent proof route;
+>   the statements here do not require a domain quadratic algebra.
+> * Mathlib's [integral-closure API](https://github.com/leanprover-community/mathlib4/blob/e37d88a26f3791ed5a93daa1f949af1021b8d103/Mathlib/RingTheory/IntegralClosure/IntegrallyClosed.lean)
+>   identifies integral elements of a fraction field with base-ring elements.
 
 [Module source](../QuadraticAlgebras/Integral.lean)
 
@@ -305,7 +345,7 @@ noncomputable def QuadraticAlgebra.starAlgEquiv {K : Type v} (R : Type u) [CommR
 Quadratic conjugation as an algebra automorphism over any ring acting
 through the coefficient ring.
 
-[Source](../QuadraticAlgebras/Integral.lean#L31) (line 31).
+[Source](../QuadraticAlgebras/Integral.lean#L39) (line 39).
 
 ### QuadraticAlgebra.starAlgEquiv_apply
 
@@ -315,7 +355,7 @@ theorem QuadraticAlgebra.starAlgEquiv_apply {K : Type v} (R : Type u) [CommRing 
 
 The algebra automorphism `starAlgEquiv` acts by quadratic conjugation.
 
-[Source](../QuadraticAlgebras/Integral.lean#L42) (line 42).
+[Source](../QuadraticAlgebras/Integral.lean#L50) (line 50).
 
 ### QuadraticAlgebra.isIntegral_star
 
@@ -326,7 +366,7 @@ theorem QuadraticAlgebra.isIntegral_star {R : Type u} {K : Type v} [CommRing R] 
 Conjugating a quadratic element preserves integrality over the base ring,
 without requiring the quadratic algebra or coefficient ring to be a domain.
 
-[Source](../QuadraticAlgebras/Integral.lean#L49) (line 49).
+[Source](../QuadraticAlgebras/Integral.lean#L57) (line 57).
 
 ### QuadraticAlgebra.isInteger_trace_of_isIntegral
 
@@ -335,9 +375,10 @@ theorem QuadraticAlgebra.isInteger_trace_of_isIntegral {R : Type u} {K : Type v}
 ```
 
 The trace of an integral quadratic element over an integrally closed base
-ring belongs to that base ring.
+ring belongs to that base ring. This trace-descent step follows Vakil,
+*The Rising Sea*, Exercise 5.4.H, without requiring a domain quadratic algebra.
 
-[Source](../QuadraticAlgebras/Integral.lean#L60) (line 60).
+[Source](../QuadraticAlgebras/Integral.lean#L68) (line 68).
 
 ### QuadraticAlgebra.isInteger_norm_of_isIntegral
 
@@ -346,9 +387,10 @@ theorem QuadraticAlgebra.isInteger_norm_of_isIntegral {R : Type u} {K : Type v} 
 ```
 
 The norm of an integral quadratic element over an integrally closed base
-ring belongs to that base ring.
+ring belongs to that base ring. This norm-descent step follows Vakil,
+*The Rising Sea*, Exercise 5.4.H, without requiring a domain quadratic algebra.
 
-[Source](../QuadraticAlgebras/Integral.lean#L72) (line 72).
+[Source](../QuadraticAlgebras/Integral.lean#L81) (line 81).
 
 ## Module `QuadraticAlgebras.IntegralClosure`
 
@@ -360,6 +402,12 @@ ring belongs to that base ring.
 > ring to the coordinate model over `FractionRing A`.  Its trace and norm
 > descend to `A`; the trace recovers the constant coordinate, and squarefree
 > denominator descent recovers the linear coordinate.
+>
+> ## References
+>
+> * Ravi Vakil, *The Rising Sea: Foundations of Algebraic Geometry* (October 21,
+>   2025 draft), Exercise 5.4.H, supplies the trace, norm and squarefree
+>   denominator proof route used for this direction of the criterion.
 
 [Module source](../QuadraticAlgebras/IntegralClosure.lean)
 
@@ -370,9 +418,10 @@ theorem QuadraticAlgebra.isIntegrallyClosed_of_squarefree {A : Type u} [CommRing
 ```
 
 A domain quadratic algebra with squarefree radicand over a UFD is
-integrally closed when `2` is invertible.
+integrally closed when `2` is invertible. The trace/norm and reduced-denominator
+argument follows Vakil, *The Rising Sea*, Exercise 5.4.H.
 
-[Source](../QuadraticAlgebras/IntegralClosure.lean#L37) (line 37).
+[Source](../QuadraticAlgebras/IntegralClosure.lean#L43) (line 43).
 
 ## Module `QuadraticAlgebras.RepeatedSquare`
 
@@ -387,6 +436,14 @@ integrally closed when `2` is invertible.
 > The domain hypothesis on the quadratic algebra rules out the zero radicand.
 > This boundary is essential: an unconditional nonsquarefree-to-prime-square
 > statement is false for zero in a field with no prime elements.
+>
+> ## References
+>
+> * Ravi Vakil, *The Rising Sea: Foundations of Algebraic Geometry* (October 21,
+>   2025 draft), Exercise 5.4.H, supplies the repeated-square obstruction;
+>   the domain hypothesis and nonzero case are explicit here.
+> * Mathlib's [integral-closure API](https://github.com/leanprover-community/mathlib4/blob/e37d88a26f3791ed5a93daa1f949af1021b8d103/Mathlib/RingTheory/IntegralClosure/IntegrallyClosed.lean)
+>   provides the fraction-ring characterization of integral closedness.
 
 [Module source](../QuadraticAlgebras/RepeatedSquare.lean)
 
@@ -398,7 +455,7 @@ theorem QuadraticAlgebra.radicand_ne_zero_of_isDomain {A : Type u} [CommRing A] 
 
 The radicand of a domain quadratic algebra is nonzero.
 
-[Source](../QuadraticAlgebras/RepeatedSquare.lean#L38) (line 38).
+[Source](../QuadraticAlgebras/RepeatedSquare.lean#L46) (line 46).
 
 ### QuadraticAlgebra.exists_prime_sq_dvd_of_not_squarefree
 
@@ -409,7 +466,7 @@ theorem QuadraticAlgebra.exists_prime_sq_dvd_of_not_squarefree {A : Type u} [Com
 A nonzero nonsquarefree element of a UFD has a prime whose square divides
 it.
 
-[Source](../QuadraticAlgebras/RepeatedSquare.lean#L51) (line 51).
+[Source](../QuadraticAlgebras/RepeatedSquare.lean#L59) (line 59).
 
 ### QuadraticAlgebra.exists_integral_not_mem_range_of_sq_dvd
 
@@ -420,7 +477,7 @@ theorem QuadraticAlgebra.exists_integral_not_mem_range_of_sq_dvd {A : Type u} [C
 If a nonzero nonunit square divides the radicand, the fraction `omega / p`
 is integral over the quadratic algebra but is not in its image.
 
-[Source](../QuadraticAlgebras/RepeatedSquare.lean#L62) (line 62).
+[Source](../QuadraticAlgebras/RepeatedSquare.lean#L70) (line 70).
 
 ### QuadraticAlgebra.not_isIntegrallyClosed_of_sq_dvd
 
@@ -431,7 +488,7 @@ theorem QuadraticAlgebra.not_isIntegrallyClosed_of_sq_dvd {A : Type u} [CommRing
 A domain quadratic algebra is not integrally closed when its radicand has
 a nonzero nonunit square divisor.
 
-[Source](../QuadraticAlgebras/RepeatedSquare.lean#L139) (line 139).
+[Source](../QuadraticAlgebras/RepeatedSquare.lean#L147) (line 147).
 
 ### QuadraticAlgebra.not_isIntegrallyClosed_of_not_squarefree
 
@@ -440,9 +497,10 @@ theorem QuadraticAlgebra.not_isIntegrallyClosed_of_not_squarefree {A : Type u} [
 ```
 
 A domain quadratic algebra over a UFD is not integrally closed when its
-radicand is not squarefree.
+radicand is not squarefree. The integral `omega / p` obstruction follows Vakil,
+*The Rising Sea*, Exercise 5.4.H; the domain assumption excludes the zero case.
 
-[Source](../QuadraticAlgebras/RepeatedSquare.lean#L151) (line 151).
+[Source](../QuadraticAlgebras/RepeatedSquare.lean#L159) (line 159).
 
 ## Module `QuadraticAlgebras.IntegralClosureCriterion`
 
@@ -452,8 +510,17 @@ radicand is not squarefree.
 > domain, with `2` invertible, is integrally closed exactly when `f` is
 > squarefree.  This combines the squarefree integral-closedness theorem with the
 > repeated-square obstruction.
+>
+> ## References
+>
+> * Ravi Vakil, *The Rising Sea: Foundations of Algebraic Geometry* (October 21,
+>   2025 draft), Exercise 5.4.H, supplies the trace/norm, reduced-denominator
+>   and repeated-square proof route. The criterion here makes its UFD, domain
+>   and invertibility hypotheses explicit.
 
 [Module source](../QuadraticAlgebras/IntegralClosureCriterion.lean)
+
+<a id="qa-ufd-squarefree-criterion" name="qa-ufd-squarefree-criterion"></a>
 
 ### QuadraticAlgebra.isIntegrallyClosed_iff_squarefree
 
@@ -462,9 +529,10 @@ theorem QuadraticAlgebra.isIntegrallyClosed_iff_squarefree {A : Type u} [CommRin
 ```
 
 A domain quadratic algebra over a UFD, with `2` invertible, is integrally
-closed if and only if its radicand is squarefree.
+closed if and only if its radicand is squarefree. Both directions follow the
+proof route in Vakil, *The Rising Sea*, Exercise 5.4.H.
 
-[Source](../QuadraticAlgebras/IntegralClosureCriterion.lean#L33) (line 33).
+[Source](../QuadraticAlgebras/IntegralClosureCriterion.lean#L40) (line 40).
 
 ## Module `QuadraticAlgebras.IntegralClosureInt`
 
@@ -475,6 +543,12 @@ closed if and only if its radicand is squarefree.
 > descends twice each coordinate from the total fraction ring using the trace,
 > norm, and squarefree denominator descent. The congruence condition then forces
 > both descended integer coordinates to be even.
+>
+> ## References
+>
+> * Ravi Vakil, *The Rising Sea: Foundations of Algebraic Geometry* (October 21,
+>   2025 draft), Exercise 5.4.I(a), motivates this integer congruence case;
+>   Exercise 5.4.H supplies the trace/norm and denominator proof route.
 
 [Module source](../QuadraticAlgebras/IntegralClosureInt.lean)
 
@@ -487,7 +561,9 @@ theorem QuadraticAlgebra.isDomain_int_of_emod_four {f : ℤ} (hmod : f % 4 = 2 �
 If an integer is congruent to `2` or `3` modulo `4`, then adjoining a
 square root of it to the integers gives a domain.
 
-[Source](../QuadraticAlgebras/IntegralClosureInt.lean#L30) (line 30).
+[Source](../QuadraticAlgebras/IntegralClosureInt.lean#L36) (line 36).
+
+<a id="qa-integer-integral-closure" name="qa-integer-integral-closure"></a>
 
 ### QuadraticAlgebra.isIntegrallyClosed_int_of_squarefree_of_emod_four
 
@@ -497,8 +573,10 @@ theorem QuadraticAlgebra.isIntegrallyClosed_int_of_squarefree_of_emod_four {f : 
 
 A quadratic algebra over the integers with squarefree radicand is
 integrally closed when the radicand is congruent to `2` or `3` modulo `4`.
+Vakil, *The Rising Sea*, Exercise 5.4.I(a), motivates this case; the proof
+uses the trace/norm and denominator route of Exercise 5.4.H.
 
-[Source](../QuadraticAlgebras/IntegralClosureInt.lean#L129) (line 129).
+[Source](../QuadraticAlgebras/IntegralClosureInt.lean#L135) (line 135).
 
 ## Module `QuadraticAlgebras.Dedekind`
 
@@ -508,6 +586,11 @@ integrally closed when the radicand is congruent to `2` or `3` modulo `4`.
 > Dedekind-domain property for a quadratic algebra over a Dedekind domain. The
 > quadratic algebra is finite as a module over its base, so it is Noetherian;
 > integrality bounds its Krull dimension by one.
+>
+> ## References
+>
+> * Mathlib's [Dedekind-domain API](https://github.com/leanprover-community/mathlib4/blob/e37d88a26f3791ed5a93daa1f949af1021b8d103/Mathlib/RingTheory/DedekindDomain/Basic.lean)
+>   supplies the finite-integral dimension and Noetherian-domain results used here.
 
 [Module source](../QuadraticAlgebras/Dedekind.lean)
 
@@ -520,7 +603,7 @@ theorem QuadraticAlgebra.isDedekindDomain_of_isIntegrallyClosed {R : Type u} [Co
 A domain quadratic algebra over a Dedekind domain is Dedekind when it is
 integrally closed.
 
-[Source](../QuadraticAlgebras/Dedekind.lean#L30) (line 30).
+[Source](../QuadraticAlgebras/Dedekind.lean#L35) (line 35).
 
 ## Module `QuadraticAlgebras.Diagonal`
 
@@ -530,8 +613,19 @@ integrally closed.
 > finitely supported coefficient family.  It proves reusable coefficient,
 > homogeneity, irreducibility, and squarefreeness results over fields of
 > characteristic different from two.
+>
+> ## References
+>
+> * Ravi Vakil, *The Rising Sea: Foundations of Algebraic Geometry* (October 21,
+>   2025 draft), Exercise 5.4.I(b), motivates a diagonal prerequisite, while
+>   Exercise 5.4.N motivates the binary diagonal case. These polynomial results
+>   alone do not establish the hypersurface-normality exercise.
+> * Mathlib's [multivariate quadratic results](https://github.com/leanprover-community/mathlib4/blob/e37d88a26f3791ed5a93daa1f949af1021b8d103/Mathlib/RingTheory/MvPolynomial/IrreducibleQuadratic.lean)
+>   provide the polynomial infrastructure used here.
 
 [Module source](../QuadraticAlgebras/Diagonal.lean)
+
+<a id="qa-diagonal-sum" name="qa-diagonal-sum"></a>
 
 ### MvPolynomial.sumSMulXSq
 
@@ -541,7 +635,7 @@ noncomputable def MvPolynomial.sumSMulXSq {ι : Type u_1} {R : Type u_2} [CommRi
 
 The diagonal quadratic polynomial `∑ i, c i • X i ^ 2`.
 
-[Source](../QuadraticAlgebras/Diagonal.lean#L36) (line 36).
+[Source](../QuadraticAlgebras/Diagonal.lean#L45) (line 45).
 
 ### MvPolynomial.sumSMulXSq_apply
 
@@ -551,7 +645,7 @@ theorem MvPolynomial.sumSMulXSq_apply {ι : Type u_1} {R : Type u_2} [CommRing R
 
 Evaluate the linear construction as the finite sum of its diagonal terms.
 
-[Source](../QuadraticAlgebras/Diagonal.lean#L42) (line 42).
+[Source](../QuadraticAlgebras/Diagonal.lean#L51) (line 51).
 
 ### MvPolynomial.coeff_sumSMulXSq
 
@@ -561,7 +655,7 @@ theorem MvPolynomial.coeff_sumSMulXSq {ι : Type u_1} {R : Type u_2} [CommRing R
 
 The coefficient of the monomial `X i ^ 2` is the given coefficient `c i`.
 
-[Source](../QuadraticAlgebras/Diagonal.lean#L47) (line 47).
+[Source](../QuadraticAlgebras/Diagonal.lean#L56) (line 56).
 
 ### MvPolynomial.pderiv_sumSMulXSq
 
@@ -572,7 +666,7 @@ theorem MvPolynomial.pderiv_sumSMulXSq {ι : Type u_1} {R : Type u_2} [CommRing 
 The derivative in variable `i` is `2 * c i * X i`, over any commutative
 ring, including characteristic two.
 
-[Source](../QuadraticAlgebras/Diagonal.lean#L60) (line 60).
+[Source](../QuadraticAlgebras/Diagonal.lean#L69) (line 69).
 
 ### MvPolynomial.isHomogeneous_sumSMulXSq
 
@@ -583,7 +677,9 @@ theorem MvPolynomial.isHomogeneous_sumSMulXSq {ι : Type u_1} {R : Type u_2} [Co
 A diagonal quadratic is homogeneous of degree two, also when all its
 coefficients vanish; no field or nonzero-coefficient hypothesis is required.
 
-[Source](../QuadraticAlgebras/Diagonal.lean#L79) (line 79).
+[Source](../QuadraticAlgebras/Diagonal.lean#L88) (line 88).
+
+<a id="qa-diagonal-irreducible" name="qa-diagonal-irreducible"></a>
 
 ### MvPolynomial.irreducible_sumSMulXSq
 
@@ -592,9 +688,13 @@ theorem MvPolynomial.irreducible_sumSMulXSq {ι : Type u_1} {k : Type u_3} [Fiel
 ```
 
 A diagonal quadratic over a field of characteristic different from two is
-irreducible as soon as at least three coefficients are nonzero.
+irreducible as soon as at least three coefficients are nonzero. This reusable
+prerequisite is motivated by Vakil, *The Rising Sea*, Exercise 5.4.I(b), not
+a proof of the hypersurface-normality exercise.
 
-[Source](../QuadraticAlgebras/Diagonal.lean#L213) (line 213).
+[Source](../QuadraticAlgebras/Diagonal.lean#L222) (line 222).
+
+<a id="qa-binary-diagonal-irreducible" name="qa-binary-diagonal-irreducible"></a>
 
 ### MvPolynomial.irreducible_C_mul_X_sq_add_C_mul_X_sq_of_not_isSquare
 
@@ -605,9 +705,12 @@ theorem MvPolynomial.irreducible_C_mul_X_sq_add_C_mul_X_sq_of_not_isSquare {ι :
 A binary diagonal quadratic `a * X i ^ 2 + b * X j ^ 2` over a field of
 characteristic different from two is irreducible when `i ≠ j`, `a` is
 nonzero, and `-b / a` is not a square. (The last condition already forces
-`b` to be nonzero.)
+`b` to be nonzero.) The binary case is motivated by Vakil, *The Rising Sea*,
+Exercise 5.4.N.
 
-[Source](../QuadraticAlgebras/Diagonal.lean#L345) (line 345).
+[Source](../QuadraticAlgebras/Diagonal.lean#L356) (line 356).
+
+<a id="qa-diagonal-squarefree" name="qa-diagonal-squarefree"></a>
 
 ### MvPolynomial.squarefree_sumSMulXSq
 
@@ -618,7 +721,7 @@ theorem MvPolynomial.squarefree_sumSMulXSq {ι : Type u_1} {k : Type u_3} [Field
 A diagonal quadratic over a field of characteristic different from two is
 squarefree as soon as at least two coefficients are nonzero.
 
-[Source](../QuadraticAlgebras/Diagonal.lean#L427) (line 427).
+[Source](../QuadraticAlgebras/Diagonal.lean#L439) (line 439).
 
 ## Module `QuadraticAlgebras.SqrtNegFive`
 
@@ -628,6 +731,14 @@ squarefree as soon as at least two coefficients are nonzero.
 > factorization monoid. The embedded integer `2` is irreducible because the norm
 > form `x² + 5y²` does not represent `2`, but it is not prime because
 > `(1 + ω) * (1 - ω) = 6` while `2` divides neither factor.
+>
+> ## References
+>
+> * Ravi Vakil, *The Rising Sea: Foundations of Algebraic Geometry* (October 21,
+>   2025 draft), Exercise 5.4.K, motivates the `√-5` example and gives the
+>   factorization hint behind its failure of unique factorization.
+> * Mathlib's [quadratic algebra](https://github.com/leanprover-community/mathlib4/blob/e37d88a26f3791ed5a93daa1f949af1021b8d103/Mathlib/Algebra/QuadraticAlgebra/Basic.lean)
+>   supplies the coordinate norm and conjugation operations.
 
 [Module source](../QuadraticAlgebras/SqrtNegFive.lean)
 
@@ -640,7 +751,7 @@ theorem QuadraticAlgebra.norm_int_negFive_eq (x : QuadraticAlgebra ℤ (-5) 0) :
 In the integer quadratic algebra with `ω² = -5`, the norm is
 `x.re² + 5 * x.im²`.
 
-[Source](../QuadraticAlgebras/SqrtNegFive.lean#L26) (line 26).
+[Source](../QuadraticAlgebras/SqrtNegFive.lean#L34) (line 34).
 
 ### QuadraticAlgebra.isUnit_iff_norm_eq_one_int_negFive
 
@@ -651,7 +762,7 @@ theorem QuadraticAlgebra.isUnit_iff_norm_eq_one_int_negFive {x : QuadraticAlgebr
 An element of `QuadraticAlgebra ℤ (-5) 0` is a unit exactly when its norm
 is `1`.
 
-[Source](../QuadraticAlgebras/SqrtNegFive.lean#L38) (line 38).
+[Source](../QuadraticAlgebras/SqrtNegFive.lean#L46) (line 46).
 
 ### QuadraticAlgebra.irreducible_two_int_negFive
 
@@ -662,7 +773,7 @@ theorem QuadraticAlgebra.irreducible_two_int_negFive : Irreducible 2
 The embedded integer `2` is irreducible in
 `QuadraticAlgebra ℤ (-5) 0`.
 
-[Source](../QuadraticAlgebras/SqrtNegFive.lean#L66) (line 66).
+[Source](../QuadraticAlgebras/SqrtNegFive.lean#L74) (line 74).
 
 ### QuadraticAlgebra.not_prime_two_int_negFive
 
@@ -673,7 +784,9 @@ theorem QuadraticAlgebra.not_prime_two_int_negFive : ¬Prime 2
 The embedded integer `2` is not prime in
 `QuadraticAlgebra ℤ (-5) 0`.
 
-[Source](../QuadraticAlgebras/SqrtNegFive.lean#L122) (line 122).
+[Source](../QuadraticAlgebras/SqrtNegFive.lean#L130) (line 130).
+
+<a id="qa-minus-five-not-ufd" name="qa-minus-five-not-ufd"></a>
 
 ### QuadraticAlgebra.not_uniqueFactorizationMonoid_int_negFive
 
@@ -682,9 +795,10 @@ theorem QuadraticAlgebra.not_uniqueFactorizationMonoid_int_negFive : ¬UniqueFac
 ```
 
 The integer quadratic algebra `QuadraticAlgebra ℤ (-5) 0` is not a unique
-factorization monoid.
+factorization monoid. The norm and factorization argument is motivated by
+Vakil, *The Rising Sea*, Exercise 5.4.K.
 
-[Source](../QuadraticAlgebras/SqrtNegFive.lean#L136) (line 136).
+[Source](../QuadraticAlgebras/SqrtNegFive.lean#L144) (line 144).
 
 ## Module `QuadraticAlgebras.NumberField`
 
@@ -696,6 +810,13 @@ factorization monoid.
 >
 > The separate `QuadraticAlgebras.ClassNumberNegFive` module builds on these
 > results to classify the ideals of norm at most two and compute the class number.
+>
+> ## References
+>
+> * Mathlib's [number-field class-number formalization](https://github.com/leanprover-community/mathlib4/blob/e37d88a26f3791ed5a93daa1f949af1021b8d103/Mathlib/NumberTheory/NumberField/ClassNumber.lean)
+>   by Anne Baanen, Riccardo Brasca and Xavier Roblot supplies
+>   `NumberField.exists_ideal_in_class_of_norm_le`. The discriminant, bound
+>   computation and norm-two specialization are assembled in this library.
 
 [Module source](../QuadraticAlgebras/NumberField.lean)
 
@@ -708,7 +829,7 @@ def QuadraticAlgebra.mapCoeffsEquiv {S : Type u_1} {T : Type u_2} [CommRing S] [
 Transport a quadratic algebra along a ring equivalence of its
 coefficients.
 
-[Source](../QuadraticAlgebras/NumberField.lean#L31) (line 31).
+[Source](../QuadraticAlgebras/NumberField.lean#L38) (line 38).
 
 ### QuadraticAlgebra.mapCoeffsEquivOfEq
 
@@ -719,7 +840,7 @@ def QuadraticAlgebra.mapCoeffsEquivOfEq {S : Type u_1} {T : Type u_2} [CommRing 
 Transport a quadratic algebra along a ring equivalence, with the target
 coefficients presented by equalities.
 
-[Source](../QuadraticAlgebras/NumberField.lean#L44) (line 44).
+[Source](../QuadraticAlgebras/NumberField.lean#L51) (line 51).
 
 ### QuadraticAlgebra.numberField_fractionRing
 
@@ -730,7 +851,7 @@ instance QuadraticAlgebra.numberField_fractionRing (a b : ℤ) [IsDomain (Quadra
 The fraction field of a domain integer quadratic algebra is a number
 field.
 
-[Source](../QuadraticAlgebras/NumberField.lean#L56) (line 56).
+[Source](../QuadraticAlgebras/NumberField.lean#L63) (line 63).
 
 ### QuadraticAlgebra.ringOfIntegersEquiv
 
@@ -741,7 +862,7 @@ noncomputable def QuadraticAlgebra.ringOfIntegersEquiv (a b : ℤ) [IsDomain (Qu
 An integrally closed domain integer quadratic algebra is canonically the
 ring of integers of its fraction field.
 
-[Source](../QuadraticAlgebras/NumberField.lean#L74) (line 74).
+[Source](../QuadraticAlgebras/NumberField.lean#L81) (line 81).
 
 ### QuadraticAlgebra.SqrtNegFiveOrder
 
@@ -751,7 +872,7 @@ abbrev QuadraticAlgebra.SqrtNegFiveOrder : Type
 
 The integer quadratic order `ℤ[√-5]`.
 
-[Source](../QuadraticAlgebras/NumberField.lean#L90) (line 90).
+[Source](../QuadraticAlgebras/NumberField.lean#L97) (line 97).
 
 ### QuadraticAlgebra.SqrtNegFiveField
 
@@ -761,7 +882,7 @@ abbrev QuadraticAlgebra.SqrtNegFiveField : Type
 
 The fraction field of `ℤ[√-5]`.
 
-[Source](../QuadraticAlgebras/NumberField.lean#L93) (line 93).
+[Source](../QuadraticAlgebras/NumberField.lean#L100) (line 100).
 
 ### QuadraticAlgebra.instIsDomainSqrtNegFiveOrder
 
@@ -771,7 +892,7 @@ instance QuadraticAlgebra.instIsDomainSqrtNegFiveOrder : IsDomain SqrtNegFiveOrd
 
 The integer order `ℤ[√-5]` is a domain, using `-5 ≡ 3 mod 4`.
 
-[Source](../QuadraticAlgebras/NumberField.lean#L96) (line 96).
+[Source](../QuadraticAlgebras/NumberField.lean#L103) (line 103).
 
 ### QuadraticAlgebra.instIsIntegrallyClosedSqrtNegFiveOrder
 
@@ -782,7 +903,9 @@ instance QuadraticAlgebra.instIsIntegrallyClosedSqrtNegFiveOrder : IsIntegrallyC
 Squarefreeness of `-5` and its remainder modulo four make `ℤ[√-5]`
 integrally closed. This is a global instance for the specified order.
 
-[Source](../QuadraticAlgebras/NumberField.lean#L100) (line 100).
+[Source](../QuadraticAlgebras/NumberField.lean#L107) (line 107).
+
+<a id="qa-minus-five-ring-of-integers" name="qa-minus-five-ring-of-integers"></a>
 
 ### QuadraticAlgebra.sqrtNegFiveRingOfIntegersEquiv
 
@@ -793,7 +916,7 @@ noncomputable def QuadraticAlgebra.sqrtNegFiveRingOfIntegersEquiv : SqrtNegFiveO
 The canonical identification of `ℤ[√-5]` with the ring of integers of its
 fraction field.
 
-[Source](../QuadraticAlgebras/NumberField.lean#L107) (line 107).
+[Source](../QuadraticAlgebras/NumberField.lean#L114) (line 114).
 
 ### QuadraticAlgebra.algebraTrace_eq_trace_sqrtNegFive
 
@@ -803,7 +926,7 @@ theorem QuadraticAlgebra.algebraTrace_eq_trace_sqrtNegFive (x : SqrtNegFiveOrder
 
 On `ℤ[√-5]`, algebra trace agrees with quadratic-algebra trace.
 
-[Source](../QuadraticAlgebras/NumberField.lean#L114) (line 114).
+[Source](../QuadraticAlgebras/NumberField.lean#L121) (line 121).
 
 ### QuadraticAlgebra.discr_sqrtNegFiveOrder_basis
 
@@ -813,7 +936,7 @@ theorem QuadraticAlgebra.discr_sqrtNegFiveOrder_basis : Algebra.discr ℤ ⇑(ba
 
 The standard basis of `ℤ[√-5]` has discriminant `-20`.
 
-[Source](../QuadraticAlgebras/NumberField.lean#L122) (line 122).
+[Source](../QuadraticAlgebras/NumberField.lean#L129) (line 129).
 
 ### QuadraticAlgebra.sqrtNegFiveRingOfIntegersBasis
 
@@ -824,7 +947,7 @@ noncomputable def QuadraticAlgebra.sqrtNegFiveRingOfIntegersBasis : Module.Basis
 The integral basis of the number field induced by the standard basis of
 `ℤ[√-5]`.
 
-[Source](../QuadraticAlgebras/NumberField.lean#L129) (line 129).
+[Source](../QuadraticAlgebras/NumberField.lean#L136) (line 136).
 
 ### QuadraticAlgebra.discr_sqrtNegFiveField
 
@@ -834,7 +957,7 @@ theorem QuadraticAlgebra.discr_sqrtNegFiveField : NumberField.discr SqrtNegFiveF
 
 The number-field discriminant of `ℚ(√-5)` is `-20`.
 
-[Source](../QuadraticAlgebras/NumberField.lean#L138) (line 138).
+[Source](../QuadraticAlgebras/NumberField.lean#L145) (line 145).
 
 ### QuadraticAlgebra.sqrtNegFiveFieldEquivRatQuadratic
 
@@ -845,7 +968,7 @@ noncomputable def QuadraticAlgebra.sqrtNegFiveFieldEquivRatQuadratic : SqrtNegFi
 The fraction field of `ℤ[√-5]` as the corresponding rational quadratic
 algebra.
 
-[Source](../QuadraticAlgebras/NumberField.lean#L150) (line 150).
+[Source](../QuadraticAlgebras/NumberField.lean#L157) (line 157).
 
 ### QuadraticAlgebra.finrank_sqrtNegFiveField
 
@@ -855,7 +978,7 @@ theorem QuadraticAlgebra.finrank_sqrtNegFiveField : Module.finrank ℚ SqrtNegFi
 
 The degree of `ℚ(√-5)` over `ℚ` is two.
 
-[Source](../QuadraticAlgebras/NumberField.lean#L170) (line 170).
+[Source](../QuadraticAlgebras/NumberField.lean#L177) (line 177).
 
 ### QuadraticAlgebra.instIsTotallyComplexSqrtNegFiveField
 
@@ -866,7 +989,7 @@ instance QuadraticAlgebra.instIsTotallyComplexSqrtNegFiveField : NumberField.IsT
 The field `ℚ(√-5)` is totally complex: a real embedding would send a square
 to `-5`, contradicting nonnegativity of real squares.
 
-[Source](../QuadraticAlgebras/NumberField.lean#L176) (line 176).
+[Source](../QuadraticAlgebras/NumberField.lean#L183) (line 183).
 
 ### QuadraticAlgebra.nrComplexPlaces_sqrtNegFiveField
 
@@ -876,7 +999,7 @@ theorem QuadraticAlgebra.nrComplexPlaces_sqrtNegFiveField : NumberField.Infinite
 
 The number field `ℚ(√-5)` has exactly one complex place.
 
-[Source](../QuadraticAlgebras/NumberField.lean#L193) (line 193).
+[Source](../QuadraticAlgebras/NumberField.lean#L200) (line 200).
 
 ### QuadraticAlgebra.classGroup_minkowskiBound_sqrtNegFiveField_lt_three
 
@@ -887,7 +1010,7 @@ theorem QuadraticAlgebra.classGroup_minkowskiBound_sqrtNegFiveField_lt_three : (
 The explicit Minkowski bound for ideal-class representatives in
 `ℚ(√-5)` is strictly less than three.
 
-[Source](../QuadraticAlgebras/NumberField.lean#L202) (line 202).
+[Source](../QuadraticAlgebras/NumberField.lean#L209) (line 209).
 
 ### QuadraticAlgebra.exists_ideal_in_class_of_absNorm_le_two
 
@@ -896,9 +1019,11 @@ theorem QuadraticAlgebra.exists_ideal_in_class_of_absNorm_le_two (C : ClassGroup
 ```
 
 Every ideal class of `ℚ(√-5)` has an integral representative of absolute
-norm at most two.
+norm at most two. This applies Mathlib's prior formalization
+`NumberField.exists_ideal_in_class_of_norm_le` (Anne Baanen, Riccardo Brasca
+and Xavier Roblot) to the discriminant and Minkowski bound computed here.
 
-[Source](../QuadraticAlgebras/NumberField.lean#L223) (line 223).
+[Source](../QuadraticAlgebras/NumberField.lean#L230) (line 230).
 
 ## Module `QuadraticAlgebras.ClassNumberNegFive`
 
@@ -912,6 +1037,16 @@ norm at most two.
 >
 > The localization and basic-open calculations motivated by this example are
 > separate from the source-independent number-field theory developed here.
+>
+> ## References
+>
+> * Mathlib's [number-field class-number formalization](https://github.com/leanprover-community/mathlib4/blob/e37d88a26f3791ed5a93daa1f949af1021b8d103/Mathlib/NumberTheory/NumberField/ClassNumber.lean)
+>   by Anne Baanen, Riccardo Brasca and Xavier Roblot supplies the ideal-class
+>   representative bound used through `QuadraticAlgebra.exists_ideal_in_class_of_absNorm_le_two`.
+>   The norm-two ideal classification and class-number computation are local.
+> * Ravi Vakil, *The Rising Sea: Foundations of Algebraic Geometry* (October 21,
+>   2025 draft), Exercise 5.4.K, motivates the `√-5` example, not this
+>   class-number calculation.
 
 [Module source](../QuadraticAlgebras/ClassNumberNegFive.lean)
 
@@ -924,7 +1059,7 @@ def QuadraticAlgebra.sqrtNegFiveModTwo : SqrtNegFiveOrder →+* ZMod 2
 Reduction of `ℤ[√-5]` modulo the relation sending `√-5` to `1` in
 `ZMod 2`.
 
-[Source](../QuadraticAlgebras/ClassNumberNegFive.lean#L32) (line 32).
+[Source](../QuadraticAlgebras/ClassNumberNegFive.lean#L42) (line 42).
 
 ### QuadraticAlgebra.sqrtNegFiveModTwo_surjective
 
@@ -934,7 +1069,7 @@ theorem QuadraticAlgebra.sqrtNegFiveModTwo_surjective : Function.Surjective ⇑s
 
 Reduction from `ℤ[√-5]` to `ZMod 2` is surjective.
 
-[Source](../QuadraticAlgebras/ClassNumberNegFive.lean#L39) (line 39).
+[Source](../QuadraticAlgebras/ClassNumberNegFive.lean#L49) (line 49).
 
 ### QuadraticAlgebra.sqrtNegFiveIdealTwo
 
@@ -945,7 +1080,7 @@ def QuadraticAlgebra.sqrtNegFiveIdealTwo : Ideal SqrtNegFiveOrder
 The distinguished ideal of `ℤ[√-5]` obtained as the kernel of reduction
 to `ZMod 2`.
 
-[Source](../QuadraticAlgebras/ClassNumberNegFive.lean#L44) (line 44).
+[Source](../QuadraticAlgebras/ClassNumberNegFive.lean#L54) (line 54).
 
 ### QuadraticAlgebra.quotientSqrtNegFiveIdealTwoEquiv
 
@@ -956,7 +1091,7 @@ noncomputable def QuadraticAlgebra.quotientSqrtNegFiveIdealTwoEquiv : SqrtNegFiv
 The quotient of `ℤ[√-5]` by its distinguished norm-two ideal is
 `ZMod 2`.
 
-[Source](../QuadraticAlgebras/ClassNumberNegFive.lean#L50) (line 50).
+[Source](../QuadraticAlgebras/ClassNumberNegFive.lean#L60) (line 60).
 
 ### QuadraticAlgebra.instIsDedekindDomainSqrtNegFiveOrder
 
@@ -967,7 +1102,7 @@ instance QuadraticAlgebra.instIsDedekindDomainSqrtNegFiveOrder : IsDedekindDomai
 The integrally closed negative-five quadratic order is a Dedekind
 domain.
 
-[Source](../QuadraticAlgebras/ClassNumberNegFive.lean#L57) (line 57).
+[Source](../QuadraticAlgebras/ClassNumberNegFive.lean#L67) (line 67).
 
 ### QuadraticAlgebra.absNorm_sqrtNegFiveIdealTwo
 
@@ -977,7 +1112,7 @@ theorem QuadraticAlgebra.absNorm_sqrtNegFiveIdealTwo : Ideal.absNorm sqrtNegFive
 
 The distinguished ideal of `ℤ[√-5]` has absolute norm two.
 
-[Source](../QuadraticAlgebras/ClassNumberNegFive.lean#L62) (line 62).
+[Source](../QuadraticAlgebras/ClassNumberNegFive.lean#L72) (line 72).
 
 ### QuadraticAlgebra.algebraNorm_eq_norm_sqrtNegFive
 
@@ -987,7 +1122,7 @@ theorem QuadraticAlgebra.algebraNorm_eq_norm_sqrtNegFive (x : SqrtNegFiveOrder) 
 
 On `ℤ[√-5]`, the algebra norm agrees with the quadratic-algebra norm.
 
-[Source](../QuadraticAlgebras/ClassNumberNegFive.lean#L69) (line 69).
+[Source](../QuadraticAlgebras/ClassNumberNegFive.lean#L79) (line 79).
 
 ### QuadraticAlgebra.not_isPrincipal_sqrtNegFiveIdealTwo
 
@@ -997,7 +1132,7 @@ theorem QuadraticAlgebra.not_isPrincipal_sqrtNegFiveIdealTwo : ¬Submodule.IsPri
 
 The distinguished norm-two ideal of `ℤ[√-5]` is not principal.
 
-[Source](../QuadraticAlgebras/ClassNumberNegFive.lean#L76) (line 76).
+[Source](../QuadraticAlgebras/ClassNumberNegFive.lean#L86) (line 86).
 
 ### QuadraticAlgebra.eq_sqrtNegFiveIdealTwo_of_absNorm_eq_two
 
@@ -1008,7 +1143,7 @@ theorem QuadraticAlgebra.eq_sqrtNegFiveIdealTwo_of_absNorm_eq_two (I : Ideal Sqr
 Every ideal of `ℤ[√-5]` of absolute norm two is the distinguished kernel
 ideal.
 
-[Source](../QuadraticAlgebras/ClassNumberNegFive.lean#L102) (line 102).
+[Source](../QuadraticAlgebras/ClassNumberNegFive.lean#L112) (line 112).
 
 ### QuadraticAlgebra.SqrtNegFiveRingOfIntegers
 
@@ -1018,7 +1153,7 @@ abbrev QuadraticAlgebra.SqrtNegFiveRingOfIntegers : Type
 
 The ring of integers of `ℚ(√-5)`.
 
-[Source](../QuadraticAlgebras/ClassNumberNegFive.lean#L147) (line 147).
+[Source](../QuadraticAlgebras/ClassNumberNegFive.lean#L157) (line 157).
 
 ### QuadraticAlgebra.sqrtNegFiveRingOfIntegersModTwo
 
@@ -1028,7 +1163,7 @@ noncomputable def QuadraticAlgebra.sqrtNegFiveRingOfIntegersModTwo : SqrtNegFive
 
 Reduction of the ring of integers of `ℚ(√-5)` to `ZMod 2`.
 
-[Source](../QuadraticAlgebras/ClassNumberNegFive.lean#L151) (line 151).
+[Source](../QuadraticAlgebras/ClassNumberNegFive.lean#L161) (line 161).
 
 ### QuadraticAlgebra.sqrtNegFiveRingOfIntegersModTwo_surjective
 
@@ -1039,7 +1174,7 @@ theorem QuadraticAlgebra.sqrtNegFiveRingOfIntegersModTwo_surjective : Function.S
 Reduction of the ring of integers of `ℚ(√-5)` to `ZMod 2` is
 surjective.
 
-[Source](../QuadraticAlgebras/ClassNumberNegFive.lean#L157) (line 157).
+[Source](../QuadraticAlgebras/ClassNumberNegFive.lean#L167) (line 167).
 
 ### QuadraticAlgebra.sqrtNegFiveRingOfIntegersIdealTwo
 
@@ -1049,7 +1184,7 @@ noncomputable def QuadraticAlgebra.sqrtNegFiveRingOfIntegersIdealTwo : Ideal Sqr
 
 The distinguished norm-two ideal in the ring of integers of `ℚ(√-5)`.
 
-[Source](../QuadraticAlgebras/ClassNumberNegFive.lean#L164) (line 164).
+[Source](../QuadraticAlgebras/ClassNumberNegFive.lean#L174) (line 174).
 
 ### QuadraticAlgebra.quotientSqrtNegFiveRingOfIntegersIdealTwoEquiv
 
@@ -1060,7 +1195,7 @@ noncomputable def QuadraticAlgebra.quotientSqrtNegFiveRingOfIntegersIdealTwoEqui
 The quotient of the ring of integers of `ℚ(√-5)` by its distinguished
 norm-two ideal is `ZMod 2`.
 
-[Source](../QuadraticAlgebras/ClassNumberNegFive.lean#L170) (line 170).
+[Source](../QuadraticAlgebras/ClassNumberNegFive.lean#L180) (line 180).
 
 ### QuadraticAlgebra.absNorm_sqrtNegFiveRingOfIntegersIdealTwo
 
@@ -1071,7 +1206,7 @@ theorem QuadraticAlgebra.absNorm_sqrtNegFiveRingOfIntegersIdealTwo : Ideal.absNo
 The distinguished ideal in the ring of integers of `ℚ(√-5)` has absolute
 norm two.
 
-[Source](../QuadraticAlgebras/ClassNumberNegFive.lean#L178) (line 178).
+[Source](../QuadraticAlgebras/ClassNumberNegFive.lean#L188) (line 188).
 
 ### QuadraticAlgebra.comap_sqrtNegFiveRingOfIntegersIdealTwo
 
@@ -1082,7 +1217,7 @@ theorem QuadraticAlgebra.comap_sqrtNegFiveRingOfIntegersIdealTwo : Ideal.comap s
 Pulling back the distinguished ideal of the ring of integers recovers the
 distinguished ideal of `ℤ[√-5]`.
 
-[Source](../QuadraticAlgebras/ClassNumberNegFive.lean#L186) (line 186).
+[Source](../QuadraticAlgebras/ClassNumberNegFive.lean#L196) (line 196).
 
 ### QuadraticAlgebra.not_isPrincipal_sqrtNegFiveRingOfIntegersIdealTwo
 
@@ -1093,7 +1228,7 @@ theorem QuadraticAlgebra.not_isPrincipal_sqrtNegFiveRingOfIntegersIdealTwo : ¬S
 The distinguished norm-two ideal in the ring of integers of `ℚ(√-5)` is
 not principal.
 
-[Source](../QuadraticAlgebras/ClassNumberNegFive.lean#L196) (line 196).
+[Source](../QuadraticAlgebras/ClassNumberNegFive.lean#L206) (line 206).
 
 ### QuadraticAlgebra.ringHom_eq_sqrtNegFiveRingOfIntegersModTwo
 
@@ -1104,7 +1239,7 @@ theorem QuadraticAlgebra.ringHom_eq_sqrtNegFiveRingOfIntegersModTwo (f : SqrtNeg
 Every ring homomorphism from the ring of integers of `ℚ(√-5)` to
 `ZMod 2` is the distinguished reduction map.
 
-[Source](../QuadraticAlgebras/ClassNumberNegFive.lean#L212) (line 212).
+[Source](../QuadraticAlgebras/ClassNumberNegFive.lean#L222) (line 222).
 
 ### QuadraticAlgebra.eq_sqrtNegFiveRingOfIntegersIdealTwo_of_absNorm_eq_two
 
@@ -1115,7 +1250,7 @@ theorem QuadraticAlgebra.eq_sqrtNegFiveRingOfIntegersIdealTwo_of_absNorm_eq_two 
 Every ideal of absolute norm two in the ring of integers of `ℚ(√-5)` is
 the distinguished kernel ideal.
 
-[Source](../QuadraticAlgebras/ClassNumberNegFive.lean#L240) (line 240).
+[Source](../QuadraticAlgebras/ClassNumberNegFive.lean#L250) (line 250).
 
 ### QuadraticAlgebra.sqrtNegFiveRingOfIntegersIdealTwoNonzero
 
@@ -1126,7 +1261,7 @@ noncomputable def QuadraticAlgebra.sqrtNegFiveRingOfIntegersIdealTwoNonzero : �
 The distinguished norm-two ideal, packaged as a nonzero ideal for the
 class-group API.
 
-[Source](../QuadraticAlgebras/ClassNumberNegFive.lean#L271) (line 271).
+[Source](../QuadraticAlgebras/ClassNumberNegFive.lean#L281) (line 281).
 
 ### QuadraticAlgebra.eq_top_or_eq_sqrtNegFiveRingOfIntegersIdealTwo_of_absNorm_le_two
 
@@ -1137,7 +1272,7 @@ theorem QuadraticAlgebra.eq_top_or_eq_sqrtNegFiveRingOfIntegersIdealTwo_of_absNo
 A nonzero ideal of absolute norm at most two in the ring of integers of
 `ℚ(√-5)` is either the unit ideal or the distinguished norm-two ideal.
 
-[Source](../QuadraticAlgebras/ClassNumberNegFive.lean#L283) (line 283).
+[Source](../QuadraticAlgebras/ClassNumberNegFive.lean#L293) (line 293).
 
 ### QuadraticAlgebra.classGroup_eq_one_or_mk0_sqrtNegFiveRingOfIntegersIdealTwo
 
@@ -1148,7 +1283,9 @@ theorem QuadraticAlgebra.classGroup_eq_one_or_mk0_sqrtNegFiveRingOfIntegersIdeal
 Every ideal class of `ℚ(√-5)` is either trivial or represented by the
 distinguished norm-two ideal.
 
-[Source](../QuadraticAlgebras/ClassNumberNegFive.lean#L301) (line 301).
+[Source](../QuadraticAlgebras/ClassNumberNegFive.lean#L311) (line 311).
+
+<a id="qa-minus-five-class-number" name="qa-minus-five-class-number"></a>
 
 ### QuadraticAlgebra.classNumber_sqrtNegFiveField
 
@@ -1156,9 +1293,11 @@ distinguished norm-two ideal.
 theorem QuadraticAlgebra.classNumber_sqrtNegFiveField : NumberField.classNumber SqrtNegFiveField = 2
 ```
 
-The class number of `ℚ(√-5)` is two.
+The class number of `ℚ(√-5)` is two. The local ideal classification
+combines with Mathlib's ideal-class representative bound (Anne Baanen, Riccardo
+Brasca and Xavier Roblot) specialized in `NumberField.lean`.
 
-[Source](../QuadraticAlgebras/ClassNumberNegFive.lean#L320) (line 320).
+[Source](../QuadraticAlgebras/ClassNumberNegFive.lean#L330) (line 330).
 
 ## Module `QuadraticAlgebras`
 

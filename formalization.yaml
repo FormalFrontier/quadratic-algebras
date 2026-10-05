@@ -13,22 +13,18 @@ sources:
     type: original-proof
     relationship: formalizes
     note: >-
-      Original project Lean theory and proofs contributed by Atlas, using
-      separately authored mathlib APIs as declared dependencies. A distinct AI
-      agent migrated the native modules, build and stored clients without
-      originating the mathematical proofs. Atlas subsequently repaired module
-      documentation placement and authored the guide, named README examples,
-      metadata and API assembly; Folio contributed the headline summaries.
+      Original Formal Frontier Lean proofs of the stated results using imported
+      Mathlib APIs. See the README references for mathematical motivation and
+      prior formalizations.
 automation:
   methods:
     - method: agent
       tool_setup: >-
-        Formal Frontier AI agents used Lean and mathlib with pinned revisions,
-        public imports, downstream examples and independent project reviews.
+        Formal Frontier AI agents used Lean and pinned Mathlib to develop proofs,
+        documentation and downstream examples.
   notes: >-
-    AI agents developed and assembled the project using Lean and mathlib.
-    No model or cost measurements are claimed; the README gives a scoped
-    cached-dependency build baseline, not an aggregate memory requirement.
+    AI agents contributed mathematical proofs, module and client migration,
+    and documentation.
 status:
   scope: >-
     Quotient and scalar-extension presentations and total fraction rings allow
@@ -67,14 +63,11 @@ status:
 review:
   status: agent-reviewed mathematical development
   notes: >-
-    Mathematical development and earlier native-module/client assembly received
-    independent project review and owner acceptance. Historical review and schema
-    validity alone do not certify a later artifact, source coverage or
-    redistribution clearance.
+    The mathematical development received independent project review; the
+    stated scope does not assert complete source correspondence.
 acknowledgements: >-
-  Uses mathlib's quadratic-algebra, polynomial, localization, number-field and
-  ideal-class APIs through the declared pinned dependency. Mathematical
-  motivation and source-specific correspondence are not imported proof code
-  and do not make source authors formalization contributors. The documentation
-  adapter retains credit to Anchor's original ideal-completion recipe and
-  subsequent Formal Frontier adaptations in docs/README.md.
+  Atlas wrote the original Lean proofs; a distinct AI agent migrated modules,
+  build and clients without originating those proofs. Atlas contributed the
+  standalone documentation and examples, Folio the headline guide, and Anchor
+  the original renderer recipe adapted for the API guide (docs/README.md).
+  Mathlib supplies the separately authored imported APIs.

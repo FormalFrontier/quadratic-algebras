@@ -14,6 +14,11 @@ This file packages the generic passage from integral closedness to the
 Dedekind-domain property for a quadratic algebra over a Dedekind domain. The
 quadratic algebra is finite as a module over its base, so it is Noetherian;
 integrality bounds its Krull dimension by one.
+
+## References
+
+* Mathlib's [Dedekind-domain API](https://github.com/leanprover-community/mathlib4/blob/e37d88a26f3791ed5a93daa1f949af1021b8d103/Mathlib/RingTheory/DedekindDomain/Basic.lean)
+  supplies the finite-integral dimension and Noetherian-domain results used here.
 -/
 
 public section
@@ -39,7 +44,5 @@ theorem isDedekindDomain_of_isIntegrallyClosed
     Ring.DimensionLEOne.of_isIntegral R _
   let _ : IsDedekindRing (QuadraticAlgebra R a b) := { }
   infer_instance
-
-#print axioms isDedekindDomain_of_isIntegrallyClosed
 
 end QuadraticAlgebra

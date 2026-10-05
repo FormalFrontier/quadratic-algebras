@@ -15,6 +15,14 @@ This file proves that `QuadraticAlgebra ℤ (-5) 0` is not a unique
 factorization monoid. The embedded integer `2` is irreducible because the norm
 form `x² + 5y²` does not represent `2`, but it is not prime because
 `(1 + ω) * (1 - ω) = 6` while `2` divides neither factor.
+
+## References
+
+* Ravi Vakil, *The Rising Sea: Foundations of Algebraic Geometry* (October 21,
+  2025 draft), Exercise 5.4.K, motivates the `√-5` example and gives the
+  factorization hint behind its failure of unique factorization.
+* Mathlib's [quadratic algebra](https://github.com/leanprover-community/mathlib4/blob/e37d88a26f3791ed5a93daa1f949af1021b8d103/Mathlib/Algebra/QuadraticAlgebra/Basic.lean)
+  supplies the coordinate norm and conjugation operations.
 -/
 
 public section
@@ -134,7 +142,8 @@ theorem not_prime_two_int_negFive :
   · exact two_not_dvd_one_sub_omega h
 
 /-- The integer quadratic algebra `QuadraticAlgebra ℤ (-5) 0` is not a unique
-factorization monoid. -/
+factorization monoid. The norm and factorization argument is motivated by
+Vakil, *The Rising Sea*, Exercise 5.4.K. -/
 theorem not_uniqueFactorizationMonoid_int_negFive :
     ¬UniqueFactorizationMonoid (QuadraticAlgebra ℤ (-5 : ℤ) 0) := by
   intro h

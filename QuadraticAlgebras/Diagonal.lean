@@ -21,6 +21,15 @@ This file defines the diagonal quadratic `∑ i, c i • X i ^ 2` attached to a
 finitely supported coefficient family.  It proves reusable coefficient,
 homogeneity, irreducibility, and squarefreeness results over fields of
 characteristic different from two.
+
+## References
+
+* Ravi Vakil, *The Rising Sea: Foundations of Algebraic Geometry* (October 21,
+  2025 draft), Exercise 5.4.I(b), motivates a diagonal prerequisite, while
+  Exercise 5.4.N motivates the binary diagonal case. These polynomial results
+  alone do not establish the hypersurface-normality exercise.
+* Mathlib's [multivariate quadratic results](https://github.com/leanprover-community/mathlib4/blob/e37d88a26f3791ed5a93daa1f949af1021b8d103/Mathlib/RingTheory/MvPolynomial/IrreducibleQuadratic.lean)
+  provide the polynomial infrastructure used here.
 -/
 
 public section
@@ -211,7 +220,9 @@ private theorem factors_isHomogeneous_one
       hb_hom⟩
 
 /-- A diagonal quadratic over a field of characteristic different from two is
-irreducible as soon as at least three coefficients are nonzero. -/
+irreducible as soon as at least three coefficients are nonzero. This reusable
+prerequisite is motivated by Vakil, *The Rising Sea*, Exercise 5.4.I(b), not
+a proof of the hypersurface-normality exercise. -/
 theorem irreducible_sumSMulXSq [NeZero (2 : k)]
     (c : ι →₀ k) (hc : 3 ≤ c.support.card) :
     Irreducible (sumSMulXSq c) := by
@@ -345,7 +356,8 @@ theorem irreducible_sumSMulXSq [NeZero (2 : k)]
 /-- A binary diagonal quadratic `a * X i ^ 2 + b * X j ^ 2` over a field of
 characteristic different from two is irreducible when `i ≠ j`, `a` is
 nonzero, and `-b / a` is not a square. (The last condition already forces
-`b` to be nonzero.) -/
+`b` to be nonzero.) The binary case is motivated by Vakil, *The Rising Sea*,
+Exercise 5.4.N. -/
 theorem irreducible_C_mul_X_sq_add_C_mul_X_sq_of_not_isSquare [NeZero (2 : k)]
     {i j : ι} (hij : i ≠ j) {a b : k} (ha0 : a ≠ 0)
     (hnsq : ¬ IsSquare (-b / a)) :

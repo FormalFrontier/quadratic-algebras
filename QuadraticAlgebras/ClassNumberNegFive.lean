@@ -19,6 +19,16 @@ number is two.
 
 The localization and basic-open calculations motivated by this example are
 separate from the source-independent number-field theory developed here.
+
+## References
+
+* Mathlib's [number-field class-number formalization](https://github.com/leanprover-community/mathlib4/blob/e37d88a26f3791ed5a93daa1f949af1021b8d103/Mathlib/NumberTheory/NumberField/ClassNumber.lean)
+  by Anne Baanen, Riccardo Brasca and Xavier Roblot supplies the ideal-class
+  representative bound used through `QuadraticAlgebra.exists_ideal_in_class_of_absNorm_le_two`.
+  The norm-two ideal classification and class-number computation are local.
+* Ravi Vakil, *The Rising Sea: Foundations of Algebraic Geometry* (October 21,
+  2025 draft), Exercise 5.4.K, motivates the `√-5` example, not this
+  class-number calculation.
 -/
 
 public section
@@ -317,7 +327,9 @@ theorem classGroup_eq_one_or_mk0_sqrtNegFiveRingOfIntegersIdealTwo
     congr 1
     exact Subtype.ext htwo
 
-/-- The class number of `ℚ(√-5)` is two. -/
+/-- The class number of `ℚ(√-5)` is two. The local ideal classification
+combines with Mathlib's ideal-class representative bound (Anne Baanen, Riccardo
+Brasca and Xavier Roblot) specialized in `NumberField.lean`. -/
 theorem classNumber_sqrtNegFiveField :
     NumberField.classNumber SqrtNegFiveField = 2 := by
   rw [NumberField.classNumber, ← Nat.card_eq_fintype_card,
