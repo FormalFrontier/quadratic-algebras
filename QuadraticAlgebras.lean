@@ -5,6 +5,7 @@ Authors: Formal Frontier Agents
 module
 
 public import QuadraticAlgebras.AdjoinRoot
+public import QuadraticAlgebras.RealClosedCoordinates
 public import QuadraticAlgebras.FractionRing
 public import QuadraticAlgebras.Squarefree
 public import QuadraticAlgebras.Integral

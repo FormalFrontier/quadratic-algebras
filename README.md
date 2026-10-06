@@ -18,7 +18,8 @@ The results below extend mathlib's quadratic-algebra, polynomial, localization
 and number-field infrastructure. They provide changes of presentation,
 integral-closure tests and explicit arithmetic examples; the imported
 infrastructure is not a new contribution of this library. The
-[API reference](docs/API.md) gives the full signatures and module imports.
+[API reference](docs/API.md) gives the historical native signatures and a
+source-derived guide to the newer coordinate declarations and module imports.
 
 ### Presentations, scalar extension and integral closure
 
@@ -52,6 +53,25 @@ Key interfaces are the [polynomial-quotient equivalence](docs/API.md#qa-equiv-ad
 [scalar-extension and total-fraction-ring maps](QuadraticAlgebras/FractionRing.lean),
 [UFD squarefree criterion](docs/API.md#qa-ufd-squarefree-criterion)
 and [separate integer criterion](docs/API.md#qa-integer-integral-closure).
+
+### Chosen coordinates for quadratic algebras
+
+Over a field `R` with `[IsRealClosed R]`, irreducibility of
+`QuadraticAlgebra.definingPolynomial a b` supplies a nonzero `d` with
+`d² = -QuadraticAlgebra.discr a b`; see the
+[real-closed witness](docs/API.md#qa-real-closed-witness). Separately, over
+any field with `[NeZero (2 : R)]`, a *supplied* `d ≠ 0` satisfying this
+square identity gives a [chosen equivalence](docs/API.md#qa-chosen-coordinates)
+from `QuadraticAlgebra R a b` to `QuadraticAlgebra R (-1) 0`. Its generator
+maps to `(d / 2) • omega + algebraMap R _ (b / 2)`; replacing `d` with `-d`
+conjugates that image, without selecting a preferred sign or requiring
+irreducibility of the supplied-witness equivalence. The
+[quotient version](docs/API.md#qa-chosen-quotient) additionally assumes `p`
+is monic with `p.natDegree = 2`, and evaluates *every* polynomial class
+`AdjoinRoot.mk p g` at the image of the chosen root. These conditional chosen
+coordinates are distinct from the earlier canonical quotient bridge over
+arbitrary commutative rings; no unconditional Lean `ℝ` instance or
+arbitrary-degree quotient equivalence is asserted.
 
 ### Diagonal quadratics
 
@@ -98,12 +118,13 @@ and the [class-number-two theorem](docs/API.md#qa-minus-five-class-number).
 ## Module and API guide
 
 All paths below have the prefix `QuadraticAlgebras.`. The root
-`QuadraticAlgebras` reexports all thirteen leaves. Most names are in the
-`QuadraticAlgebra` namespace; the two exceptions are identified in the table.
+`QuadraticAlgebras` reexports all fourteen production leaves. Most names are in
+the `QuadraticAlgebra` namespace; the two exceptions are identified in the table.
 
 | Leaf | Main interface and boundary |
 | --- | --- |
 | `AdjoinRoot` | `definingPolynomial`, `equivAdjoinRoot`, and generator equations over any commutative ring. The convention is `omega ^ 2 = a + b * omega`. |
+| [`RealClosedCoordinates`](QuadraticAlgebras/RealClosedCoordinates.lean) | [Real-closed negative-discriminant witness](docs/API.md#qa-real-closed-witness); [signed generator equivalence](docs/API.md#qa-chosen-coordinates) over a field with nonzero two and a supplied nonzero witness; [monic degree-two quotient coordinates](docs/API.md#qa-chosen-quotient). |
 | `FractionRing` | `baseChangeEquiv`, `fractionRingEquivTensor`, `fractionRingEquivBaseChange`, `fractionRingEquivAdjoinRoot`; their generator and algebra-map lemmas retain arbitrary commutative rings. |
 | `Squarefree` | `IsFractionRing.isInteger_of_sq_mul_squarefree`: denominator descent for a UFD/domain and a chosen fraction field. `IsLocalization.IsInteger` means membership in the image of the base ring, not merely `IsIntegral`. |
 | `Integral` | `starAlgEquiv`, `isIntegral_star`, and trace/norm membership lemmas over an integrally closed base with a fraction-ring structure. The quadratic algebra need not be a domain. |
@@ -163,9 +184,12 @@ The project uses Lean `v4.34.0-rc2` and mathlib
 `e37d88a26f3791ed5a93daa1f949af1021b8d103`.
 
 The named downstream test-library target compiles the direct-leaf and
-aggregate-only clients and the four stored README modules. The twenty modules
-(fourteen production and six private test/example modules) are all included in
-the default build:
+aggregate-only clients, the four stored README modules and the
+chosen-coordinate examples. All twenty-two modules (fourteen production
+leaves, the aggregate root and seven test/example modules) are included in the
+default build. In the new test leaf only `gaussianWitness` is public; its other
+fourteen named clients are private. The six older test/example modules remain
+private-only:
 
 ```sh
 lake build QuadraticAlgebrasTest
@@ -175,16 +199,18 @@ lake build
 To treat warnings as errors during a check, use `lake --wfail build` or
 `lake --wfail build QuadraticAlgebrasTest` after fetching the pinned cache.
 
-A baseline on a 23-GiB Linux runtime, after fetching the matching dependency
-cache and with project outputs initially absent, totaled 92.65 seconds across
-twenty **sequential, warning-fatal named-module invocations**. The largest
+A historical baseline on a 23-GiB Linux runtime, after fetching the matching
+dependency cache and with project outputs initially absent, totaled 92.65
+seconds across twenty **sequential, warning-fatal named-module invocations**
+before the coordinate modules were added. The largest
 measured peak RSS of a child process was 1,838,488 KiB, not the runtime's
 aggregate memory. `LAKE_JOBS=1` and `LEAN_NUM_THREADS=1` were recorded for those
 commands; `LEAN_NUM_THREADS` controls each Lean runtime's workers, while the
-recorded `LAKE_JOBS` does not establish default-build concurrency. The total
+recorded `LAKE_JOBS` does not establish default-build concurrency. That total
 excludes cache preparation, native documentation generation and the separate
 proof audit. It is not a cold-build timing, a portable RAM minimum, a measured
-default-build concurrency limit or an improvement claim.
+default-build concurrency limit, a measurement of the current twenty-two
+modules or an improvement claim.
 
 ## Using the library
 
@@ -282,15 +308,16 @@ hypotheses for their respective results.
 
 ## Generated documentation and checks
 
-The [API reference](docs/API.md) retains all 92 native display signatures,
-including the five instances, from the [previously published native
+The [API reference](docs/API.md) preserves all 92 historical native display
+signatures, including five instances, from the [previously published native
 reference](https://github.com/FormalFrontier/quadratic-algebras/blob/e5ac018d29892d2a8612f4ca8d4babaabb9c4d15/docs/API.md).
-Its module descriptions, declaration summaries and relative source links are
-maintained against this checkout. The [historical input manifest](docs/api-manifest.json)
-records earlier native analysis, not the current source inputs or edited API
-file. The [binding guide](docs/README.md) separates those records from current
-file hashes and the static source-link assessment; no new native analysis or
-passing native `--check` is claimed.
+It separately links all seven new public coordinate declarations and their
+laws to the present source without claiming native generation of that
+supplement or a complete generated-current inventory. The
+[historical input manifest](docs/api-manifest.json) binds the older native
+analysis, not the new modules or this edited API file; the
+[binding guide](docs/README.md) identifies its old hash comparison as
+historical. No new native analysis or passing native `--check` is claimed.
 It does not distribute a JavaScript site or external dependency documentation.
 
 Build-checked examples, inherited native API signatures and a schema-valid metadata file
@@ -319,6 +346,10 @@ general classification of quadratic forms or number fields is claimed.
 - [Mathlib at the pinned revision `e37d88a26f3791ed5a93daa1f949af1021b8d103`](https://github.com/leanprover-community/mathlib4/tree/e37d88a26f3791ed5a93daa1f949af1021b8d103)
   supplies the imported formalizations, including
   [`Algebra.QuadraticAlgebra.Basic`](https://github.com/leanprover-community/mathlib4/blob/e37d88a26f3791ed5a93daa1f949af1021b8d103/Mathlib/Algebra/QuadraticAlgebra/Basic.lean),
+  [`Algebra.QuadraticAlgebra.Discriminant`](https://github.com/leanprover-community/mathlib4/blob/e37d88a26f3791ed5a93daa1f949af1021b8d103/Mathlib/Algebra/QuadraticAlgebra/Discriminant.lean)
+  (`QuadraticAlgebra.exists_sq_eq_iff_isSquare_discr`),
+  [`FieldTheory.IsRealClosed.Basic`](https://github.com/leanprover-community/mathlib4/blob/e37d88a26f3791ed5a93daa1f949af1021b8d103/Mathlib/FieldTheory/IsRealClosed/Basic.lean)
+  (`IsRealClosed.isSquare_neg_of_not_isSquare`),
   [`RingTheory.AdjoinRoot`](https://github.com/leanprover-community/mathlib4/blob/e37d88a26f3791ed5a93daa1f949af1021b8d103/Mathlib/RingTheory/AdjoinRoot.lean),
   [`RingTheory.Localization.BaseChange`](https://github.com/leanprover-community/mathlib4/blob/e37d88a26f3791ed5a93daa1f949af1021b8d103/Mathlib/RingTheory/Localization/BaseChange.lean),
   [`RingTheory.IntegralClosure.IntegrallyClosed`](https://github.com/leanprover-community/mathlib4/blob/e37d88a26f3791ed5a93daa1f949af1021b8d103/Mathlib/RingTheory/IntegralClosure/IntegrallyClosed.lean),

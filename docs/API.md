@@ -1,19 +1,83 @@
 # API reference
 
-Complete public API of quadratic-algebras: 92 declarations in thirteen mathematical leaves.
-Import `QuadraticAlgebras` for all leaves. Six test modules contain private checked
-clients and README examples, not additional public API.
+Import `QuadraticAlgebras` for all fourteen production leaves. This guide
+preserves 92 historical native signature blocks from thirteen leaves and
+separately describes seven public declarations in the newer
+`RealClosedCoordinates` leaf from their current Lean source. The new entries
+are **not** native-generated signature blocks; this is not a complete
+generated-current inventory. There are seven test/example modules: six older
+modules are private-only, while the new coordinate test leaf has one public
+statement, `QuadraticAlgebrasTest.gaussianWitness`, and fourteen private
+named clients.
 
 The 92 Lean signature blocks are inherited unchanged from the
 [published native API](https://github.com/FormalFrontier/quadratic-algebras/blob/e5ac018d29892d2a8612f4ca8d4babaabb9c4d15/docs/API.md),
 with all displayed implicit arguments retained; they are not proof bodies.
 Native printing can suppress type annotations on literals. Consult the linked
-source for explicit types; universe parameters are arbitrary. Module explanations,
-declaration docstrings and relative source links are maintained against the
-current source comments, not newly generated native records. The
-[historical input manifest](api-manifest.json) and [binding guide](README.md)
-distinguish that native analysis from these edits. See the
+source for explicit types; universe parameters are arbitrary. The older
+module explanations, declaration prose and relative links are source-maintained,
+not newly generated native records. The new supplement below is source-derived.
+The [historical input manifest](api-manifest.json) and [binding guide](README.md)
+bind the earlier analysis only, not the new leaf or this edited guide. See the
 [mathematical overview](../README.md).
+
+## Module `QuadraticAlgebras.RealClosedCoordinates` — source-derived supplement
+
+[Module source](../QuadraticAlgebras/RealClosedCoordinates.lean). These seven
+public declarations belong to the fourteenth production leaf; their named
+assumptions and laws are read from the linked Lean definitions and theorems,
+not from native-generated signatures:
+
+<a id="qa-real-closed-witness" name="qa-real-closed-witness"></a>
+
+- [`QuadraticAlgebra.exists_sq_eq_neg_discr_of_irreducible`](../QuadraticAlgebras/RealClosedCoordinates.lean#L71):
+  For `[Field R] [IsRealClosed R]`, if
+  `Irreducible (definingPolynomial a b)`, there is `d : R` with `d ≠ 0` and
+  `d ^ 2 = -(discr a b)`. It does not select a sign. The proof uses Mathlib's
+  `QuadraticAlgebra.exists_sq_eq_iff_isSquare_discr` to exclude a square
+  discriminant and `IsRealClosed.isSquare_neg_of_not_isSquare` to obtain its
+  negative square root.
+
+<a id="qa-chosen-coordinates" name="qa-chosen-coordinates"></a>
+
+- [`QuadraticAlgebra.equivOfDiscrSqNeg`](../QuadraticAlgebras/RealClosedCoordinates.lean#L96):
+  For `[Field R] [NeZero (2 : R)]`, *supplied* `d ≠ 0` and
+  `d ^ 2 = -(discr a b)` define an `R`-algebra equivalence
+  `QuadraticAlgebra R a b ≃ₐ[R] QuadraticAlgebra R (-1) 0`.
+  Irreducibility is not an assumption of this construction.
+- [`QuadraticAlgebra.equivOfDiscrSqNeg_omega`](../QuadraticAlgebras/RealClosedCoordinates.lean#L115):
+  The chosen equivalence sends `omega` to
+  `(d / 2) • omega + algebraMap R _ (b / 2)` in the target algebra.
+- [`QuadraticAlgebra.equivOfDiscrSqNeg_neg_omega`](../QuadraticAlgebras/RealClosedCoordinates.lean#L135):
+  With the witness `-d`, the *image of `omega`* is the conjugate (`star`) of
+  its image with `d`; this does not canonically orient either equivalence.
+
+<a id="qa-chosen-quotient" name="qa-chosen-quotient"></a>
+
+- [`QuadraticAlgebra.adjoinRootEquivOfDiscrSqNeg`](../QuadraticAlgebras/RealClosedCoordinates.lean#L148):
+  For `[Field R] [NeZero (2 : R)]`, `p : R[X]` **monic** with
+  `p.natDegree = 2`, and supplied `d ≠ 0` with
+  `d ^ 2 = -(discr (-p.coeff 0) (-p.coeff 1))`, defines
+  `AdjoinRoot p ≃ₐ[R] QuadraticAlgebra R (-1) 0`. This composes the
+  canonical quotient bridge and the chosen field-level equivalence;
+  irreducibility is not required once `d` is provided.
+- [`QuadraticAlgebra.adjoinRootEquivOfDiscrSqNeg_root`](../QuadraticAlgebras/RealClosedCoordinates.lean#L170):
+  This equivalence sends `AdjoinRoot.root p` to
+  `(d / 2) • omega + algebraMap R _ ((-p.coeff 1) / 2)`.
+- [`QuadraticAlgebra.adjoinRootEquivOfDiscrSqNeg_mk`](../QuadraticAlgebras/RealClosedCoordinates.lean#L181):
+  For **every** `g : R[X]`, the image of `AdjoinRoot.mk p g` is
+  `g.eval₂ (algebraMap R _)` at that chosen root coordinate, not merely a
+  statement about the adjoined root itself.
+
+The [rational Gaussian example](../QuadraticAlgebrasTest/RealClosedCoordinates.lean#L47)
+provides a concrete nonzero negative-discriminant witness; the other named
+test clients include translated and opposite choices and a reducible split
+quadratic. These coordinate results assert neither a preferred sign nor an
+unconditional Lean `ℝ` instance nor a higher-degree quotient theorem.
+
+The following thirteen-leaf reference preserves its 92 historical native
+signature blocks, including five instances. Its counts and original
+[native manifest](api-manifest.json) do not describe this supplement.
 
 ## Module `QuadraticAlgebras.AdjoinRoot`
 
@@ -1304,7 +1368,8 @@ Brasca and Xavier Roblot) specialized in `NumberField.lean`.
 > # Quadratic algebras
 >
 > The public aggregate re-exports the coordinate, fraction-ring, integral-closure,
-> diagonal-quadratic and negative-five number-field developments.
+> diagonal-quadratic, chosen negative-discriminant and negative-five number-field
+> developments.
 
 [Module source](../QuadraticAlgebras.lean)
 
@@ -1368,3 +1433,12 @@ Brasca and Xavier Roblot) specialized in `NumberField.lean`.
 > This named private client is the corresponding README Lean block. It adds no public API.
 
 [Module source](../QuadraticAlgebrasTest/ReadmeNegativeFive.lean)
+
+## Module `QuadraticAlgebrasTest.RealClosedCoordinates`
+
+The [coordinate test leaf](../QuadraticAlgebrasTest/RealClosedCoordinates.lean)
+has fifteen named clients. The sole public one,
+[`QuadraticAlgebrasTest.gaussianWitness`](../QuadraticAlgebrasTest/RealClosedCoordinates.lean#L47),
+states `(2 : ℚ) ≠ 0 ∧ (2 : ℚ) ^ 2 = -(QuadraticAlgebra.discr (-1) 0)`;
+its fourteen other named declarations are private, so their Gaussian,
+translated-root and split examples do not extend the exported library API.
