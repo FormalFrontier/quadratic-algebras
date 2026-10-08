@@ -19,7 +19,7 @@ and number-field infrastructure. They provide changes of presentation,
 integral-closure tests and explicit arithmetic examples; the imported
 infrastructure is not a new contribution of this library. The
 [API reference](docs/API.md) gives the historical native signatures and a
-source-derived guide to the newer coordinate declarations and module imports.
+guide to the newer real-closed declarations and module imports.
 
 ### Presentations, scalar extension and integral closure
 
@@ -70,8 +70,26 @@ irreducibility of the supplied-witness equivalence. The
 is monic with `p.natDegree = 2`, and evaluates *every* polynomial class
 `AdjoinRoot.mk p g` at the image of the chosen root. These conditional chosen
 coordinates are distinct from the earlier canonical quotient bridge over
-arbitrary commutative rings; no unconditional Lean `ℝ` instance or
-arbitrary-degree quotient equivalence is asserted.
+arbitrary commutative rings; they do not choose a sign or provide an
+arbitrary-degree quotient equivalence.
+
+### Algebraic closure over a real-closed field
+
+For any field `R` with `[IsRealClosed R]`, the canonical quadratic field
+`QuadraticAlgebra R (-1) 0` is algebraically closed. No order or nonsquare
+witness is supplied by the caller: semireality proves the field witness
+`Fact (¬ IsSquare (-1 : R))`. Every element of this quadratic field has a
+square root, and a finite normal closure with the Galois correspondence and
+Sylow's theorem rules out any further finite extension. Consequently every
+irreducible `p : R[X]` satisfies `p.natDegree ≤ 2`.
+
+The independent [real model](QuadraticAlgebrasTest/RealClosedModel.lean) proves
+`IsRealClosed ℝ` without importing the closure result. It exhibits irreducible
+`X² + 1` at the bound and reducible `X² - 1` and `X⁴ - 1` as boundaries.
+The [dependent clients](QuadraticAlgebrasTest/RealClosedClosure.lean) exercise
+the square-root and cubic-root results and compare the general degree bound
+with Mathlib's real-only bound. See the
+[closure API](docs/API.md#qa-real-closed-closure).
 
 ### Diagonal quadratics
 
@@ -118,13 +136,14 @@ and the [class-number-two theorem](docs/API.md#qa-minus-five-class-number).
 ## Module and API guide
 
 All paths below have the prefix `QuadraticAlgebras.`. The root
-`QuadraticAlgebras` reexports all fourteen production leaves. Most names are in
-the `QuadraticAlgebra` namespace; the two exceptions are identified in the table.
+`QuadraticAlgebras` reexports all fifteen production leaves. Most names are in
+the `QuadraticAlgebra` namespace; the other namespaces are identified in the table.
 
 | Leaf | Main interface and boundary |
 | --- | --- |
 | `AdjoinRoot` | `definingPolynomial`, `equivAdjoinRoot`, and generator equations over any commutative ring. The convention is `omega ^ 2 = a + b * omega`. |
 | [`RealClosedCoordinates`](QuadraticAlgebras/RealClosedCoordinates.lean) | [Real-closed negative-discriminant witness](docs/API.md#qa-real-closed-witness); [signed generator equivalence](docs/API.md#qa-chosen-coordinates) over a field with nonzero two and a supplied nonzero witness; [monic degree-two quotient coordinates](docs/API.md#qa-chosen-quotient). |
+| [`RealClosedClosure`](QuadraticAlgebras/RealClosedClosure.lean) | `IsAlgClosed (QuadraticAlgebra R (-1) 0)` and `IsRealClosed.irreducible_natDegree_le_two` for `[Field R] [IsRealClosed R]`; the square-root and odd-extension helpers are also public. |
 | `FractionRing` | `baseChangeEquiv`, `fractionRingEquivTensor`, `fractionRingEquivBaseChange`, `fractionRingEquivAdjoinRoot`; their generator and algebra-map lemmas retain arbitrary commutative rings. |
 | `Squarefree` | `IsFractionRing.isInteger_of_sq_mul_squarefree`: denominator descent for a UFD/domain and a chosen fraction field. `IsLocalization.IsInteger` means membership in the image of the base ring, not merely `IsIntegral`. |
 | `Integral` | `starAlgEquiv`, `isIntegral_star`, and trace/norm membership lemmas over an integrally closed base with a fraction-ring structure. The quadratic algebra need not be a domain. |
@@ -185,11 +204,12 @@ The project uses Lean `v4.34.0-rc2` and mathlib
 
 The named downstream test-library target compiles the direct-leaf and
 aggregate-only clients, the four stored README modules and the
-chosen-coordinate examples. All twenty-two modules (fourteen production
-leaves, the aggregate root and seven test/example modules) are included in the
-default build. In the new test leaf only `gaussianWitness` is public; its other
-fourteen named clients are private. The six older test/example modules remain
-private-only:
+chosen-coordinate and real-closed closure examples. All twenty-five modules
+(fifteen production leaves, the aggregate root and nine test/example modules)
+are included in the default build. The coordinate test leaf has one public
+`gaussianWitness` and fourteen private named clients; the real-closed model
+and closure client leaves expose their boundary and comparison theorems. The
+six older test/example modules remain private-only:
 
 ```sh
 lake build QuadraticAlgebrasTest
@@ -337,6 +357,10 @@ general classification of quadratic forms or number fields is claimed.
 
 ## References
 
+- Emil Artin and Otto Schreier, the classical characterization of real-closed
+  fields: the odd-degree extension and Sylow 2-group arguments motivate the
+  quadratic-closure proof. This library works with Mathlib's unordered
+  `IsRealClosed` class rather than assuming an order or algebraic closure.
 - Ravi Vakil, *The Rising Sea: Foundations of Algebraic Geometry* (October 21,
   2025 draft): Exercise 5.4.H supplies the trace/norm, denominator and
   repeated-square proof route for integral closure; 5.4.I(a) motivates the

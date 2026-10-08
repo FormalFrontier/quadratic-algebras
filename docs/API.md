@@ -1,14 +1,14 @@
 # API reference
 
-Import `QuadraticAlgebras` for all fourteen production leaves. This guide
+Import `QuadraticAlgebras` for all fifteen production leaves. This guide
 preserves 92 historical native signature blocks from thirteen leaves and
-separately describes seven public declarations in the newer
-`RealClosedCoordinates` leaf from their current Lean source. The new entries
+separately describes seven public coordinate declarations and the real-closed
+closure interface from their current Lean source. The new entries
 are **not** native-generated signature blocks; this is not a complete
-generated-current inventory. There are seven test/example modules: six older
-modules are private-only, while the new coordinate test leaf has one public
-statement, `QuadraticAlgebrasTest.gaussianWitness`, and fourteen private
-named clients.
+generated-current inventory. There are nine test/example modules: six older
+modules are private-only, the coordinate test leaf has one public
+`QuadraticAlgebrasTest.gaussianWitness` and fourteen private named clients,
+and the real-closed model and dependent client leaves expose public examples.
 
 The 92 Lean signature blocks are inherited unchanged from the
 [published native API](https://github.com/FormalFrontier/quadratic-algebras/blob/e5ac018d29892d2a8612f4ca8d4babaabb9c4d15/docs/API.md),
@@ -16,9 +16,10 @@ with all displayed implicit arguments retained; they are not proof bodies.
 Native printing can suppress type annotations on literals. Consult the linked
 source for explicit types; universe parameters are arbitrary. The older
 module explanations, declaration prose and relative links are source-maintained,
-not newly generated native records. The new supplement below is source-derived.
+not newly generated native records. The newer supplements below are read from
+their Lean source.
 The [historical input manifest](api-manifest.json) and [binding guide](README.md)
-bind the earlier analysis only, not the new leaf or this edited guide. See the
+bind the earlier analysis only, not the new leaves or this edited guide. See the
 [mathematical overview](../README.md).
 
 ## Module `QuadraticAlgebras.RealClosedCoordinates` — source-derived supplement
@@ -72,12 +73,41 @@ not from native-generated signatures:
 The [rational Gaussian example](../QuadraticAlgebrasTest/RealClosedCoordinates.lean#L47)
 provides a concrete nonzero negative-discriminant witness; the other named
 test clients include translated and opposite choices and a reducible split
-quadratic. These coordinate results assert neither a preferred sign nor an
-unconditional Lean `ℝ` instance nor a higher-degree quotient theorem.
+quadratic. These coordinate results assert neither a preferred sign nor a
+higher-degree quotient theorem; the real model and closure results are separate.
+
+<a id="qa-real-closed-closure" name="qa-real-closed-closure"></a>
+
+## Module `QuadraticAlgebras.RealClosedClosure` — real-closed extension
+
+[Module source](../QuadraticAlgebras/RealClosedClosure.lean). For any
+`[Field R] [IsRealClosed R]`, without a chosen order or a caller-supplied
+nonsquare witness:
+
+- `QuadraticAlgebra` supplies `Fact (¬ IsSquare (-1 : R))` already under
+  `[Field R] [IsSemireal R]`; its existing quadratic field instance applies.
+- `IsRealClosed.isSquare_of_isSumSq` makes every sum of squares in `R` a square.
+- `IsRealClosed.finrank_eq_one_of_odd` makes every odd-degree finite field
+  extension of `R` trivial.
+- `QuadraticAlgebra.exists_sq_eq` gives every element of
+  `QuadraticAlgebra R (-1) 0` a square root in that same field.
+- The `IsAlgClosed (QuadraticAlgebra R (-1) 0)` instance rules out further
+  algebraic extensions, using a finite normal closure and Sylow fixed fields.
+- `IsRealClosed.irreducible_natDegree_le_two` bounds the natural degree of
+  every irreducible polynomial over `R` by two, via a root in the quadratic
+  field and its dimension two over `R`.
+
+The independent [real model](../QuadraticAlgebrasTest/RealClosedModel.lean)
+constructs `IsRealClosed ℝ` from real polynomial results, shows that
+irreducible `X² + 1` attains the bound, and separates the reducible degree-two
+and degree-four examples. The
+[dependent clients](../QuadraticAlgebrasTest/RealClosedClosure.lean) use the
+square-root, cubic-root and degree-bound results; their real-only comparison
+retains Mathlib's previously available `Irreducible.natDegree_le_two`.
 
 The following thirteen-leaf reference preserves its 92 historical native
 signature blocks, including five instances. Its counts and original
-[native manifest](api-manifest.json) do not describe this supplement.
+[native manifest](api-manifest.json) do not describe these supplements.
 
 ## Module `QuadraticAlgebras.AdjoinRoot`
 

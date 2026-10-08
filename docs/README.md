@@ -1,15 +1,21 @@
 # API reference and source binding
 
 [`API.md`](API.md) retains 92 historical native signatures from thirteen
-mathematical leaves and adds a separately identified, source-derived guide to
-seven public chosen-coordinate declarations in a fourteenth production leaf.
-The current library has that aggregate root and seven test/example modules:
-six older modules are private-only, while the new coordinate test leaf exposes
-only `QuadraticAlgebrasTest.gaussianWitness` among its fifteen named clients.
+mathematical leaves and adds separate source-derived supplements for seven
+public chosen-coordinate declarations in a fourteenth production leaf and
+the [real-closed closure interface](../QuadraticAlgebras/RealClosedClosure.lean)
+in a fifteenth production leaf. The current library has fifteen production
+leaves, one aggregate root and nine test/example modules
+(25 Lean modules total). Six older test/example modules are private-only;
+the coordinate test leaf exposes `QuadraticAlgebrasTest.gaussianWitness` and
+has fourteen private named clients. The independent Mathlib-only
+[`RealClosedModel`](../QuadraticAlgebrasTest/RealClosedModel.lean) and dependent
+[`RealClosedClosure`](../QuadraticAlgebrasTest/RealClosedClosure.lean) test leaves
+expose public model, boundary and client theorems.
 The 92 old signature blocks come from the
 [published native output](https://github.com/FormalFrontier/quadratic-algebras/blob/e5ac018d29892d2a8612f4ca8d4babaabb9c4d15/docs/API.md).
-The new supplement links the current source and is not native doc-gen output,
-nor is this a generated inventory of every declaration in the current build.
+Both supplements describe current source, not native doc-gen output or a
+generated inventory of every declaration in the current build.
 No intermediate HTML, JavaScript, fonts,
 dependency website, source PDF or external mathematical prose is distributed.
 
@@ -19,7 +25,7 @@ dependency website, source PDF or external mathematical prose is distributed.
 `49e5e90c17970c0486876560eae2146ddd64e7ef`: twenty historical Lean inputs, three
 configuration/pin inputs, twenty native records, the public inventory and the
 output hash. It does not record native analysis of changed inputs in a later
-checkout, including the new coordinate modules or the aggregate import.
+checkout, including the coordinate and closure modules or aggregate import.
 Source or pin changes require assessing affected build and documentation
 bindings; none of the recorded checks extends automatically to new inputs.
 
@@ -33,7 +39,8 @@ leaves have added references/docstrings, while the `Dedekind.lean`,
 `FractionRing.lean` and `lakefile.toml` changes also contain earlier proof or
 configuration edits. The other nine inputs matched their historical hashes
 at that comparison. This table does not inventory or hash the subsequently
-changed aggregate root, added coordinate production/test modules or the edited guides.
+changed aggregate root, added coordinate and closure production/test modules
+or the edited guides.
 
 | Then-changed input | Recorded SHA-256 of that earlier file |
 | --- | --- |
@@ -60,10 +67,11 @@ belongs to the published native output, **not** the current edited
 had SHA-256
 `951dda3ea5f423af63a05cefa04c488ef6385f0f6d5d30b4dd00a2f436c2a779`.
 All 92 historical native signature blocks and names/kinds are retained in the
-guide; their recorded source-link assessment predates the new supplement.
-The seven supplemental entries link the current declaration sources but do
-not have native display signatures. These are not new native analysis or proof
-checks and neither hash above authenticates this edited guide.
+guide; their recorded source-link assessment predates the newer supplements.
+The seven coordinate entries link current declaration sources, and the closure
+supplement links its current module source; neither has native display
+signatures. These are not new native analysis or proof checks and neither hash
+above authenticates this edited guide or the current 25 modules.
 
 When the analyzed development commit exists locally, every input must match its
 Git object. If that commit is missing from local history, generation must instead
@@ -98,9 +106,10 @@ python3 -B scripts/test_generate_api.py
 
 These are optional reproduction commands for exactly matching historical
 sources and native records. `FULL_SOURCE_COMMIT` must be that analysis's full
-revision; the historical adapter does not cover the new leaf or establish a
-native check for the current twenty-two modules. The data-only tests use a
-synthetic missing-history fixture, not release verification.
+revision; the historical adapter does not cover the coordinate or closure
+supplements or establish a native check for the current 25 modules. The
+data-only tests use a synthetic missing-history fixture, not release
+verification.
 
 The adapter accepts exactly the inspected names, native kinds, origins and source
 ranges. Native metadata groups abbreviations with definitions; the displayed
@@ -110,8 +119,8 @@ normalizing whitespace only. Native pretty-printing may omit literal type
 annotations; names, docstrings and linked sources supply their context. These
 are display signatures, not standalone modules or proofs. Module explanations
 and declaration prose for those historical entries derive from their source
-comments, separately from the historical native signature blocks. The new
-chosen-coordinate entries are source-derived prose only.
+comments, separately from the historical native signature blocks. Both newer
+supplements are source-derived prose only.
 
 Data-only tests exercise missing/duplicate/unexpected declarations, altered kinds,
 lost modifiers, malformed markup, ranges, source drift and missing-history manifest
