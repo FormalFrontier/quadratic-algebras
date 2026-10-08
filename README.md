@@ -91,6 +91,20 @@ the square-root and cubic-root results and compare the general degree bound
 with Mathlib's real-only bound. See the
 [closure API](docs/API.md#qa-real-closed-closure).
 
+### Irreducible polynomial quotients
+
+For an arbitrary real-closed field `R`, each irreducible `p : R[X]` with
+`1 < p.natDegree` has an `R`-algebra equivalence from `AdjoinRoot p` to
+`QuadraticAlgebra R (-1) 0`; no monicity or discriminant witness is required.
+Over any base field, the chosen-root constructor for an irreducible quadratic
+specifies the image of the adjoined root and evaluates every polynomial class
+at it. The witness-free constructor chooses
+such a root without identifying the maps arising from different choices.
+The [independent real model](QuadraticAlgebrasTest/RealClosedModel.lean) supplies
+irreducible quadratic and reducible boundaries; the
+[quotient clients](QuadraticAlgebrasTest/RealClosedAdjoinRoot.lean) also exercise
+a nonmonic scalar multiple and both signs of the quadratic generator.
+
 ### Diagonal quadratics
 
 The library also defines the finitely supported
@@ -136,7 +150,7 @@ and the [class-number-two theorem](docs/API.md#qa-minus-five-class-number).
 ## Module and API guide
 
 All paths below have the prefix `QuadraticAlgebras.`. The root
-`QuadraticAlgebras` reexports all fifteen production leaves. Most names are in
+`QuadraticAlgebras` reexports all sixteen production leaves. Most names are in
 the `QuadraticAlgebra` namespace; the other namespaces are identified in the table.
 
 | Leaf | Main interface and boundary |
@@ -144,6 +158,7 @@ the `QuadraticAlgebra` namespace; the other namespaces are identified in the tab
 | `AdjoinRoot` | `definingPolynomial`, `equivAdjoinRoot`, and generator equations over any commutative ring. The convention is `omega ^ 2 = a + b * omega`. |
 | [`RealClosedCoordinates`](QuadraticAlgebras/RealClosedCoordinates.lean) | [Real-closed negative-discriminant witness](docs/API.md#qa-real-closed-witness); [signed generator equivalence](docs/API.md#qa-chosen-coordinates) over a field with nonzero two and a supplied nonzero witness; [monic degree-two quotient coordinates](docs/API.md#qa-chosen-quotient). |
 | [`RealClosedClosure`](QuadraticAlgebras/RealClosedClosure.lean) | `IsAlgClosed (QuadraticAlgebra R (-1) 0)` and `IsRealClosed.irreducible_natDegree_le_two` for `[Field R] [IsRealClosed R]`; the square-root and odd-extension helpers are also public. |
+| [`RealClosedAdjoinRoot`](QuadraticAlgebras/RealClosedAdjoinRoot.lean) | `adjoinRootEquivOfRoot` for a specified root of an irreducible quadratic over any field, and `adjoinRootEquivOfIrreducible` for nonlinear polynomials over a real-closed field without a supplied root; generator and polynomial-class evaluation laws. |
 | `FractionRing` | `baseChangeEquiv`, `fractionRingEquivTensor`, `fractionRingEquivBaseChange`, `fractionRingEquivAdjoinRoot`; their generator and algebra-map lemmas retain arbitrary commutative rings. |
 | `Squarefree` | `IsFractionRing.isInteger_of_sq_mul_squarefree`: denominator descent for a UFD/domain and a chosen fraction field. `IsLocalization.IsInteger` means membership in the image of the base ring, not merely `IsIntegral`. |
 | `Integral` | `starAlgEquiv`, `isIntegral_star`, and trace/norm membership lemmas over an integrally closed base with a fraction-ring structure. The quadratic algebra need not be a domain. |
@@ -204,12 +219,15 @@ The project uses Lean `v4.34.0-rc2` and mathlib
 
 The named downstream test-library target compiles the direct-leaf and
 aggregate-only clients, the four stored README modules and the
-chosen-coordinate and real-closed closure examples. All twenty-five modules
-(fifteen production leaves, the aggregate root and nine test/example modules)
+chosen-coordinate, real-closed closure and irreducible-quotient examples.
+All twenty-seven modules (sixteen production leaves, the aggregate root and
+ten test/example modules)
 are included in the default build. The coordinate test leaf has one public
 `gaussianWitness` and fourteen private named clients; the real-closed model
 and closure client leaves expose their boundary and comparison theorems. The
-six older test/example modules remain private-only:
+irreducible-quotient test leaf exercises both specified roots, a nonmonic
+quadratic and the witness-free equivalence. The six older test/example modules
+remain private-only:
 
 ```sh
 lake build QuadraticAlgebrasTest
@@ -229,8 +247,8 @@ commands; `LEAN_NUM_THREADS` controls each Lean runtime's workers, while the
 recorded `LAKE_JOBS` does not establish default-build concurrency. That total
 excludes cache preparation, native documentation generation and the separate
 proof audit. It is not a cold-build timing, a portable RAM minimum, a measured
-default-build concurrency limit, a measurement of the current twenty-two
-modules or an improvement claim.
+default-build concurrency limit, a measurement of the current default build
+or an improvement claim.
 
 ## Using the library
 
@@ -331,9 +349,10 @@ hypotheses for their respective results.
 The [API reference](docs/API.md) preserves all 92 historical native display
 signatures, including five instances, from the [previously published native
 reference](https://github.com/FormalFrontier/quadratic-algebras/blob/e5ac018d29892d2a8612f4ca8d4babaabb9c4d15/docs/API.md).
-It separately links all seven new public coordinate declarations and their
-laws to the present source without claiming native generation of that
-supplement or a complete generated-current inventory. The
+It separately describes three source-derived supplements: all seven public
+chosen-coordinate declarations and the real-closed closure and
+irreducible-quotient interfaces. These supplements are not native-generated
+signatures or a complete generated-current inventory. The
 [historical input manifest](docs/api-manifest.json) binds the older native
 analysis, not the new modules or this edited API file; the
 [binding guide](docs/README.md) identifies its old hash comparison as
@@ -346,12 +365,15 @@ public documentation inventory does not audit private or generated proof bodies.
 
 ## Attribution and scope
 
-Atlas developed the original mathematical Lean proofs; another AI agent later
-migrated the native modules, build and downstream clients without originating
-those proofs. Atlas wrote the standalone documentation and examples, Folio the
-headline guide, and the [adapter lineage](docs/README.md#provenance) credits
-Anchor's renderer recipe. Collective author credit does not assert copyright
-ownership. [`formalization.yaml`](formalization.yaml) describes the mathematical
+Atlas developed earlier mathematical Lean proofs and wrote the initial
+standalone documentation and examples; another AI agent migrated the native
+modules, build and downstream clients without originating those earlier proofs.
+Folio contributed the headline guide, and the
+[adapter lineage](docs/README.md#provenance) credits Anchor's renderer recipe.
+Later contributors also wrote original mathematical Lean proofs, examples and
+documentation, including new real-closed and irreducible-quotient material.
+Collective author credit does not assert copyright ownership.
+[`formalization.yaml`](formalization.yaml) describes the mathematical
 scope, AI involvement and review status; no complete source formalization or
 general classification of quadratic forms or number fields is claimed.
 

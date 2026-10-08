@@ -7,6 +7,7 @@ module
 public import QuadraticAlgebras.AdjoinRoot
 public import QuadraticAlgebras.RealClosedCoordinates
 public import QuadraticAlgebras.RealClosedClosure
+public import QuadraticAlgebras.RealClosedAdjoinRoot
 public import QuadraticAlgebras.FractionRing
 public import QuadraticAlgebras.Squarefree
 public import QuadraticAlgebras.Integral
@@ -25,5 +26,6 @@ public import QuadraticAlgebras.ClassNumberNegFive
 
 The public aggregate re-exports the coordinate, fraction-ring, integral-closure,
 diagonal-quadratic and negative-five number-field developments, together with
-algebraic closure of the quadratic extension of a real-closed field.
+algebraic closure of the quadratic extension of a real-closed field and the
+irreducible-polynomial quotient equivalence.
 -/

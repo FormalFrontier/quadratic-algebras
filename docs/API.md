@@ -1,11 +1,12 @@
 # API reference
 
-Import `QuadraticAlgebras` for all fifteen production leaves. This guide
+Import `QuadraticAlgebras` for all sixteen production leaves. This guide
 preserves 92 historical native signature blocks from thirteen leaves and
 separately describes seven public coordinate declarations and the real-closed
-closure interface from their current Lean source. The new entries
+closure and irreducible-quotient interfaces from their current Lean source.
+The new entries
 are **not** native-generated signature blocks; this is not a complete
-generated-current inventory. There are nine test/example modules: six older
+generated-current inventory. There are ten test/example modules: six older
 modules are private-only, the coordinate test leaf has one public
 `QuadraticAlgebrasTest.gaussianWitness` and fourteen private named clients,
 and the real-closed model and dependent client leaves expose public examples.
@@ -108,6 +109,37 @@ retains Mathlib's previously available `Irreducible.natDegree_le_two`.
 The following thirteen-leaf reference preserves its 92 historical native
 signature blocks, including five instances. Its counts and original
 [native manifest](api-manifest.json) do not describe these supplements.
+
+<a id="qa-irreducible-root-quotient" name="qa-irreducible-root-quotient"></a>
+
+## Module `QuadraticAlgebras.RealClosedAdjoinRoot` — irreducible quotients
+
+[Module source](../QuadraticAlgebras/RealClosedAdjoinRoot.lean). These
+source-derived declarations use Mathlib's `AdjoinRoot.liftAlgHom`, power basis
+and finrank comparison, without changing the historical native signatures:
+
+- `QuadraticAlgebra.adjoinRootEquivOfRoot`: for any field `R`, an irreducible
+  `p : R[X]` of natural degree two and a *supplied* root
+  `z : QuadraticAlgebra R (-1) 0` with `p.aeval z = 0` determine
+  `AdjoinRoot p ≃ₐ[R] QuadraticAlgebra R (-1) 0`. Monicity and a field
+  structure on the target are not caller hypotheses.
+- `QuadraticAlgebra.adjoinRootEquivOfRoot_root` and
+  `QuadraticAlgebra.adjoinRootEquivOfRoot_mk` say that the adjoined root maps
+  to `z` and every polynomial class maps to evaluation at `z`.
+- `QuadraticAlgebra.rootOfIrreducible` and
+  `QuadraticAlgebra.rootOfIrreducible_aeval` choose and characterize a root
+  of an irreducible polynomial when `[IsRealClosed R]`.
+- `QuadraticAlgebra.adjoinRootEquivOfIrreducible`: over any real-closed field,
+  every irreducible `p` with `1 < p.natDegree` has such an equivalence without
+  a caller-supplied root. Its `_root` and `_mk` laws describe the chosen root
+  and evaluation on all polynomial classes. The choice is noncanonical:
+  opposite roots can yield different maps.
+
+The [independent real model](../QuadraticAlgebrasTest/RealClosedModel.lean)
+provides an irreducible degree-two polynomial and reducible boundaries;
+the [quotient clients](../QuadraticAlgebrasTest/RealClosedAdjoinRoot.lean)
+also test a nonmonic scalar multiple, the linear boundary, both roots and
+polynomial-class evaluation.
 
 ## Module `QuadraticAlgebras.AdjoinRoot`
 

@@ -1,20 +1,23 @@
 # API reference and source binding
 
 [`API.md`](API.md) retains 92 historical native signatures from thirteen
-mathematical leaves and adds separate source-derived supplements for seven
-public chosen-coordinate declarations in a fourteenth production leaf and
-the [real-closed closure interface](../QuadraticAlgebras/RealClosedClosure.lean)
-in a fifteenth production leaf. The current library has fifteen production
-leaves, one aggregate root and nine test/example modules
-(25 Lean modules total). Six older test/example modules are private-only;
+mathematical leaves and adds three source-derived supplements: seven public
+chosen-coordinate declarations in a fourteenth production leaf, the
+[real-closed closure interface](../QuadraticAlgebras/RealClosedClosure.lean)
+in a fifteenth production leaf, and the
+[irreducible-quotient interface](../QuadraticAlgebras/RealClosedAdjoinRoot.lean)
+in a sixteenth production leaf. The current library has sixteen production
+leaves, one aggregate root and ten test/example modules
+(27 Lean modules total). Six older test/example modules are private-only;
 the coordinate test leaf exposes `QuadraticAlgebrasTest.gaussianWitness` and
 has fourteen private named clients. The independent Mathlib-only
 [`RealClosedModel`](../QuadraticAlgebrasTest/RealClosedModel.lean) and dependent
-[`RealClosedClosure`](../QuadraticAlgebrasTest/RealClosedClosure.lean) test leaves
-expose public model, boundary and client theorems.
+[`RealClosedClosure`](../QuadraticAlgebrasTest/RealClosedClosure.lean) and
+[`RealClosedAdjoinRoot`](../QuadraticAlgebrasTest/RealClosedAdjoinRoot.lean)
+test leaves expose public model, boundary and client theorems.
 The 92 old signature blocks come from the
 [published native output](https://github.com/FormalFrontier/quadratic-algebras/blob/e5ac018d29892d2a8612f4ca8d4babaabb9c4d15/docs/API.md).
-Both supplements describe current source, not native doc-gen output or a
+All three supplements describe current source, not native doc-gen output or a
 generated inventory of every declaration in the current build.
 No intermediate HTML, JavaScript, fonts,
 dependency website, source PDF or external mathematical prose is distributed.
@@ -25,7 +28,8 @@ dependency website, source PDF or external mathematical prose is distributed.
 `49e5e90c17970c0486876560eae2146ddd64e7ef`: twenty historical Lean inputs, three
 configuration/pin inputs, twenty native records, the public inventory and the
 output hash. It does not record native analysis of changed inputs in a later
-checkout, including the coordinate and closure modules or aggregate import.
+checkout, including the coordinate, closure and irreducible-quotient
+production/test modules or aggregate import.
 Source or pin changes require assessing affected build and documentation
 bindings; none of the recorded checks extends automatically to new inputs.
 
@@ -39,8 +43,8 @@ leaves have added references/docstrings, while the `Dedekind.lean`,
 `FractionRing.lean` and `lakefile.toml` changes also contain earlier proof or
 configuration edits. The other nine inputs matched their historical hashes
 at that comparison. This table does not inventory or hash the subsequently
-changed aggregate root, added coordinate and closure production/test modules
-or the edited guides.
+changed aggregate root, added coordinate, closure and irreducible-quotient
+production/test modules or the edited guides.
 
 | Then-changed input | Recorded SHA-256 of that earlier file |
 | --- | --- |
@@ -63,15 +67,16 @@ The unchanged historical manifest's SHA-256 is
 `72b9a964e729fd2c81ac73b5491c14f58f3ab9a0ea966ac750ac776025a98137`;
 its API output digest `66316af0a97e3a12bb7a1598ab7fbf6b9a47db1e2806426a289133db22c246d5`
 belongs to the published native output, **not** the current edited
-[`API.md`](API.md). A previous API guide before the source-derived supplement
+[`API.md`](API.md). A previous API guide before the source-derived additions
 had SHA-256
 `951dda3ea5f423af63a05cefa04c488ef6385f0f6d5d30b4dd00a2f436c2a779`.
 All 92 historical native signature blocks and names/kinds are retained in the
 guide; their recorded source-link assessment predates the newer supplements.
 The seven coordinate entries link current declaration sources, and the closure
-supplement links its current module source; neither has native display
-signatures. These are not new native analysis or proof checks and neither hash
-above authenticates this edited guide or the current 25 modules.
+and irreducible-quotient supplements link their current module sources; none
+has native display signatures. These are not new native analysis or proof
+checks and neither hash above authenticates this edited guide or the current
+27 modules.
 
 When the analyzed development commit exists locally, every input must match its
 Git object. If that commit is missing from local history, generation must instead
@@ -106,10 +111,10 @@ python3 -B scripts/test_generate_api.py
 
 These are optional reproduction commands for exactly matching historical
 sources and native records. `FULL_SOURCE_COMMIT` must be that analysis's full
-revision; the historical adapter does not cover the coordinate or closure
-supplements or establish a native check for the current 25 modules. The
-data-only tests use a synthetic missing-history fixture, not release
-verification.
+revision; the historical adapter does not cover the coordinate, closure or
+irreducible-quotient supplements or establish a native check for the current
+27 modules. The data-only tests use a synthetic missing-history fixture, not
+release verification.
 
 The adapter accepts exactly the inspected names, native kinds, origins and source
 ranges. Native metadata groups abbreviations with definitions; the displayed
@@ -119,8 +124,8 @@ normalizing whitespace only. Native pretty-printing may omit literal type
 annotations; names, docstrings and linked sources supply their context. These
 are display signatures, not standalone modules or proofs. Module explanations
 and declaration prose for those historical entries derive from their source
-comments, separately from the historical native signature blocks. Both newer
-supplements are source-derived prose only.
+comments, separately from the historical native signature blocks. All three
+newer supplements are source-derived prose only.
 
 Data-only tests exercise missing/duplicate/unexpected declarations, altered kinds,
 lost modifiers, malformed markup, ranges, source drift and missing-history manifest
