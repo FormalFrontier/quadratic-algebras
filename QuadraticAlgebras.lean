@@ -8,6 +8,7 @@ public import QuadraticAlgebras.AdjoinRoot
 public import QuadraticAlgebras.RealClosedCoordinates
 public import QuadraticAlgebras.RealClosedClosure
 public import QuadraticAlgebras.RealClosedAdjoinRoot
+public import QuadraticAlgebras.RealComplexAdjoinRoot
 public import QuadraticAlgebras.FractionRing
 public import QuadraticAlgebras.Squarefree
 public import QuadraticAlgebras.Integral

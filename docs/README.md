@@ -6,9 +6,12 @@ chosen-coordinate declarations in a fourteenth production leaf, the
 [real-closed closure interface](../QuadraticAlgebras/RealClosedClosure.lean)
 in a fifteenth production leaf, and the
 [irreducible-quotient interface](../QuadraticAlgebras/RealClosedAdjoinRoot.lean)
-in a sixteenth production leaf. The current library has sixteen production
-leaves, one aggregate root and ten test/example modules
-(27 Lean modules total). Six older test/example modules are private-only;
+in a sixteenth production leaf. This earlier source inventory comprised sixteen
+production leaves, one aggregate root and ten test/example modules
+(27 Lean modules total); it does not count the later
+[complex quotient leaf](../QuadraticAlgebras/RealComplexAdjoinRoot.lean) or its
+[test module](../QuadraticAlgebrasTest/RealComplexAdjoinRoot.lean). Six older
+test/example modules are private-only;
 the coordinate test leaf exposes `QuadraticAlgebrasTest.gaussianWitness` and
 has fourteen private named clients. The independent Mathlib-only
 [`RealClosedModel`](../QuadraticAlgebrasTest/RealClosedModel.lean) and dependent
@@ -22,6 +25,20 @@ generated inventory of every declaration in the current build.
 No intermediate HTML, JavaScript, fonts,
 dependency website, source PDF or external mathematical prose is distributed.
 
+## Complex quotient interface
+
+The [real coordinate equivalence](../QuadraticAlgebras/RealComplexAdjoinRoot.lean)
+sends the quadratic generator to `Complex.I` and has forward formula
+`x.re + x.im * Complex.I`, with inverse coordinates `(z.re, z.im)`. The
+supplied-root equivalence evaluates each polynomial class in `AdjoinRoot p`
+at any given `z : ℂ` satisfying `p.aeval z = 0`, provided `p` is irreducible
+of natural degree two. The witness-free version needs only irreducibility and
+`1 < p.natDegree`: it evaluates classes at a selected root, without imposing
+a sign or monic normalization. The constant and variable class laws and
+[Gaussian examples](../QuadraticAlgebrasTest/RealComplexAdjoinRoot.lean)
+explain how to use these maps without unfolding their definitions. These
+declarations are not part of the historical `API.md` native signature inventory.
+
 ## Reproduction and binding
 
 [`api-manifest.json`](api-manifest.json) records native analysis of source revision
@@ -29,7 +46,8 @@ dependency website, source PDF or external mathematical prose is distributed.
 configuration/pin inputs, twenty native records, the public inventory and the
 output hash. It does not record native analysis of changed inputs in a later
 checkout, including the coordinate, closure and irreducible-quotient
-production/test modules or aggregate import.
+production/test modules, the later complex quotient production/test modules or
+aggregate import.
 Source or pin changes require assessing affected build and documentation
 bindings; none of the recorded checks extends automatically to new inputs.
 
@@ -76,7 +94,7 @@ The seven coordinate entries link current declaration sources, and the closure
 and irreducible-quotient supplements link their current module sources; none
 has native display signatures. These are not new native analysis or proof
 checks and neither hash above authenticates this edited guide or the current
-27 modules.
+29 modules.
 
 When the analyzed development commit exists locally, every input must match its
 Git object. If that commit is missing from local history, generation must instead
@@ -112,9 +130,11 @@ python3 -B scripts/test_generate_api.py
 These are optional reproduction commands for exactly matching historical
 sources and native records. `FULL_SOURCE_COMMIT` must be that analysis's full
 revision; the historical adapter does not cover the coordinate, closure or
-irreducible-quotient supplements or establish a native check for the current
-27 modules. The data-only tests use a synthetic missing-history fixture, not
-release verification.
+irreducible-quotient supplements, nor the later
+[complex quotient leaf](../QuadraticAlgebras/RealComplexAdjoinRoot.lean) and its
+[test module](../QuadraticAlgebrasTest/RealComplexAdjoinRoot.lean). It does not
+establish a native check for the current 29 modules. The data-only tests use a
+synthetic missing-history fixture, not release verification.
 
 The adapter accepts exactly the inspected names, native kinds, origins and source
 ranges. Native metadata groups abbreviations with definitions; the displayed

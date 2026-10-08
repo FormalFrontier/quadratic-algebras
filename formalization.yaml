@@ -9,7 +9,9 @@ project:
     For any real-closed field R, QuadraticAlgebra R (-1) 0 is algebraically
     closed and irreducible polynomials over R have degree at most two. Its
     irreducible nonlinear polynomial quotients admit noncanonical algebra
-    equivalences with this quadratic field.
+    equivalences with this quadratic field. For real coefficients, that field
+    identifies with the complex numbers, and evaluation at a chosen complex
+    root gives an algebra equivalence for irreducible nonlinear quotients.
   authors:
     - Formal Frontier Agents
   license: Apache-2.0
@@ -48,7 +50,12 @@ status:
     degree-two polynomial over any field with a supplied root in the canonical
     quadratic algebra has an evaluation equivalence without monicity; over a
     real-closed field, every irreducible nonlinear polynomial has such an
-    equivalence with a chosen root and no witness from the caller. Neither
+    equivalence with a chosen root and no witness from the caller. Over the
+    reals, the canonical quadratic algebra has complex coordinates with its
+    generator mapping to the positive imaginary unit. Any supplied complex
+    root of an irreducible quadratic induces an evaluation equivalence on
+    every polynomial class, and irreducible nonlinear polynomials admit a
+    selected-root equivalence with no caller-supplied root or monicity. Neither
     construction presents higher-degree quotients or works over arbitrary
     commutative rings. Integral-closure criteria retain the stated
     domain, UFD, invertible-two or integer congruence hypotheses. Diagonal
@@ -80,6 +87,12 @@ status:
       file: QuadraticAlgebras/RealClosedAdjoinRoot.lean
     - declaration: QuadraticAlgebra.adjoinRootEquivOfIrreducible
       file: QuadraticAlgebras/RealClosedAdjoinRoot.lean
+    - declaration: QuadraticAlgebra.realComplexEquiv
+      file: QuadraticAlgebras/RealComplexAdjoinRoot.lean
+    - declaration: QuadraticAlgebra.adjoinRootComplexEquivOfRoot
+      file: QuadraticAlgebras/RealComplexAdjoinRoot.lean
+    - declaration: QuadraticAlgebra.adjoinRootComplexEquivOfIrreducible
+      file: QuadraticAlgebras/RealComplexAdjoinRoot.lean
     - declaration: QuadraticAlgebra.fractionRingEquivBaseChange
       file: QuadraticAlgebras/FractionRing.lean
     - declaration: IsFractionRing.isInteger_of_sq_mul_squarefree

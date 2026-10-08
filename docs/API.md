@@ -1,13 +1,19 @@
 # API reference
 
-Import `QuadraticAlgebras` for all sixteen production leaves. This guide
-preserves 92 historical native signature blocks from thirteen leaves and
+Import `QuadraticAlgebras` for the current production library. The historical
+source inventory represented by this guide comprised sixteen production leaves,
+one aggregate root and ten test/example modules. The [binding guide](README.md)
+distinguishes that inventory from the current seventeen production leaves, one
+aggregate root and eleven test/example modules, including the later
+[complex quotient interface](README.md#complex-quotient-interface).
+
+This guide preserves 92 historical native signature blocks from thirteen leaves and
 separately describes seven public coordinate declarations and the real-closed
 closure and irreducible-quotient interfaces from their current Lean source.
 The new entries
 are **not** native-generated signature blocks; this is not a complete
-generated-current inventory. There are ten test/example modules: six older
-modules are private-only, the coordinate test leaf has one public
+generated-current inventory. Of the ten historical test/example modules, six
+older modules are private-only, the coordinate test leaf has one public
 `QuadraticAlgebrasTest.gaussianWitness` and fourteen private named clients,
 and the real-closed model and dependent client leaves expose public examples.
 
