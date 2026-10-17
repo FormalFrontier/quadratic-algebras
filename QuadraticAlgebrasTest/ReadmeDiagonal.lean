@@ -14,6 +14,8 @@ different from two.
 This named private client is the corresponding README Lean block. It adds no public API.
 -/
 
+set_option linter.privateModule false
+
 private theorem diagonalDerivative {ι R : Type*} [CommRing R]
     (c : ι →₀ R) (i : ι) :
     MvPolynomial.pderiv i (MvPolynomial.sumSMulXSq c) =

@@ -13,6 +13,8 @@ The sole import is the public library root. Named private declarations check its
 exports and ordinary use without re-exporting test material.
 -/
 
+set_option linter.privateModule false
+
 noncomputable section
 
 namespace QuadraticAlgebrasTest

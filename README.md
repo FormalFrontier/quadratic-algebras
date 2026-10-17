@@ -233,7 +233,7 @@ lake build
 ```
 
 The project uses Lean `v4.34.0-rc2` and mathlib
-`e37d88a26f3791ed5a93daa1f949af1021b8d103`.
+`83abb3e776bdefcbc447a1e44d0debe4010039e5`.
 
 The named downstream test-library target compiles the direct-leaf and
 aggregate-only clients, the four stored README modules and the
@@ -412,20 +412,20 @@ general classification of quadratic forms or number fields is claimed.
   integer criterion, 5.4.I(b) a diagonal prerequisite, 5.4.K the minus-five
   example and 5.4.N the binary diagonal case. The reusable generalizations
   here are not claimed as complete exercise formalizations.
-- [Mathlib at the pinned revision `e37d88a26f3791ed5a93daa1f949af1021b8d103`](https://github.com/leanprover-community/mathlib4/tree/e37d88a26f3791ed5a93daa1f949af1021b8d103)
+- [Mathlib at the pinned revision `83abb3e776bdefcbc447a1e44d0debe4010039e5`](https://github.com/leanprover-community/mathlib4/tree/83abb3e776bdefcbc447a1e44d0debe4010039e5)
   supplies the imported formalizations, including
-  [`Algebra.QuadraticAlgebra.Basic`](https://github.com/leanprover-community/mathlib4/blob/e37d88a26f3791ed5a93daa1f949af1021b8d103/Mathlib/Algebra/QuadraticAlgebra/Basic.lean),
-  [`Basic.Complex.Basic`](https://github.com/leanprover-community/mathlib4/blob/e37d88a26f3791ed5a93daa1f949af1021b8d103/Mathlib/Basic/Complex/Basic.lean),
-  [`Algebra.QuadraticAlgebra.Discriminant`](https://github.com/leanprover-community/mathlib4/blob/e37d88a26f3791ed5a93daa1f949af1021b8d103/Mathlib/Algebra/QuadraticAlgebra/Discriminant.lean)
+  [`Algebra.QuadraticAlgebra.Basic`](https://github.com/leanprover-community/mathlib4/blob/83abb3e776bdefcbc447a1e44d0debe4010039e5/Mathlib/Algebra/QuadraticAlgebra/Basic.lean),
+  [`Basic.Complex.Basic`](https://github.com/leanprover-community/mathlib4/blob/83abb3e776bdefcbc447a1e44d0debe4010039e5/Mathlib/Basic/Complex/Basic.lean),
+  [`Algebra.QuadraticAlgebra.Discriminant`](https://github.com/leanprover-community/mathlib4/blob/83abb3e776bdefcbc447a1e44d0debe4010039e5/Mathlib/Algebra/QuadraticAlgebra/Discriminant.lean)
   (`QuadraticAlgebra.exists_sq_eq_iff_isSquare_discr`),
-  [`FieldTheory.IsRealClosed.Basic`](https://github.com/leanprover-community/mathlib4/blob/e37d88a26f3791ed5a93daa1f949af1021b8d103/Mathlib/FieldTheory/IsRealClosed/Basic.lean)
+  [`FieldTheory.IsRealClosed.Basic`](https://github.com/leanprover-community/mathlib4/blob/83abb3e776bdefcbc447a1e44d0debe4010039e5/Mathlib/FieldTheory/IsRealClosed/Basic.lean)
   (`IsRealClosed.isSquare_neg_of_not_isSquare`),
-  [`RingTheory.AdjoinRoot`](https://github.com/leanprover-community/mathlib4/blob/e37d88a26f3791ed5a93daa1f949af1021b8d103/Mathlib/RingTheory/AdjoinRoot.lean),
-  [`RingTheory.Localization.BaseChange`](https://github.com/leanprover-community/mathlib4/blob/e37d88a26f3791ed5a93daa1f949af1021b8d103/Mathlib/RingTheory/Localization/BaseChange.lean),
-  [`RingTheory.IntegralClosure.IntegrallyClosed`](https://github.com/leanprover-community/mathlib4/blob/e37d88a26f3791ed5a93daa1f949af1021b8d103/Mathlib/RingTheory/IntegralClosure/IntegrallyClosed.lean),
-  [`RingTheory.MvPolynomial.IrreducibleQuadratic`](https://github.com/leanprover-community/mathlib4/blob/e37d88a26f3791ed5a93daa1f949af1021b8d103/Mathlib/RingTheory/MvPolynomial/IrreducibleQuadratic.lean),
-  [`RingTheory.DedekindDomain.Basic`](https://github.com/leanprover-community/mathlib4/blob/e37d88a26f3791ed5a93daa1f949af1021b8d103/Mathlib/RingTheory/DedekindDomain/Basic.lean),
-  and [`NumberTheory.NumberField.ClassNumber`](https://github.com/leanprover-community/mathlib4/blob/e37d88a26f3791ed5a93daa1f949af1021b8d103/Mathlib/NumberTheory/NumberField/ClassNumber.lean).
+  [`RingTheory.AdjoinRoot`](https://github.com/leanprover-community/mathlib4/blob/83abb3e776bdefcbc447a1e44d0debe4010039e5/Mathlib/RingTheory/AdjoinRoot.lean),
+  [`RingTheory.Localization.BaseChange`](https://github.com/leanprover-community/mathlib4/blob/83abb3e776bdefcbc447a1e44d0debe4010039e5/Mathlib/RingTheory/Localization/BaseChange.lean),
+  [`RingTheory.IntegralClosure.IntegrallyClosed`](https://github.com/leanprover-community/mathlib4/blob/83abb3e776bdefcbc447a1e44d0debe4010039e5/Mathlib/RingTheory/IntegralClosure/IntegrallyClosed.lean),
+  [`RingTheory.MvPolynomial.IrreducibleQuadratic`](https://github.com/leanprover-community/mathlib4/blob/83abb3e776bdefcbc447a1e44d0debe4010039e5/Mathlib/RingTheory/MvPolynomial/IrreducibleQuadratic.lean),
+  [`RingTheory.DedekindDomain.Basic`](https://github.com/leanprover-community/mathlib4/blob/83abb3e776bdefcbc447a1e44d0debe4010039e5/Mathlib/RingTheory/DedekindDomain/Basic.lean),
+  and [`NumberTheory.NumberField.ClassNumber`](https://github.com/leanprover-community/mathlib4/blob/83abb3e776bdefcbc447a1e44d0debe4010039e5/Mathlib/NumberTheory/NumberField/ClassNumber.lean).
   The latter module, by Anne Baanen, Riccardo Brasca and Xavier Roblot,
   supplies the ideal-class representative bound used for `ℚ(√-5)`; this
   library separately computes its discriminant, bound and norm-two ideal.

@@ -14,6 +14,8 @@ The generic squarefree criterion and the separate integer congruence criterion.
 This named private client is the corresponding README Lean block. It adds no public API.
 -/
 
+set_option linter.privateModule false
+
 private theorem squarefreeCriterion (R : Type*) [CommRing R] [IsDomain R]
     [UniqueFactorizationMonoid R] [Invertible (2 : R)] (f : R)
     [IsDomain (QuadraticAlgebra R f 0)] :

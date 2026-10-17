@@ -25,6 +25,8 @@ All declarations are named and private: these tests use public imports without
 adding anything to the mathematical library's exported interface.
 -/
 
+set_option linter.privateModule false
+
 noncomputable section
 
 open scoped TensorProduct

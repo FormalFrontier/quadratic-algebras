@@ -14,6 +14,8 @@ of minus five.
 This named private client is the corresponding README Lean block. It adds no public API.
 -/
 
+set_option linter.privateModule false
+
 private theorem negativeFiveDiscriminantAndClassNumber :
     NumberField.discr QuadraticAlgebra.SqrtNegFiveField = -20 ∧
       NumberField.classNumber QuadraticAlgebra.SqrtNegFiveField = 2 :=
