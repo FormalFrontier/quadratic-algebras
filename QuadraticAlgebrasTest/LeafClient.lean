@@ -17,6 +17,7 @@ import QuadraticAlgebras.Diagonal
 import QuadraticAlgebras.SqrtNegFive
 import QuadraticAlgebras.NumberField
 import QuadraticAlgebras.ClassNumberNegFive
+import QuadraticAlgebrasTest.RealComplexAdjoinRoot
 
 /-!
 # Direct-leaf downstream checks
@@ -63,7 +64,57 @@ private theorem tensorGenerator (R : Type u) [CommRing R]
         (1 ⊗ₜ[R] (QuadraticAlgebra.omega : QuadraticAlgebra R a b)) =
       (QuadraticAlgebra.omega :
         QuadraticAlgebra S (algebraMap R S a) (algebraMap R S b)) := by
-  simpa [scalarExtension] using QuadraticAlgebra.baseChangeEquiv_omega S a b
+  change QuadraticAlgebra.baseChangeEquiv S a b _ = _
+  simp
+
+-- These automation checks deliberately do not open the QuadraticAlgebra simp scope.
+private theorem tensorOne (R : Type u) [CommRing R]
+    (S : Type v) [CommRing S] [Algebra R S] (a b : R) (s : S) :
+    QuadraticAlgebra.baseChangeEquiv S a b
+        (s ⊗ₜ[R] (1 : QuadraticAlgebra R a b)) =
+      algebraMap S
+        (QuadraticAlgebra S (algebraMap R S a) (algebraMap R S b)) s := by
+  simp
+
+private theorem tensorRealCoordinate (R : Type u) [CommRing R]
+    (S : Type v) [CommRing S] [Algebra R S] (a b : R)
+    (s : S) (x : QuadraticAlgebra R a b) :
+    (QuadraticAlgebra.baseChangeEquiv S a b (s ⊗ₜ[R] x)).re =
+      s * algebraMap R S x.re := by
+  simp
+
+private theorem tensorImaginaryCoordinate (R : Type u) [CommRing R]
+    (S : Type v) [CommRing S] [Algebra R S] (a b : R)
+    (s : S) (x : QuadraticAlgebra R a b) :
+    (QuadraticAlgebra.baseChangeEquiv S a b (s ⊗ₜ[R] x)).im =
+      s * algebraMap R S x.im := by
+  simp
+
+-- The ordinary full coordinate law still supports explicit downstream rewriting.
+private theorem tensorCoordinatesByName (R : Type u) [CommRing R]
+    (S : Type v) [CommRing S] [Algebra R S] (a b : R)
+    (x : QuadraticAlgebra R a b) :
+    QuadraticAlgebra.baseChangeEquiv S a b (1 ⊗ₜ[R] x) =
+      (QuadraticAlgebra.mk (algebraMap R S x.re) (algebraMap R S x.im) :
+        QuadraticAlgebra S (algebraMap R S a) (algebraMap R S b)) := by
+  rw [QuadraticAlgebra.baseChangeEquiv_tmul, one_smul]
+
+private theorem fractionTensorCoordinates (R : Type u) [CommRing R] (a b : R)
+    (x : QuadraticAlgebra R a b) :
+    QuadraticAlgebra.fractionRingEquivTensor a b
+        (algebraMap (QuadraticAlgebra R a b)
+          (FractionRing (QuadraticAlgebra R a b)) x) =
+      algebraMap (QuadraticAlgebra R a b)
+        (QuadraticAlgebra R a b ⊗[R] FractionRing R) x := by
+  simp
+
+private theorem fractionGenerator (R : Type u) [CommRing R] (a b : R) :
+    QuadraticAlgebra.fractionRingEquivBaseChange a b
+        (algebraMap (QuadraticAlgebra R a b)
+          (FractionRing (QuadraticAlgebra R a b)) QuadraticAlgebra.omega) =
+      (QuadraticAlgebra.omega : QuadraticAlgebra (FractionRing R)
+        (algebraMap R (FractionRing R) a) (algebraMap R (FractionRing R) b)) := by
+  simp
 
 private theorem fractionCoordinates (R : Type u) [CommRing R] (a b : R)
     (x : QuadraticAlgebra R a b) :
@@ -109,10 +160,16 @@ private theorem squarefreeDenominator (R : Type u) (K : Type v)
 
 private theorem squarefreeClosure (R : Type u)
     [CommRing R] [IsDomain R] [UniqueFactorizationMonoid R]
-    [Invertible (2 : R)] (f : R) (hf : Squarefree f)
-    [IsDomain (QuadraticAlgebra R f 0)] :
+    [Invertible (2 : R)] (f : R) (hf : Squarefree f) :
     IsIntegrallyClosed (QuadraticAlgebra R f 0) :=
   QuadraticAlgebra.isIntegrallyClosed_of_squarefree hf
+
+-- The split algebra is not supplied with a quadratic-domain instance.
+private theorem splitRationalClosure :
+    IsIntegrallyClosed (QuadraticAlgebra ℚ 1 0) := by
+  let : Invertible (2 : ℚ) :=
+    ⟨(1 / 2 : ℚ), by norm_num, by norm_num⟩
+  exact squarefreeClosure ℚ 1 (by simp)
 
 private theorem repeatedSquareObstruction (R : Type u)
     [CommRing R] [IsDomain R] [UniqueFactorizationMonoid R]
@@ -231,5 +288,36 @@ private theorem ringOfIntegersClassification
 private theorem negativeFiveClassNumber :
     NumberField.classNumber QuadraticAlgebra.SqrtNegFiveField = 2 :=
   QuadraticAlgebra.classNumber_sqrtNegFiveField
+
+namespace ComplexCoefficients
+
+open Polynomial
+
+private theorem complexGenerator :
+    QuadraticAlgebra.realComplexEquiv
+        (QuadraticAlgebra.omega : QuadraticAlgebra ℝ (-1) 0) = Complex.I := by
+  simp
+
+private theorem suppliedRootConstants (r : ℝ) :
+    QuadraticAlgebra.adjoinRootComplexEquivOfRoot
+        (C (3 : ℝ) * (X ^ 2 + 1)) scaledGaussian.1 scaledGaussian.2.1
+        Complex.I (by simp [gaussianComplexRoots.1])
+        (AdjoinRoot.mk (C (3 : ℝ) * (X ^ 2 + 1)) (C r)) = (r : ℂ) := by
+  simp
+
+private theorem chosenRootConstants (r : ℝ) :
+    QuadraticAlgebra.adjoinRootComplexEquivOfIrreducible
+        (C (3 : ℝ) * (X ^ 2 + 1)) scaledGaussian.1
+        (by rw [scaledGaussian.2.1]; decide)
+        (AdjoinRoot.mk (C (3 : ℝ) * (X ^ 2 + 1)) (C r)) = (r : ℂ) := by
+  simp
+
+-- Real algebra homomorphisms from the scaled Gaussian algebra preserve coefficients.
+private theorem gaussianHomConstants
+    (e : AdjoinRoot (C (3 : ℝ) * (X ^ 2 + 1)) →ₐ[ℝ] ℂ) (r : ℝ) :
+    e (AdjoinRoot.of (C (3 : ℝ) * (X ^ 2 + 1)) r) = (r : ℂ) := by
+  simp
+
+end ComplexCoefficients
 
 end QuadraticAlgebrasTest

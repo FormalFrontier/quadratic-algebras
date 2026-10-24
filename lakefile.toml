@@ -4,6 +4,7 @@
 name = "quadratic-algebras"
 version = "0.1.0"
 defaultTargets = ["QuadraticAlgebras", "QuadraticAlgebrasTest"]
+lintDriver = "batteries/runLinter"
 
 [leanOptions]
 autoImplicit = false

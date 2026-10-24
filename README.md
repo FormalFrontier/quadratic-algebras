@@ -36,14 +36,25 @@ then `x` is already in the base ring. It also shows
 that the trace and norm of an integral quadratic element over the fraction
 field of an integrally closed ring belong to the base ring, without assuming
 that the quadratic algebra is a domain. Combining these ingredients, it proves
-that a domain quadratic algebra with squarefree radicand over a unique
-factorization domain is integrally closed when `2` is invertible. Conversely,
-a nonzero nonunit square divisor of the radicand gives an explicit integral
-fraction outside the quadratic algebra; in particular, a domain quadratic
-algebra over a unique factorization domain is not integrally closed when its
+that a quadratic algebra with squarefree radicand over a unique factorization
+domain is integrally closed in its total quotient ring when `2` is invertible,
+even if the quadratic algebra has zero divisors. Conversely, for a domain
+quadratic algebra, a nonzero nonunit square divisor of the radicand gives an
+explicit integral fraction outside the quadratic algebra; in particular, a
+domain quadratic algebra over a unique factorization domain is not integrally
+closed when its
 radicand is not squarefree. Together, these results give the exact criterion:
 a domain quadratic algebra over a unique factorization domain, with `2`
 invertible, is integrally closed if and only if its radicand is squarefree.
+
+Here `IsIntegrallyClosed` uses Mathlib's total quotient ring, not necessarily a
+fraction field. The forward theorem applies, for example, to `A = ℚ`, `f = 1`,
+where the quadratic algebra is isomorphic to `ℚ × ℚ`. The reverse obstruction
+and the if-and-only-if criterion retain their quadratic-domain hypothesis.
+For `A = ℚ`, `f = 0`, the dual numbers have only units as regular elements,
+so they are integrally closed in this total-quotient sense although `0` is not
+squarefree. Thus the converse cannot simply drop the domain hypothesis.
+
 Over the integers, where `2` is not invertible, the library separately proves
 that a quadratic algebra with squarefree radicand is integrally closed when
 the radicand is congruent to `2` or `3` modulo `4`; this congruence also yields
@@ -177,10 +188,10 @@ the `QuadraticAlgebra` namespace; the other namespaces are identified in the tab
 | [`RealClosedClosure`](QuadraticAlgebras/RealClosedClosure.lean) | `IsAlgClosed (QuadraticAlgebra R (-1) 0)` and `IsRealClosed.irreducible_natDegree_le_two` for `[Field R] [IsRealClosed R]`; the square-root and odd-extension helpers are also public. |
 | [`RealClosedAdjoinRoot`](QuadraticAlgebras/RealClosedAdjoinRoot.lean) | `adjoinRootEquivOfRoot` for a specified root of an irreducible quadratic over any field, and `adjoinRootEquivOfIrreducible` for nonlinear polynomials over a real-closed field without a supplied root; generator and polynomial-class evaluation laws. |
 | [`RealComplexAdjoinRoot`](QuadraticAlgebras/RealComplexAdjoinRoot.lean) | `realComplexEquiv` identifies `QuadraticAlgebra ℝ (-1) 0` with `ℂ` by real and imaginary coordinates. For irreducible real quadratics, `adjoinRootComplexEquivOfRoot` evaluates every quotient class at a supplied complex root; for irreducible nonlinear real polynomials, `adjoinRootComplexEquivOfIrreducible` uses a selected root without monicity or a caller-supplied root. |
-| `FractionRing` | `baseChangeEquiv`, `fractionRingEquivTensor`, `fractionRingEquivBaseChange`, `fractionRingEquivAdjoinRoot`; their generator and algebra-map lemmas retain arbitrary commutative rings. |
+| `FractionRing` | `baseChangeHom`, `baseChangeEquiv`, `fractionRingEquivTensor`, `fractionRingEquivBaseChange`, `fractionRingEquivAdjoinRoot`; their generator and algebra-map lemmas retain arbitrary commutative rings. |
 | `Squarefree` | `IsFractionRing.isInteger_of_sq_mul_squarefree`: denominator descent for a UFD/domain and a chosen fraction field. `IsLocalization.IsInteger` means membership in the image of the base ring, not merely `IsIntegral`. |
 | `Integral` | `starAlgEquiv`, `isIntegral_star`, and trace/norm membership lemmas over an integrally closed base with a fraction-ring structure. The quadratic algebra need not be a domain. |
-| `IntegralClosure` | `isIntegrallyClosed_of_squarefree` for a domain quadratic algebra over a UFD with two invertible. |
+| `IntegralClosure` | `isIntegrallyClosed_of_squarefree` in the total quotient ring over a UFD with two invertible; the quadratic algebra need not be a domain. |
 | `RepeatedSquare` | Explicit integral fractions outside the algebra from a nonzero nonunit square divisor. The nonsquarefree-to-prime-square step retains its nonzero-radicand hypothesis. |
 | `IntegralClosureCriterion` | `isIntegrallyClosed_iff_squarefree` with the quadratic-domain, UFD and invertible-two hypotheses. |
 | `IntegralClosureInt` | Domain and integral-closure theorems for integer radicands of remainder two or three modulo four; integral closure additionally needs squarefreeness. |
@@ -373,8 +384,10 @@ signatures, including five instances, from the [previously published native
 reference](https://github.com/FormalFrontier/quadratic-algebras/blob/e5ac018d29892d2a8612f4ca8d4babaabb9c4d15/docs/API.md).
 It separately describes three source-derived supplements: all seven public
 chosen-coordinate declarations and the real-closed closure and
-irreducible-quotient interfaces. These supplements are not native-generated
-signatures or a complete generated-current inventory. The
+irreducible-quotient interfaces. The current scalar-extension and integral-closure
+notes are also source-derived; the historical forward integral-closure signature
+retains a now-unneeded quadratic-domain instance. These descriptions are not new
+native-generated signatures or a complete generated-current inventory. The
 [historical input manifest](docs/api-manifest.json) binds the older native
 analysis, not the new modules or this edited API file; the
 [binding guide](docs/README.md) identifies its old hash comparison as

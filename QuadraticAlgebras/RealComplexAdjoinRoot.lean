@@ -70,7 +70,7 @@ noncomputable def realComplexEquiv : QuadraticAlgebra ℝ (-1) 0 ≃ₐ[ℝ] ℂ
 
 /-- The distinguished quadratic generator corresponds to the positive
 imaginary unit. -/
-@[simp] theorem realComplexEquiv_omega :
+theorem realComplexEquiv_omega :
     realComplexEquiv (omega : QuadraticAlgebra ℝ (-1) 0) = Complex.I := by
   rw [realComplexEquiv_apply]
   simp
@@ -116,7 +116,7 @@ theorem adjoinRootComplexEquivOfRoot_mk (p : ℝ[X]) (hp : Irreducible p)
     _ = _ := by rw [Polynomial.aeval_def]
 
 /-- Real constant classes are preserved under the supplied-root map. -/
-@[simp] theorem adjoinRootComplexEquivOfRoot_C (p : ℝ[X]) (hp : Irreducible p)
+theorem adjoinRootComplexEquivOfRoot_C (p : ℝ[X]) (hp : Irreducible p)
     (hdeg : p.natDegree = 2) (z : ℂ) (hz : p.aeval z = 0) (r : ℝ) :
     adjoinRootComplexEquivOfRoot p hp hdeg z hz (AdjoinRoot.mk p (C r)) = (r : ℂ) := by
   rw [adjoinRootComplexEquivOfRoot_mk]
@@ -160,7 +160,7 @@ theorem adjoinRootComplexEquivOfIrreducible_mk (p : ℝ[X])
   exact adjoinRootComplexEquivOfRoot_mk p hp _ _ _ g
 
 /-- Real constant classes are preserved under the witness-free map. -/
-@[simp] theorem adjoinRootComplexEquivOfIrreducible_C (p : ℝ[X])
+theorem adjoinRootComplexEquivOfIrreducible_C (p : ℝ[X])
     (hp : Irreducible p) (hdeg : 1 < p.natDegree) (r : ℝ) :
     adjoinRootComplexEquivOfIrreducible p hp hdeg (AdjoinRoot.mk p (C r)) = (r : ℂ) := by
   rw [adjoinRootComplexEquivOfIrreducible_mk]

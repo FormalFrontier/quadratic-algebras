@@ -83,8 +83,7 @@ private theorem two_dvd_coordinates_of_emod_four {f r s n : ℤ}
   all_goals norm_num
 
 private theorem isIntegrallyClosed_int_of_squarefree_of_emod_four_of_isDomain
-    {f : ℤ} (hf : Squarefree f) (hmod : f % 4 = 2 ∨ f % 4 = 3)
-    [IsDomain (QuadraticAlgebra ℤ f 0)] :
+    {f : ℤ} (hf : Squarefree f) (hmod : f % 4 = 2 ∨ f % 4 = 3) :
     IsIntegrallyClosed (QuadraticAlgebra ℤ f 0) := by
   rw [isIntegrallyClosed_iff (FractionRing (QuadraticAlgebra ℤ f 0))]
   intro x hx
@@ -140,6 +139,5 @@ theorem isIntegrallyClosed_int_of_squarefree_of_emod_four
     {f : ℤ} (hf : Squarefree f) (hmod : f % 4 = 2 ∨ f % 4 = 3) :
     IsIntegrallyClosed (QuadraticAlgebra ℤ f 0) :=
   @isIntegrallyClosed_int_of_squarefree_of_emod_four_of_isDomain f hf hmod
-    (isDomain_int_of_emod_four hmod)
 
 end QuadraticAlgebra

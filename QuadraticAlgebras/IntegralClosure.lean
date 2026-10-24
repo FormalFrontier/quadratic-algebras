@@ -12,10 +12,11 @@ public import Mathlib.RingTheory.Polynomial.RationalRoot
 /-!
 # Integral closure of squarefree quadratic algebras
 
-A domain quadratic algebra `A[ω]` with `ω² = f` is integrally closed when
-`A` is a unique factorization domain, `f` is squarefree, and `2` is
-invertible.  The proof transports an integral element of the total fraction
-ring to the coordinate model over `FractionRing A`.  Its trace and norm
+The quadratic algebra `A[ω]` with `ω² = f` is integrally closed in its total
+quotient ring when `A` is a unique factorization domain, `f` is squarefree,
+and `2` is invertible. This includes quadratic algebras with zero divisors.
+The proof uses Mathlib's total quotient ring formalism to transport an integral
+element to the coordinate model over `FractionRing A`. Its trace and norm
 descend to `A`; the trace recovers the constant coordinate, and squarefree
 denominator descent recovers the linear coordinate.
 
@@ -23,7 +24,7 @@ denominator descent recovers the linear coordinate.
 
 * Ravi Vakil, *The Rising Sea: Foundations of Algebraic Geometry* (October 21,
   2025 draft), Exercise 5.4.H, supplies the trace, norm and squarefree
-  denominator proof route used for this direction of the criterion.
+  denominator proof route for the domain case.
 -/
 
 public section
@@ -40,11 +41,11 @@ variable {A : Type u} [CommRing A] [IsDomain A]
   [UniqueFactorizationMonoid A] [Invertible (2 : A)]
   {f : A}
 
-/-- A domain quadratic algebra with squarefree radicand over a UFD is
-integrally closed when `2` is invertible. The trace/norm and reduced-denominator
-argument follows Vakil, *The Rising Sea*, Exercise 5.4.H. -/
-theorem isIntegrallyClosed_of_squarefree (hf : Squarefree f)
-    [IsDomain (QuadraticAlgebra A f 0)] :
+/-- A quadratic algebra with squarefree radicand over a UFD is integrally closed
+in its total quotient ring when `2` is invertible, even if it has zero divisors.
+The trace/norm and reduced-denominator proof route for the domain case is from
+Vakil, *The Rising Sea*, Exercise 5.4.H. -/
+theorem isIntegrallyClosed_of_squarefree (hf : Squarefree f) :
     IsIntegrallyClosed (QuadraticAlgebra A f 0) := by
   rw [isIntegrallyClosed_iff (FractionRing (QuadraticAlgebra A f 0))]
   intro x hx

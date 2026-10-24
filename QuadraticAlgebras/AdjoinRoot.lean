@@ -32,9 +32,28 @@ noncomputable section
 
 open Polynomial
 
+namespace AlgHomClass
+
+universe u v w
+
+/-- Algebra homomorphisms from an adjoined-root algebra preserve coefficient classes. -/
+@[simp]
+theorem map_adjoinRoot_of {R : Type u} {S : Type v} {F : Type w}
+    [CommRing R] [Semiring S] [Algebra R S] {p : R[X]}
+    [FunLike F (AdjoinRoot p) S] [AlgHomClass F R (AdjoinRoot p) S] (e : F) (r : R) :
+    e (AdjoinRoot.of p r) = algebraMap R S r := by
+  simpa only [AdjoinRoot.algebraMap_eq] using (AlgHomClass.commutes e r)
+
+end AlgHomClass
+
 namespace QuadraticAlgebra
 
 universe u
+
+/-- Coordinates `(0, 1)` give the distinguished quadratic generator. -/
+@[simp]
+theorem mk_zero_one {R : Type u} [Zero R] [One R] {a b : R} :
+    (⟨0, 1⟩ : QuadraticAlgebra R a b) = omega := rfl
 
 variable {R : Type u} [CommRing R]
 

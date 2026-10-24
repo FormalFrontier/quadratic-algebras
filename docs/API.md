@@ -10,9 +10,12 @@ aggregate root and eleven test/example modules, including the later
 This guide preserves 92 historical native signature blocks from thirteen leaves and
 separately describes seven public coordinate declarations and the real-closed
 closure and irreducible-quotient interfaces from their current Lean source.
-The new entries
-are **not** native-generated signature blocks; this is not a complete
-generated-current inventory. Of the ten historical test/example modules, six
+Current scalar-extension, canonical-root-input and integral-closure notes are
+also source-derived. In particular, the forward integral-closure theorem no
+longer needs the quadratic-domain instance retained in its historical display;
+see its [current signature](#qa-squarefree-forward).
+These descriptions are **not** native-generated signature blocks; this is not
+a complete generated-current inventory. Of the ten historical test/example modules, six
 older modules are private-only, the coordinate test leaf has one public
 `QuadraticAlgebrasTest.gaussianWitness` and fourteen private named clients,
 and the real-closed model and dependent client leaves expose public examples.
@@ -166,6 +169,32 @@ polynomial-class evaluation.
 
 [Module source](../QuadraticAlgebras/AdjoinRoot.lean)
 
+### Canonical constant inputs — source-derived interface
+
+`AlgHomClass.map_adjoinRoot_of` is a simp rule for any class of algebra
+morphisms from an adjoined-root algebra, including algebra homomorphisms and
+algebra equivalences. Its source-derived signature is shown as text, not as a
+native display signature:
+
+```text
+@[simp] theorem AlgHomClass.map_adjoinRoot_of
+    {R : Type u} {S : Type v} {F : Type w}
+    [CommRing R] [Semiring S] [Algebra R S] {p : R[X]}
+    [FunLike F (AdjoinRoot p) S] [AlgHomClass F R (AdjoinRoot p) S]
+    (e : F) (r : R) :
+    e (AdjoinRoot.of p r) = algebraMap R S r
+```
+
+No irreducibility or monicity assumption is needed for this constant-input
+law. Together with `AdjoinRoot.mk_C`, it simplifies constant polynomial classes
+under either complex quotient equivalence. The specialized
+`QuadraticAlgebra.adjoinRootComplexEquivOfRoot_C` and
+`QuadraticAlgebra.adjoinRootComplexEquivOfIrreducible_C` remain available with
+their original statements as ordinary lemmas, rather than additional simp
+rules. Likewise, `QuadraticAlgebra.realComplexEquiv_omega` remains available by
+name; default simplification uses the general complex-coordinate formula.
+The supplied-root and selected-root evaluation laws are unchanged.
+
 ### QuadraticAlgebra.definingPolynomial
 
 ```lean
@@ -284,6 +313,67 @@ The inverse canonical equivalence identifies the quotient's root with `omega`.
 >   supplies the scalar-extension localization API.
 
 [Module source](../QuadraticAlgebras/FractionRing.lean)
+
+### QuadraticAlgebra.baseChangeHom — source-derived interface
+
+The exposed noncomputable coefficient homomorphism has the following
+source-derived signature (not a native display signature):
+
+```text
+noncomputable def QuadraticAlgebra.baseChangeHom
+    {R : Type u} [CommRing R]
+    (S : Type v) [CommRing S] [Algebra R S] (a b : R) :
+    QuadraticAlgebra R a b →ₐ[R]
+      QuadraticAlgebra S (algebraMap R S a) (algebraMap R S b)
+```
+
+This is the same lift at `omega` used by `baseChangeEquiv`, shared with that
+construction rather than a separate choice of map. It adds no domain, field
+or nontriviality assumptions, and no new choice. The universes of `R` and `S`
+are independent.
+
+`baseChangeHom_apply` is the ordinary coordinate equation
+
+```text
+baseChangeHom S a b x =
+  QuadraticAlgebra.mk (algebraMap R S x.re) (algebraMap R S x.im)
+```
+
+`baseChangeHom_re`, `baseChangeHom_im` and `baseChangeHom_omega` provide the
+following simp equations:
+
+```text
+(baseChangeHom S a b x).re = algebraMap R S x.re
+(baseChangeHom S a b x).im = algebraMap R S x.im
+baseChangeHom S a b omega = omega
+```
+
+Coefficients are governed by the existing `AlgHom.commutes` law. The existing `QuadraticAlgebra.algHom_ext` principle
+shows uniqueness: an `R`-algebra homomorphism with this target and the same
+image of `omega` equals `baseChangeHom S a b`.
+
+For `Q₁ := QuadraticAlgebra S (algebraMap R S a) (algebraMap R S b)`, the
+pure-tensor simp rule `baseChangeEquiv_tmul_baseChangeHom` is
+
+```text
+baseChangeEquiv S a b (s ⊗ₜ[R] x) =
+  algebraMap S Q₁ s * baseChangeHom S a b x
+```
+
+Thus the default normal form for an arbitrary pure tensor is a product with
+the named homomorphism, not an expanded coordinate constructor.
+`baseChangeHom_apply` does not expand whole homomorphism applications by
+default. The historical `baseChangeEquiv_tmul` below retains its full
+coordinate statement and name as an ordinary lemma; use
+`rw [QuadraticAlgebra.baseChangeEquiv_tmul]` when that coordinate form is
+needed explicitly. Coordinate projections still simplify using the
+multiplication and homomorphism projection laws.
+
+The named lemmas `baseChangeEquiv_omega`, `baseChangeEquiv_tmul_one`,
+`fractionRingEquivTensor_algebraMap` and `fractionRingEquivBaseChange_omega`
+also retain their statements as ordinary lemmas rather than extra simp
+rules. The general coordinate law `fractionRingEquivBaseChange_algebraMap`
+remains a simp rule.
 
 ### QuadraticAlgebra.baseChangeEquiv
 
@@ -528,10 +618,11 @@ ring belongs to that base ring. This norm-descent step follows Vakil,
 
 > # Integral closure of squarefree quadratic algebras
 >
-> A domain quadratic algebra `A[ω]` with `ω² = f` is integrally closed when
-> `A` is a unique factorization domain, `f` is squarefree, and `2` is
-> invertible.  The proof transports an integral element of the total fraction
-> ring to the coordinate model over `FractionRing A`.  Its trace and norm
+> A quadratic algebra `A[ω]` with `ω² = f` is integrally closed in its total
+> quotient ring when `A` is a unique factorization domain, `f` is squarefree,
+> and `2` is invertible. No domain assumption on the quadratic algebra is
+> needed. The proof transports an integral element of the total quotient
+> ring to the coordinate model over `FractionRing A`. Its trace and norm
 > descend to `A`; the trace recovers the constant coordinate, and squarefree
 > denominator descent recovers the linear coordinate.
 >
@@ -543,15 +634,49 @@ ring belongs to that base ring. This norm-descent step follows Vakil,
 
 [Module source](../QuadraticAlgebras/IntegralClosure.lean)
 
+<a id="qa-squarefree-forward"></a>
+
 ### QuadraticAlgebra.isIntegrallyClosed_of_squarefree
+
+**Current source-derived signature** (not native output):
+
+```text
+theorem QuadraticAlgebra.isIntegrallyClosed_of_squarefree
+    {A : Type u} [CommRing A] [IsDomain A]
+    [UniqueFactorizationMonoid A] [Invertible (2 : A)]
+    {f : A} (hf : Squarefree f) :
+    IsIntegrallyClosed (QuadraticAlgebra A f 0)
+```
+
+Only the quadratic-domain instance has been removed; all base-ring,
+squarefreeness and invertible-two hypotheses remain. Inferred applications
+continue to use the same theorem name. An explicit `@`-application now has
+one fewer instance parameter: omit the old final
+`IsDomain (QuadraticAlgebra A f 0)` argument after `hf`.
+
+**Historical native signature — stronger domain-qualified specialization.**
+The following immutable display retains that extra instance; it is not the
+current source signature:
 
 ```lean
 theorem QuadraticAlgebra.isIntegrallyClosed_of_squarefree {A : Type u} [CommRing A] [IsDomain A] [UniqueFactorizationMonoid A] [Invertible 2] {f : A} (hf : Squarefree f) [IsDomain (QuadraticAlgebra A f 0)] : IsIntegrallyClosed (QuadraticAlgebra A f 0)
 ```
 
-A domain quadratic algebra with squarefree radicand over a UFD is
-integrally closed when `2` is invertible. The trace/norm and reduced-denominator
-argument follows Vakil, *The Rising Sea*, Exercise 5.4.H.
+`IsIntegrallyClosed` is Mathlib's total-quotient-ring notion: every element
+of that ring integral over the quadratic algebra comes from the algebra.
+It does not assert that the quadratic algebra is a domain or that its total
+quotient ring is a field. The trace/norm and reduced-denominator argument
+follows the proof route in Vakil, *The Rising Sea*, Exercise 5.4.H; the
+zero-divisor generality here is not attributed to that source.
+
+For example, `A = ℚ` and `f = 1` give a squarefree radicand with invertible
+two and a split algebra isomorphic to `ℚ × ℚ`, so the forward theorem applies
+without a quadratic-domain instance. In contrast, `A = ℚ` and `f = 0` give
+the dual numbers. Their regular elements are already units, so their total
+quotient ring is the algebra itself and they satisfy `IsIntegrallyClosed`,
+although `0` is not squarefree. This explains why the reverse obstruction
+and `isIntegrallyClosed_iff_squarefree` retain their quadratic-domain
+hypothesis. The separate integer congruence criterion is unchanged.
 
 [Source](../QuadraticAlgebras/IntegralClosure.lean#L43) (line 43).
 

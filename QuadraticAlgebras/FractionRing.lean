@@ -46,6 +46,53 @@ variable {R : Type u} [CommRing R]
 open nonZeroDivisors
 open scoped TensorProduct
 
+/-- The canonical algebra homomorphism into a scalar extension of a quadratic
+algebra, sending the distinguished generator to the distinguished generator. -/
+@[expose]
+noncomputable def baseChangeHom
+    (S : Type v) [CommRing S] [Algebra R S] (a b : R) :
+    QuadraticAlgebra R a b →ₐ[R]
+      QuadraticAlgebra S (algebraMap R S a) (algebraMap R S b) :=
+  QuadraticAlgebra.lift ⟨omega, by
+    ext <;> simp [Algebra.algebraMap_eq_smul_one]⟩
+
+/-- The canonical base-change homomorphism maps both coordinates into `S`. -/
+theorem baseChangeHom_apply
+    (S : Type v) [CommRing S] [Algebra R S] (a b : R)
+    (x : QuadraticAlgebra R a b) :
+    baseChangeHom S a b x = QuadraticAlgebra.mk
+      (algebraMap R S x.re) (algebraMap R S x.im) := by
+  have h (r : R) :
+      algebraMap R
+          (QuadraticAlgebra S (algebraMap R S a) (algebraMap R S b)) r =
+        algebraMap S _ (algebraMap R S r) :=
+    IsScalarTower.algebraMap_apply R S _ r
+  ext <;> simp [baseChangeHom, Algebra.smul_def, h]
+
+/-- The real coordinate of the canonical base-change homomorphism. -/
+@[simp]
+theorem baseChangeHom_re
+    (S : Type v) [CommRing S] [Algebra R S] (a b : R)
+    (x : QuadraticAlgebra R a b) :
+    (baseChangeHom S a b x).re = algebraMap R S x.re := by
+  rw [baseChangeHom_apply]
+
+/-- The imaginary coordinate of the canonical base-change homomorphism. -/
+@[simp]
+theorem baseChangeHom_im
+    (S : Type v) [CommRing S] [Algebra R S] (a b : R)
+    (x : QuadraticAlgebra R a b) :
+    (baseChangeHom S a b x).im = algebraMap R S x.im := by
+  rw [baseChangeHom_apply]
+
+/-- The canonical base-change homomorphism preserves the distinguished generator. -/
+@[simp]
+theorem baseChangeHom_omega
+    (S : Type v) [CommRing S] [Algebra R S] (a b : R) :
+    baseChangeHom S a b (omega : QuadraticAlgebra R a b) =
+      (omega : QuadraticAlgebra S (algebraMap R S a) (algebraMap R S b)) := by
+  ext <;> simp
+
 /-- Scalar extension commutes with the coordinate model of a quadratic
 algebra. -/
 @[expose]
@@ -53,10 +100,7 @@ noncomputable def baseChangeEquiv
     (S : Type v) [CommRing S] [Algebra R S] (a b : R) :
     S ⊗[R] QuadraticAlgebra R a b ≃ₐ[S]
       QuadraticAlgebra S (algebraMap R S a) (algebraMap R S b) := by
-  let f : QuadraticAlgebra R a b →ₐ[R]
-      QuadraticAlgebra S (algebraMap R S a) (algebraMap R S b) :=
-    QuadraticAlgebra.lift ⟨omega, by
-      ext <;> simp [Algebra.algebraMap_eq_smul_one]⟩
+  let f := baseChangeHom S a b
   let g : QuadraticAlgebra S (algebraMap R S a) (algebraMap R S b) →ₐ[S]
       S ⊗[R] QuadraticAlgebra R a b :=
     QuadraticAlgebra.lift ⟨1 ⊗ₜ[R] omega, by
@@ -96,9 +140,20 @@ noncomputable def baseChangeEquiv
       ext
       all_goals simp [f, g])
 
+/-- On a pure tensor, base change multiplies the scalar by the canonical
+base-change homomorphism. This is the simplifier's normal form. -/
+@[simp]
+theorem baseChangeEquiv_tmul_baseChangeHom
+    (S : Type v) [CommRing S] [Algebra R S] (a b : R)
+    (s : S) (x : QuadraticAlgebra R a b) :
+    baseChangeEquiv S a b (s ⊗ₜ[R] x) =
+      algebraMap S
+        (QuadraticAlgebra S (algebraMap R S a) (algebraMap R S b)) s *
+          baseChangeHom S a b x := by
+  simp [baseChangeEquiv]
+
 /-- On a pure tensor, base change maps both coordinates into `S` and then
 multiplies by the left scalar. No domain assumption is needed. -/
-@[simp]
 theorem baseChangeEquiv_tmul
     (S : Type v) [CommRing S] [Algebra R S] (a b : R)
     (s : S) (x : QuadraticAlgebra R a b) :
@@ -106,15 +161,9 @@ theorem baseChangeEquiv_tmul
       s • (QuadraticAlgebra.mk
         (algebraMap R S x.re) (algebraMap R S x.im) :
           QuadraticAlgebra S (algebraMap R S a) (algebraMap R S b)) := by
-  have h (r : R) :
-      algebraMap R
-          (QuadraticAlgebra S (algebraMap R S a) (algebraMap R S b)) r =
-        algebraMap S _ (algebraMap R S r) :=
-    IsScalarTower.algebraMap_apply R S _ r
-  ext <;> simp [baseChangeEquiv, Algebra.smul_def, mul_comm, h]
+  ext <;> simp [baseChangeEquiv, Algebra.smul_def, mul_comm]
 
 /-- Base change sends `1 ⊗ omega` to the distinguished quadratic generator. -/
-@[simp]
 theorem baseChangeEquiv_omega
     (S : Type v) [CommRing S] [Algebra R S] (a b : R) :
     baseChangeEquiv S a b
@@ -123,7 +172,6 @@ theorem baseChangeEquiv_omega
   simp [baseChangeEquiv]
 
 /-- Base change sends `s ⊗ 1` to the scalar `s` in the target quadratic algebra. -/
-@[simp]
 theorem baseChangeEquiv_tmul_one
     (S : Type v) [CommRing S] [Algebra R S] (a b : R) (s : S) :
     baseChangeEquiv S a b
@@ -161,7 +209,6 @@ noncomputable def fractionRingEquivTensor (a b : R) :
 
 /-- The total-fraction-ring equivalence agrees with the canonical algebra map
 on elements of the original quadratic algebra. -/
-@[simp]
 theorem fractionRingEquivTensor_algebraMap
     (a b : R) (x : QuadraticAlgebra R a b) :
     fractionRingEquivTensor a b
@@ -193,18 +240,10 @@ theorem fractionRingEquivBaseChange_algebraMap
       QuadraticAlgebra.mk
         (algebraMap R (FractionRing R) x.re)
         (algebraMap R (FractionRing R) x.im) := by
-  have h (r : R) :
-      algebraMap R
-          (QuadraticAlgebra (FractionRing R)
-            (algebraMap R (FractionRing R) a)
-            (algebraMap R (FractionRing R) b)) r =
-        algebraMap (FractionRing R) _ (algebraMap R (FractionRing R) r) :=
-    IsScalarTower.algebraMap_apply R (FractionRing R) _ r
   ext <;> simp [fractionRingEquivBaseChange,
-    fractionRingEquivTensor, baseChangeEquiv, Algebra.smul_def, h]
+    fractionRingEquivTensor, baseChangeEquiv]
 
 /-- The base-change presentation of the total fraction ring preserves `omega`. -/
-@[simp]
 theorem fractionRingEquivBaseChange_omega (a b : R) :
     fractionRingEquivBaseChange a b
       (algebraMap (QuadraticAlgebra R a b)
