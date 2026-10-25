@@ -210,29 +210,9 @@ for the caller to use; the library does not install them as blanket instances.
 
 ### Proof ideas
 
-For total fraction rings, multiplying a regular quadratic element by its
-conjugate gives a regular scalar norm. Inverting regular scalars therefore
-already inverts all regular quadratic elements. This explains why the
-localization equivalences do not need a domain assumption.
-
-For integral closure, conjugation preserves integrality, so trace and norm are
-integral scalars and descend to the integrally closed base. The squarefree
-denominator lemma then forces a reduced denominator to be a unit. The generic
-quadratic criterion uses division by two; the integer theorem instead uses
-the radicand's residue modulo four. A repeated square divisor produces the
-opposite obstruction by an explicit integral fraction outside the algebra.
-
-A nontrivial factorization of a homogeneous quadratic reduces to linear
-factors. The diagonal coefficient and derivative identities rule out such a
-factorization with three supported coefficients. For squarefreeness, a repeated
-irreducible factor would divide the partial derivatives in two supported
-variables, contradicting their distinct-variable structure when two is nonzero.
-
-For the class number, the discriminant and signature give a Minkowski bound
-strictly below three. Integral ideal norms reduce this to norms one and two.
-Reduction to `ZMod 2` supplies the norm-two ideal; its uniqueness and
-nonprincipality give exactly two ideal classes, while norm one gives the unit
-ideal. The bound alone is not the ideal classification.
+See the [examples and proof-idea guide](docs/Examples.md#proof-ideas) for
+the arguments behind the localization, integral-closure, diagonal and
+class-number results.
 
 ## Build
 
@@ -270,91 +250,29 @@ lake build
 To treat warnings as errors during a check, use `lake --wfail build` or
 `lake --wfail build QuadraticAlgebrasTest` after fetching the pinned cache.
 
-A historical baseline on a 23-GiB Linux runtime, after fetching the matching
-dependency cache and with project outputs initially absent, totaled 92.65
-seconds across twenty **sequential, warning-fatal named-module invocations**
-before the coordinate modules were added. The largest
-measured peak RSS of a child process was 1,838,488 KiB, not the runtime's
-aggregate memory. `LAKE_JOBS=1` and `LEAN_NUM_THREADS=1` were recorded for those
-commands; `LEAN_NUM_THREADS` controls each Lean runtime's workers, while the
-recorded `LAKE_JOBS` does not establish default-build concurrency. That total
-excludes cache preparation, native documentation generation and the separate
-proof audit. It is not a cold-build timing, a portable RAM minimum, a measured
-default-build concurrency limit, a measurement of the current default build
-or an improvement claim.
-
 ## Using the library
 
-The following blocks are standalone Lean modules with named private examples;
-they exercise ordinary imports without extending the library's public API.
-For scalar extension, no domain or nontriviality assumptions are needed:
+Add the package to your `lakefile.toml`:
 
-```lean
-module
-import QuadraticAlgebras.FractionRing
-
-open scoped TensorProduct
-
-universe u v
-
-private theorem scalarExtensionGenerator
-    (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S]
-    (a b : R) :
-    QuadraticAlgebra.baseChangeEquiv S a b
-      (1 ⊗ₜ[R] (QuadraticAlgebra.omega : QuadraticAlgebra R a b)) =
-        (QuadraticAlgebra.omega :
-          QuadraticAlgebra S (algebraMap R S a) (algebraMap R S b)) :=
-  QuadraticAlgebra.baseChangeEquiv_omega S a b
-
-private theorem definingPolynomialReduction (R : Type u) [CommRing R] (a b : R) :
-    QuadraticAlgebra.definingPolynomial a b =
-      Polynomial.X ^ 2 - (Polynomial.C b * Polynomial.X + Polynomial.C a) :=
-  rfl
+```toml
+[[require]]
+name = "quadratic-algebras"
+git = "https://github.com/FormalFrontier/quadratic-algebras.git"
+rev = "main"
 ```
 
-The generic squarefree criterion retains the domain and invertible-two
-assumptions. Use the distinct integer API for the modulo-four case:
+GitHub `main` contains reviewed releases. Lake resolves a release when you first
+add or update the dependency; `lake-manifest.json` keeps that commit until you
+update again. Replace `main` with a full commit from the release history to pin
+one explicitly. When combining deliverables, choose releases with a common
+Mathlib revision: Lake resolves one version of each package per build.
 
-```lean
-module
-import QuadraticAlgebras.IntegralClosureCriterion
-import QuadraticAlgebras.IntegralClosureInt
+Use the Lean toolchain recorded by the selected release. Libraries combined
+in one project must agree on that toolchain as well as their Mathlib revision;
+a newer Mathlib revision is not automatically compatible.
 
-private theorem squarefreeCriterion (R : Type*) [CommRing R] [IsDomain R]
-    [UniqueFactorizationMonoid R] [Invertible (2 : R)] (f : R)
-    [IsDomain (QuadraticAlgebra R f 0)] :
-    IsIntegrallyClosed (QuadraticAlgebra R f 0) ↔ Squarefree f :=
-  QuadraticAlgebra.isIntegrallyClosed_iff_squarefree
-
-private theorem integerCriterion (f : ℤ) (hf : Squarefree f)
-    (hmod : f % 4 = 2 ∨ f % 4 = 3) :
-    IsDomain (QuadraticAlgebra ℤ f 0) ∧
-      IsIntegrallyClosed (QuadraticAlgebra ℤ f 0) :=
-  ⟨QuadraticAlgebra.isDomain_int_of_emod_four hmod,
-    QuadraticAlgebra.isIntegrallyClosed_int_of_squarefree_of_emod_four hf hmod⟩
-```
-
-Diagonal squarefreeness needs two nonzero coefficients, expressed as nontrivial
-support, and characteristic different from two. The derivative formula itself
-has neither requirement:
-
-```lean
-module
-import QuadraticAlgebras.Diagonal
-
-private theorem diagonalDerivative {ι R : Type*} [CommRing R]
-    (c : ι →₀ R) (i : ι) :
-    MvPolynomial.pderiv i (MvPolynomial.sumSMulXSq c) =
-      MvPolynomial.C (2 * c i) * MvPolynomial.X i :=
-  MvPolynomial.pderiv_sumSMulXSq c i
-
-private theorem diagonalSquarefree {ι k : Type*} [Field k] [NeZero (2 : k)]
-    (c : ι →₀ k) (hc : c.support.Nontrivial) :
-    Squarefree (MvPolynomial.sumSMulXSq c) :=
-  MvPolynomial.squarefree_sumSMulXSq c hc
-```
-
-The aggregate import also provides the concrete arithmetic conclusions:
+The aggregate import gives, for example, the discriminant and class number
+of the field generated by a square root of minus five:
 
 ```lean
 module
@@ -367,15 +285,9 @@ private theorem negativeFiveDiscriminantAndClassNumber :
     QuadraticAlgebra.classNumber_sqrtNegFiveField⟩
 ```
 
-`QuadraticAlgebrasTest.LeafClient` and `QuadraticAlgebrasTest.RootClient`
-contain compiled, named private downstream examples, including generic
-commutative-ring and zero-ring uses; they do not extend the public API.
-The four blocks above are stored, with additional license/module comments, as
-`ReadmeScalarExtension`, `ReadmeIntegralClosure`, `ReadmeDiagonal` and
-`ReadmeNegativeFive` in the same test library. All their nonempty mathematical
-code lines agree with the displayed examples.
-The modules document the precise domain, characteristic, and fraction-ring
-hypotheses for their respective results.
+The [examples guide](docs/Examples.md#examples) gives the four standalone,
+named examples stored in the test library, from generic scalar extension and
+integral closure to diagonal squarefreeness and the class number of `ℚ(√-5)`.
 
 ## Generated documentation and checks
 
